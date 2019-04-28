@@ -8,6 +8,7 @@
     <div class="main-body">
       <div class="main-warn">
         <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
+        <div class="purple-text">{{content}}</div>
       </div>
       <div>
         <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
@@ -52,7 +53,8 @@ export default {
   data () {
     return {
       watermarkId: '',
-      list: []
+      list: [],
+      content: ''
     }
   },
   computed: {
@@ -76,6 +78,11 @@ export default {
             return a.sortIndex - b.sortIndex
           })
           this.list = list
+        }
+      })
+      this.$http.get('customer/getFixedInvestmentContent').then((data) => {
+        if (data.success) {
+          this.content = data.data.value
         }
       })
       // this.$http.get('auth/checkCustomer', {
