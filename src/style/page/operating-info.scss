@@ -323,5 +323,19 @@
     display: inline-block;
     min-width: 80px;
   }
+  .exemption {
+    text-align: center;
+    font-size: 26px;
+    .title {
+      margin-bottom: 50px;
+    }
+    .bottom {
+      // 天坑
+      margin-bottom: 50px;
+      padding: 0 30px;
+      display: inline-block;
+      font-size: 22px;
+    }
+  }
 }
 

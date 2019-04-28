@@ -32,6 +32,11 @@
           <p class="target">推荐标的：{{item.fundCode}} {{item.fundName}}</p>
         </div>
       </mt-cell-swipe>
+      <div class="exemption">
+        <div class="title">风险提示</div>
+        <div class="bottom">以上数据均为历史回测表现，不能代表未来发展趋势，每个指标都有他的局限性，在不同的市场环境下可能会出现于回测数据不一致的表现，投资者需要根据不同场景合理应用。</div>
+        <div class="bottom">本产品非投资咨询产品，非荐股软件，产品内容仅供参考，不构成投资建议。投资者据此操作，风险自担</div>
+      </div>
     </div>
   </div>
 </template>

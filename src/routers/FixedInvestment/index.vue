@@ -9,29 +9,36 @@
       <div class="main-warn">
         <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
       </div>
-      <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
+      <div>
+        <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
       item.detail.buySell[0] === '买'?'buy':item.detail.buySell[0] === '卖'?'sell':''
       ]">
-        <div slot="title">
-          <h3>
-            <span class="index-name">{{item.name}}</span>
-            <span style="float: right" :class="numberClass(item.detail.rate)">{{item.detail.rate}}%</span>
-          </h3>
-          <p class="date">
+          <div slot="title">
+            <h3>
+              <span class="index-name">{{item.name}}</span>
+              <span style="float: right" :class="numberClass(item.detail.rate)">{{item.detail.rate}}%</span>
+            </h3>
+            <p class="date">
             <span v-for="(subItem, index) in item.detail.kline" :key="index"
             >{{dayDate(subItem.date)}}</span>
-          </p>
-          <p class="netChange wn">
+            </p>
+            <p class="netChange wn">
             <span v-for="(subItem, index) in item.detail.kline" :key="index"
                   :class="numberClass(subItem.netChangeRatio)">{{subItem.netChangeRatio}}%</span>
-          </p>
-          <p class="explain">
+            </p>
+            <p class="explain">
             <span v-for="(subItem, index) in item.detail.buySell" :key="subItem + index"
                   :class="subItem === '买'?'buy':''">{{subItem === '买'?'买':''}}</span>
-          </p>
-          <p class="target">推荐标的：{{item.fundCode}} {{item.fundName}}</p>
-        </div>
-      </mt-cell-swipe>
+            </p>
+            <p class="target">标的：{{item.fundCode}} {{item.fundName}}</p>
+          </div>
+        </mt-cell-swipe>
+      </div>
+      <div class="exemption">
+        <div class="title">风险提示</div>
+        <div class="bottom">以上数据均为历史回测表现，不能代表未来发展趋势，每个指标都有他的局限性，在不同的市场环境下可能会出现于回测数据不一致的表现，投资者需要根据不同场景合理应用。</div>
+        <div class="bottom">本产品非投资咨询产品，非荐股软件，产品内容仅供参考，不构成投资建议。投资者据此操作，风险自担</div>
+      </div>
     </div>
   </div>
 </template>
