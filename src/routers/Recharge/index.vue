@@ -9,6 +9,7 @@
       <img src="../../assets/pay.jpg" alt="">
       <div class="title">搜索并添加客服微信号"fund_buy_sell"提交充值申请或咨询</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
+      <img src="../../assets/kefu.jpg" alt="">
     </div>
   </div>
 </template>
