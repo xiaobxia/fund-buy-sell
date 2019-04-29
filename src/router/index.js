@@ -50,6 +50,16 @@ const routers = [
     component: lazyLoading('Recharge')
   },
   {
+    name: 'Agreement',
+    path: '/page/agreement',
+    component: lazyLoading('Agreement')
+  },
+  {
+    name: 'AboutUs',
+    path: '/page/aboutUs',
+    component: lazyLoading('AboutUs')
+  },
+  {
     name: '404',
     path: '*',
     component: lazyLoading('NotMatch')

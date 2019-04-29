@@ -8,8 +8,8 @@
     <div class="main-body">
       <div class="main-warn">
         <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
-        <div class="purple-text">仓位建议：{{positionContent}}%</div>
-        <div class="purple-text">操作建议：{{marketWarn}}</div>
+        <div class="purple-text">仓位建议：{{positionContent || 0}}%</div>
+        <div class="purple-text">操作建议：{{marketWarn || '未更新'}}</div>
       </div>
       <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
       item.detail.buySell[0] === '买'?'buy':item.detail.buySell[0] === '卖'?'sell':''
