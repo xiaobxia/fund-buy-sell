@@ -12,7 +12,8 @@
         <div class="purple-text">操作建议：{{marketWarn || '未更新'}}</div>
       </div>
       <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
-      item.detail.buySell[0] === '买'?'buy':item.detail.buySell[0] === '卖'?'sell':''
+      item.detail.buySell[0] === '买'?'buy':item.detail.buySell[0] === '卖'?'sell':'',
+      'should-' + getShouldDo(item.detail.kline, item.detail.buySell)
       ]">
         <div slot="title">
           <h3>
@@ -105,6 +106,46 @@ export default {
     },
     backHandler () {
       this.$router.history.go(-1)
+    },
+    getShouldDo (kline, buySellList) {
+      let ifBuy = false
+      let ifSell = false
+      let firstFlag = ''
+      let firstFlagIndex = 0
+      // 首先今天是没有出信号的
+      if (buySellList[0] !== '') {
+        return ''
+      }
+      // 获取之后的第一个信号
+      for (let i = 1; i < buySellList.length; i++) {
+        if (buySellList[i] !== '') {
+          firstFlagIndex = i
+          firstFlag = buySellList[i]
+          break
+        }
+      }
+      // 今天没信号，之前有卖出，并且连续跌2天及以上，那就提示卖出
+      if (firstFlag === '卖') {
+        if (firstFlagIndex >= 1) {
+          let allDown = true
+          for (let i = 0; i < firstFlagIndex; i++) {
+            if (kline[i].netChangeRatio > 0) {
+              allDown = false
+              break
+            }
+          }
+          if (allDown) {
+            ifSell = true
+          }
+        }
+      }
+      if (ifSell) {
+        return 'sell'
+      }
+      if (ifBuy) {
+        return 'buy'
+      }
+      return ''
     }
   }
 }

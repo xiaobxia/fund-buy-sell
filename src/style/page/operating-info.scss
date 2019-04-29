@@ -115,7 +115,7 @@
     }
   }
   // 本该买卖出，而未操作的提示
-  .mint-cell.has.no-lock {
+  .mint-cell {
     &.should-sell {
       background-color: $green-color-back;
     }
