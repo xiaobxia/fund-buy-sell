@@ -68,6 +68,9 @@ export default {
     this.initPage()
     const userInfo = storageUtil.getUserInfo()
     this.watermarkId = Watermark.set(userInfo.name)
+    if (window._hmt) {
+      window._hmt.push(['_trackPageview', `/波段策略`])
+    }
   },
   methods: {
     initPage () {

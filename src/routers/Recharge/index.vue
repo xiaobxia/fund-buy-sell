@@ -23,6 +23,11 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
+  mounted () {
+    if (window._hmt) {
+      window._hmt.push(['_trackPageview', `/充值说明`])
+    }
+  },
   methods: {
     backHandler () {
       this.$router.history.go(-1)

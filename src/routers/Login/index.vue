@@ -57,6 +57,9 @@ export default {
   computed: {},
   mounted () {
     this.initPage()
+    if (window._hmt) {
+      window._hmt.push(['_trackPageview', `/登录注册`])
+    }
   },
   methods: {
     initPage () {

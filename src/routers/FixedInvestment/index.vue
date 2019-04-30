@@ -90,6 +90,9 @@ export default {
         device_id: deviceId,
         type: 'fixedInvestment'
       })
+      if (window._hmt) {
+        window._hmt.push(['_trackPageview', `/定投策略`])
+      }
       // this.$http.get('auth/checkCustomer', {
       //   name: name,
       //   device_id: deviceId,
