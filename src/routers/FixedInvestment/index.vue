@@ -69,8 +69,8 @@ export default {
   },
   methods: {
     initPage () {
-      // const deviceId = storageUtil.getDeviceInfo('device_id')
-      // const name = storageUtil.getUserInfo('name')
+      const deviceId = storageUtil.getDeviceInfo('device_id')
+      const name = storageUtil.getUserInfo('name')
       this.$http.get('customer/getFixedInvestment').then((data) => {
         if (data.success) {
           const list = data.data
@@ -84,6 +84,11 @@ export default {
         if (data.success) {
           this.content = data.data.value
         }
+      })
+      this.$http.get('customer/addTodayQuery', {
+        name: name,
+        device_id: deviceId,
+        type: 'fixedInvestment'
       })
       // this.$http.get('auth/checkCustomer', {
       //   name: name,
