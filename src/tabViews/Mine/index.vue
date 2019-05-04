@@ -47,27 +47,23 @@ export default {
   name: 'Mine',
   data () {
     return {
-      userName: '',
-      userData: {},
-      isVip: false
+      userName: ''
     }
   },
-  computed: {},
+  computed: {
+    userData () {
+      return this.$store.state.userInfo || {}
+    },
+    isVip () {
+      const userInfo = this.$store.state.userInfo || {}
+      return userInfo.isVip || false
+    }
+  },
   mounted () {
     this.initPage()
   },
   methods: {
     initPage () {
-      const userInfo = storageUtil.getUserInfo()
-      this.userName = userInfo.name
-      this.$http.get('customer/getCustomerByName', {
-        name: userInfo.name
-      }).then((data) => {
-        this.userData = data.data
-        if (data.data.buy_type && data.data.can_use_day > 0) {
-          this.isVip = true
-        }
-      })
     },
     okHandler () {
       Http.get('auth/logout', {token: window._token, platform: 'mobile'}).then((data) => {

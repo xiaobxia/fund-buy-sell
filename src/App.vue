@@ -112,7 +112,22 @@ export default {
             ...data.data,
             isLogin: true
           })
+          this.getUserInfo(data.data.name)
         }
+      })
+    },
+    getUserInfo (name) {
+      this.$http.get('customer/getCustomerByName', {
+        name: name
+      }).then((data) => {
+        let isVip = false
+        if (data.data.buy_type && data.data.can_use_day > 0) {
+          isVip = true
+        }
+        this.$store.dispatch('initUserInfo', {
+          ...data.data,
+          isVip
+        })
       })
     },
     checkSubPath (path) {
