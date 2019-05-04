@@ -21,9 +21,14 @@
       </template>
     </div>
     <div class="my-info-wrap simple">
-      <mt-cell-swipe :to="'/page/recharge'" is-link>
+      <mt-cell-swipe v-if="userData.if_test" :to="'/page/recharge'" is-link>
         <div slot="title">
-          <h3><i class="fas fa-hand-holding-usd"></i>{{userData.if_test?'去充值':'去申请试用'}}</h3>
+          <h3><i class="fas fa-hand-holding-usd"></i>去充值</h3>
+        </div>
+      </mt-cell-swipe>
+      <mt-cell-swipe  v-else :to="'/page/getTest'" is-link>
+        <div slot="title">
+          <h3><i class="fas fa-gift"></i>去试用波段策略</h3>
         </div>
       </mt-cell-swipe>
       <!--<mt-cell-swipe :to="'/page/invitation'" is-link>-->
