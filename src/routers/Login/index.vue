@@ -10,7 +10,7 @@
       <mt-tab-container-item id="tab-container1">
         <div class="input-wrap">
           <div class="input-item">
-            <input type="text" v-model="name" placeholder="请输入微信号">
+            <input type="text" v-model="name" placeholder="请输入手机/微信号">
           </div>
           <div class="input-item">
             <input type="text" v-model="password" placeholder="请输入密码">
@@ -20,9 +20,9 @@
       </mt-tab-container-item>
       <mt-tab-container-item id="tab-container2">
         <div class="input-wrap">
-          <div class="warn">为了避免不必要的麻烦，请务必使用真实微信号</div>
+          <!--<div class="warn">为了避免不必要的麻烦，请务必使用真实微信号</div>-->
           <div class="input-item">
-            <input type="text" v-model="name" placeholder="请输入微信号">
+            <input type="text" v-model="name" placeholder="请输入手机/微信号">
           </div>
           <div class="input-item">
             <input type="text" v-model="password" placeholder="请输入密码">
