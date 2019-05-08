@@ -6,7 +6,7 @@
       </mt-button>
     </mt-header>
     <div class="main-body">
-      <div class="title">搜索并添加客服微信号"fund_buy_sell"提交试用申请或咨询</div>
+      <div class="title">搜索并添加客服微信号"fund_buy_sell"提交试用申请，即可获得10个交易日的试用权限</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
       <img src="../../assets/kefu.jpg" alt="">
     </div>
