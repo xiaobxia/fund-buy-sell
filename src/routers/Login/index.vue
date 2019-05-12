@@ -67,9 +67,9 @@ export default {
     loginHandler () {
       const info = storageUtil.getDeviceInfo()
       this.$http.post('auth/customerLogin', {
-        name: this.name,
+        name: this.name.replace(/\s+/g, ''),
         device_id: info.device_id,
-        password: this.password
+        password: this.password.replace(/\s+/g, '')
       }).then((data) => {
         if (data.success) {
           window._token = data.data.token
@@ -88,9 +88,9 @@ export default {
     registerHandler () {
       const info = storageUtil.getDeviceInfo()
       this.$http.post('auth/customerRegister', {
-        name: this.name,
+        name: this.name.replace(/\s+/g, ''),
         device_id: info.device_id,
-        password: this.password
+        password: this.password.replace(/\s+/g, '')
       }).then((data) => {
         if (data.success) {
           window._token = data.data.token
