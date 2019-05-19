@@ -65,6 +65,11 @@ const routers = [
     component: lazyLoading('AboutUs')
   },
   {
+    name: 'Question',
+    path: '/page/question',
+    component: lazyLoading('Question')
+  },
+  {
     name: '404',
     path: '*',
     component: lazyLoading('NotMatch')

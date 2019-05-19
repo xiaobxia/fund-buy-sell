@@ -17,11 +17,15 @@
 @import "component/search";
 @import "component/indicator";
 @import "component/table";
+
+@import "component/fold-card";
+
 @import "tabViews/mine";
 @import "page/login";
 @import "page/operating-info";
 @import "page/page-recharge";
 @import "page/page-get-test";
+@import "page/page-question";
 
 body {
   margin: 0;

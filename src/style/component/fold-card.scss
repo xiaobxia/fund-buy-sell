@@ -1,0 +1,14 @@
+.component-fold-card {
+  .title {
+    padding: 25px 30px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    i {
+      float: right;
+    }
+  }
+  .content {
+    padding: 30px;
+    background-color: rgb(245, 245, 245);
+  }
+}

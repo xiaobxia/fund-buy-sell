@@ -24,9 +24,7 @@ export default {
     }
   },
   mounted () {
-    if (window._hmt) {
-      window._hmt.push(['_trackPageview', `/充值说明`])
-    }
+    this.addPV('充值说明')
   },
   methods: {
     backHandler () {

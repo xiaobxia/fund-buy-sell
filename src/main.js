@@ -13,6 +13,7 @@ import store from './store'
 import numberUtil from '@/util/numberUtil.js'
 import Clipboard from 'v-clipboard'
 import moment from 'moment'
+import storageUtil from '@/util/storageUtil.js'
 
 environmentUtil.setAdaptive()
 
@@ -23,6 +24,14 @@ Vue.use(VCharts)
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
+
+Vue.prototype.addPV = function (name) {
+  const userInfo = storageUtil.getUserInfo()
+  const isAdmin = userInfo.name === 'wx_4' || userInfo.name === '17681824125'
+  if (window._hmt && location.hostname !== 'localhost' && !isAdmin) {
+    window._hmt.push(['_trackPageview', `/${name}`])
+  }
+}
 
 Vue.prototype.numberClass = function (number) {
   if (!number) {

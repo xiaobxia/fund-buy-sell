@@ -5,8 +5,10 @@
         <i class="fas fa-chevron-left"></i>
       </mt-button>
     </mt-header>
-    <div class="main-body">
-      <div class="title">搜索并添加客服微信号"fund_buy_sell"提交试用申请，即可获得10个交易日的试用权限</div>
+    <div class="main-body content">
+      <div class="title">搜索并添加客服微信号"fund_buy_sell"</div>
+      <div class="title">向客服提供您注册时的手机号/微信号</div>
+      <div class="title">就能获得10个交易日的试用权限，就这么简单</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
       <img src="../../assets/kefu.jpg" alt="">
     </div>
@@ -23,9 +25,7 @@ export default {
     }
   },
   mounted () {
-    if (window._hmt) {
-      window._hmt.push(['_trackPageview', `/申请试用`])
-    }
+    this.addPV('申请试用')
   },
   methods: {
     backHandler () {
