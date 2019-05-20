@@ -36,6 +36,11 @@
           <h3><i class="fas fa-question-circle"></i>常见问题</h3>
         </div>
       </mt-cell-swipe>
+      <mt-cell-swipe  :to="'/page/aboutUs'" is-link>
+        <div slot="title">
+          <h3><i class="fas fa-users"></i>关于我们</h3>
+        </div>
+      </mt-cell-swipe>
       <!--<mt-cell-swipe :to="'/page/invitation'" is-link>-->
         <!--<div slot="title">-->
           <!--<h3><i class="fas fa-gift"></i>邀请有礼</h3>-->

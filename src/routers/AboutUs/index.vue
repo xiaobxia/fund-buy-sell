@@ -1,12 +1,15 @@
 <template>
-  <div class="page-agreement">
+  <div class="page-about-us">
     <mt-header title="关于我们" :fixed="true">
       <mt-button slot="left" @click="backHandler">
         <i class="fas fa-chevron-left"></i>
       </mt-button>
     </mt-header>
-    <div class="main-body">
-      <h3></h3>
+    <div class="main-body content">
+      <h3>养基波段定投</h3>
+      <p>专注指数基金定投和波段操作，分享交易信息。拥有专属技术分析工具。</p>
+      <mt-button type="primary" v-clipboard="'fund_do'" v-clipboard:success="clipboardSuccessHandler">一键复制公众号</mt-button>
+      <img src="../../assets/aboutUs.jpg" alt="">
     </div>
   </div>
 </template>
@@ -17,6 +20,9 @@ export default {
   data () {
     return {
     }
+  },
+  mounted () {
+    this.addPV('关于我们')
   },
   methods: {
     backHandler () {
