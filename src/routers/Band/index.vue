@@ -74,34 +74,30 @@ export default {
     initPage () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
       const name = storageUtil.getUserInfo('name')
-      this.$http.get('auth/checkCustomer', {
+      this.$http.get('customer/getBand', {
         name: name,
         device_id: deviceId,
         type: 'band'
       }).then((data) => {
         if (data.success) {
-          this.$http.get('customer/getBand').then((data) => {
-            if (data.success) {
-              const list = data.data
-              list.sort((a, b) => {
-                return a.sortIndex - b.sortIndex
-              })
-              this.list = list
-            }
-          })
           this.$http.get('customer/addTodayQuery', {
             name: name,
             device_id: deviceId,
             type: 'band'
           })
+          this.$http.get('customer/getBandContent').then((data) => {
+            if (data.success) {
+              this.positionContent = data.data.positionContent
+              this.marketWarn = data.data.marketWarn
+            }
+          })
+          const list = data.data
+          list.sort((a, b) => {
+            return a.sortIndex - b.sortIndex
+          })
+          this.list = list
         } else {
           ToastBig.error(data.message, 1000)
-        }
-      })
-      this.$http.get('customer/getBandContent').then((data) => {
-        if (data.success) {
-          this.positionContent = data.data.positionContent
-          this.marketWarn = data.data.marketWarn
         }
       })
     },

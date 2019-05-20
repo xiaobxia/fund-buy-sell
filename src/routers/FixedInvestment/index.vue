@@ -71,7 +71,11 @@ export default {
     initPage () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
       const name = storageUtil.getUserInfo('name')
-      this.$http.get('customer/getFixedInvestment').then((data) => {
+      this.$http.get('customer/getFixedInvestment', {
+        name: name,
+        device_id: deviceId,
+        type: 'fixedInvestment'
+      }).then((data) => {
         if (data.success) {
           const list = data.data
           list.sort((a, b) => {
