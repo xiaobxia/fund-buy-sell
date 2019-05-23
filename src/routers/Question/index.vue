@@ -19,14 +19,15 @@
         <div slot="content">搜索并添加客服微信号"fund_buy_sell"，向客服提供您注册时的手机号/微信号，就能获得10个交易日的试用权限。关注我们的动态，节假日我们也会有赠送使用时间的活动的！</div>
       </fold-card>
       <fold-card>
-        <div slot="title">4.使用完如何续期？</div>
+        <div slot="title">4.试用完如何续期？</div>
         <div slot="content">
-          <div>搜索并添加客服微信号"fund_buy_sell"提交充值申请或咨询</div>
           <img src="../../assets/pay.jpg" alt="">
+          <div class="l-1">搜索并添加客服微信号"fund_buy_sell"提交充值申请或咨询</div>
+          <p class="l-2">订的越久，每个交易日的单价就越便宜。以套餐一为例，总价是120元，可以用60个交易日，折合每个交易日是2元。60个交易日可以用多久呢？一个月平均是21个交易日，60个交易日相当于3个月，也就是说120元可以用3个月。那贵吗？帮大家算一笔账，假如您持有1支基金1万元，它一天跌了1.2%，那也就是说您亏了120元。但是如果您使用系统后提前躲过了下跌，只要躲过1次，您就少亏了120，您就收回成本了。</p>
         </div>
       </fold-card>
       <fold-card>
-        <div slot="title">5.你们推荐的基金费率高吗？</div>
+        <div slot="title">5.您们推荐的基金费率高吗？</div>
         <div slot="content">
           <div>我们推荐的标的都是同个品种当中费率最低的。如果您分步建仓，再分步卖出是可以实现几乎零费率操作的。</div>
           <table width="100%" cellspacing="1" cellpadding="20">
