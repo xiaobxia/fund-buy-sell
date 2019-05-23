@@ -16,7 +16,7 @@
       </fold-card>
       <fold-card>
         <div slot="title">3.如何申请试用？</div>
-        <div slot="content">搜索并添加客服微信号"fund_buy_sell"，向客服提供您注册时的手机号/微信号，就能获得10个交易日的试用权限。关注我们的动态，节假日我们也会有赠送使用时间的活动的！</div>
+        <div slot="content">搜索并添加客服微信号"fund_buy_sell"，向客服提供您注册时的手机号或微信号，就能获得10个交易日的试用权限。关注我们的动态，节假日我们也会有赠送使用时间的活动的！</div>
       </fold-card>
       <fold-card>
         <div slot="title">4.试用完如何续期？</div>
