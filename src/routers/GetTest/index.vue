@@ -11,6 +11,8 @@
       <div class="title">就能获得10个交易日的试用权限，就这么简单</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
       <img src="../../assets/kefu.jpg" alt="">
+      <div class="title">示例</div>
+      <img src="../../assets/test-e.jpg" alt="">
     </div>
   </div>
 </template>

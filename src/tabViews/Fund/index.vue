@@ -33,10 +33,14 @@ export default {
   data () {
     return {}
   },
+  computed: {
+    userData () {
+      return this.$store.state.userInfo || {}
+    }
+  },
   mounted () {
     this.initPage()
   },
-
   methods: {
     initPage () {
     },
@@ -55,6 +59,10 @@ export default {
         if (data.success) {
           this.$router.push(path)
         } else {
+          if (type === 'band' && this.userData.if_test === false) {
+            this.$router.push('/page/getTest')
+            return
+          }
           ToastBig.error(data.message, 1000)
         }
       })
