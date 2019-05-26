@@ -13,6 +13,8 @@
       <img src="../../assets/kefu.jpg" alt="">
       <div class="title">示例</div>
       <img src="../../assets/test-e.jpg" alt="">
+      <div class="title top-20">如果您试用以后觉得好，可以选择付费，支持我们哦</div>
+      <img src="../../assets/pay.jpg" alt="">
     </div>
   </div>
 </template>
