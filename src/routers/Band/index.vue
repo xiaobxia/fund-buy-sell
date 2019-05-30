@@ -62,12 +62,12 @@ export default {
   computed: {
   },
   beforeDestroy () {
-    Watermark.remove(this.watermarkId)
+    // Watermark.remove(this.watermarkId)
   },
   mounted () {
     this.initPage()
     const userInfo = storageUtil.getUserInfo()
-    this.watermarkId = Watermark.set(userInfo.name)
+    // this.watermarkId = Watermark.set(userInfo.name)
     this.addPV('波段策略')
   },
   methods: {

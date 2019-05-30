@@ -30,6 +30,11 @@ const routers = [
     component: lazyLoading('Login')
   },
   {
+    name: 'ResetPassword',
+    path: '/page/resetPassword',
+    component: lazyLoading('ResetPassword')
+  },
+  {
     name: 'NoPermission',
     path: '/noPermission',
     component: lazyLoading('NoPermission')

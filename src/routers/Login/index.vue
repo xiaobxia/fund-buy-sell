@@ -17,6 +17,7 @@
           </div>
           <mt-button type="primary" @click="loginHandler">登录</mt-button>
         </div>
+        <div class="f-p" @click="toResetPassword">忘记密码？</div>
       </mt-tab-container-item>
       <mt-tab-container-item id="tab-container2">
         <div class="input-wrap">
@@ -112,6 +113,9 @@ export default {
     },
     activeChange (str) {
       this.active = str
+    },
+    toResetPassword () {
+      this.$router.push('/page/resetPassword')
     }
   }
 }
