@@ -78,6 +78,7 @@ export default {
             ...data.data,
             isLogin: true
           })
+          this.getUserInfo(data.data.name)
           ToastBig.success('登录成功')
         } else {
           ToastBig.error(data.message, 2000)
@@ -99,10 +100,25 @@ export default {
             ...data.data,
             isLogin: true
           })
+          this.getUserInfo(data.data.name)
           ToastBig.success('注册成功')
         } else {
           ToastBig.error(data.message, 2000)
         }
+      })
+    },
+    getUserInfo (name) {
+      this.$http.get('customer/getCustomerByName', {
+        name: name
+      }).then((data) => {
+        let isVip = false
+        if (data.data.buy_type && data.data.can_use_day > 0) {
+          isVip = true
+        }
+        this.$store.dispatch('initUserInfo', {
+          ...data.data,
+          isVip
+        })
       })
     },
     clipboardSuccessHandler () {
