@@ -21,6 +21,16 @@
           <div class="bottom">波段策略</div>
         </div>
       </div>
+      <div class="img-card" @click="toPath('/page/highBand', 'band')">
+        <!--<img src="../../assets/timg.jpg" alt="">-->
+        <div class="container">
+          <div class="content">
+            <img src="../../assets/25风险.png" alt="">
+            <!--<i class="fas fa-allergies"></i>-->
+          </div>
+          <div class="bottom">高风偏波段</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

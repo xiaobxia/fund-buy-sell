@@ -40,6 +40,11 @@ const routers = [
     component: lazyLoading('Band')
   },
   {
+    name: 'HighBand',
+    path: '/page/highBand',
+    component: lazyLoading('HighBand')
+  },
+  {
     name: 'FixedInvestment',
     path: '/page/fixedInvestment',
     component: lazyLoading('FixedInvestment')
