@@ -95,24 +95,24 @@ export default {
     backHandler () {
       this.$router.history.go(-1)
     },
-    getShouldDo (kline, buySellHighList) {
+    getShouldDo (kline, buySellList) {
       let ifBuy = false
       let ifSell = false
       let firstFlag = ''
       let firstFlagIndex = 0
       // 首先今天是没有出信号的
-      if (buySellHighList[0] !== '') {
+      if (buySellList[0] !== '') {
         return ''
       }
       // 获取之后的第一个信号
-      for (let i = 1; i < buySellHighList.length; i++) {
-        if (buySellHighList[i] !== '') {
+      for (let i = 1; i < buySellList.length; i++) {
+        if (buySellList[i] !== '') {
           firstFlagIndex = i
-          firstFlag = buySellHighList[i]
+          firstFlag = buySellList[i]
           break
         }
       }
-      // 今天没信号，之前有卖出，并且连续跌2天及以上，那就提示卖出
+      // 今天没信号，之前有卖出，并且连续跌1天及以上，那就提示卖出
       if (firstFlag === '卖') {
         if (firstFlagIndex >= 1) {
           let allDown = true
@@ -124,6 +124,64 @@ export default {
           }
           if (allDown) {
             ifSell = true
+          }
+        }
+      }
+      // 今天没信号，之前有买入，并且连续涨1天及以上，那就提示买入
+      if (firstFlag === '买') {
+        if (firstFlagIndex >= 1) {
+          let allUp = true
+          for (let i = 0; i < firstFlagIndex; i++) {
+            if (kline[i].netChangeRatio < 0) {
+              allUp = false
+              break
+            }
+          }
+          if (allUp) {
+            ifBuy = true
+          }
+        }
+      }
+      // 今天没信号，之前有卖出，卖出信号第二天涨了，但是涨得少，之后都跌了也应该卖出
+      if (firstFlag === '卖') {
+        if (firstFlagIndex >= 2) {
+          const changeRatio = kline[firstFlagIndex - 1].netChangeRatio
+          // 卖出信号第二天涨了，但是涨得少
+          if (changeRatio > 0 && changeRatio < 0.5) {
+            let allDown = true
+            for (let i = 0; i < (firstFlagIndex - 1); i++) {
+              if (kline[i].netChangeRatio > 0) {
+                allDown = false
+                break
+              }
+            }
+            if (allDown) {
+              ifSell = true
+            }
+          }
+        }
+      }
+      // 今天没信号，之前有卖出，之后只有一天涨了（但不是今天）而且涨的很少也应该卖出
+      if (firstFlag === '卖') {
+        if (firstFlagIndex >= 3) {
+          // 今天是跌的
+          if (kline[0].netChangeRatio < 0) {
+            let upCount = 0
+            let upIndex = 0
+            for (let i = 0; i < firstFlagIndex; i++) {
+              if (kline[i].netChangeRatio > 0) {
+                upCount++
+                upIndex = i
+              }
+            }
+            // 只有一天是上涨的
+            if (upCount === 1) {
+              const changeRatio = kline[upIndex].netChangeRatio
+              // 但是涨得少
+              if (changeRatio > 0 && changeRatio < 0.5) {
+                ifSell = true
+              }
+            }
           }
         }
       }

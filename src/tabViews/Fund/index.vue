@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="tab-view-fund">
     <div class="has-bar">
+      <div v-if="showTopWarnTest" class="top-warn">您的套餐只剩1天了哦，快去申请试用吧！</div>
+      <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去充值吧！</div>
       <div class="img-card" @click="toPath('/page/fixedInvestment', 'fixedInvestment')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
         <div class="container">
@@ -38,6 +40,7 @@
 <script>
 import storageUtil from '@/util/storageUtil.js'
 import ToastBig from '@/common/toast.js'
+
 export default {
   name: 'Fund',
   data () {
@@ -46,6 +49,20 @@ export default {
   computed: {
     userData () {
       return this.$store.state.userInfo || {}
+    },
+    showTopWarnTest () {
+      const userInfo = this.$store.state.userInfo || {}
+      if (userInfo.can_use_day === 1 && userInfo.if_test === false) {
+        return true
+      }
+      return false
+    },
+    showTopWarnBuy () {
+      const userInfo = this.$store.state.userInfo || {}
+      if (userInfo.can_use_day === 1 && userInfo.if_test === true) {
+        return true
+      }
+      return false
     }
   },
   mounted () {

@@ -121,7 +121,7 @@ export default {
           break
         }
       }
-      // 今天没信号，之前有卖出，并且连续跌2天及以上，那就提示卖出
+      // 今天没信号，之前有卖出，并且连续跌1天及以上，那就提示卖出
       if (firstFlag === '卖') {
         if (firstFlagIndex >= 1) {
           let allDown = true
@@ -133,6 +133,64 @@ export default {
           }
           if (allDown) {
             ifSell = true
+          }
+        }
+      }
+      // 今天没信号，之前有买入，并且连续涨1天及以上，那就提示买入
+      if (firstFlag === '买') {
+        if (firstFlagIndex >= 1) {
+          let allUp = true
+          for (let i = 0; i < firstFlagIndex; i++) {
+            if (kline[i].netChangeRatio < 0) {
+              allUp = false
+              break
+            }
+          }
+          if (allUp) {
+            ifBuy = true
+          }
+        }
+      }
+      // 今天没信号，之前有卖出，卖出信号第二天涨了，但是涨得少，之后都跌了也应该卖出
+      if (firstFlag === '卖') {
+        if (firstFlagIndex >= 2) {
+          const changeRatio = kline[firstFlagIndex - 1].netChangeRatio
+          // 卖出信号第二天涨了，但是涨得少
+          if (changeRatio > 0 && changeRatio < 0.5) {
+            let allDown = true
+            for (let i = 0; i < (firstFlagIndex - 1); i++) {
+              if (kline[i].netChangeRatio > 0) {
+                allDown = false
+                break
+              }
+            }
+            if (allDown) {
+              ifSell = true
+            }
+          }
+        }
+      }
+      // 今天没信号，之前有卖出，之后只有一天涨了（但不是今天）而且涨的很少也应该卖出
+      if (firstFlag === '卖') {
+        if (firstFlagIndex >= 3) {
+          // 今天是跌的
+          if (kline[0].netChangeRatio < 0) {
+            let upCount = 0
+            let upIndex = 0
+            for (let i = 0; i < firstFlagIndex; i++) {
+              if (kline[i].netChangeRatio > 0) {
+                upCount++
+                upIndex = i
+              }
+            }
+            // 只有一天是上涨的
+            if (upCount === 1) {
+              const changeRatio = kline[upIndex].netChangeRatio
+              // 但是涨得少
+              if (changeRatio > 0 && changeRatio < 0.5) {
+                ifSell = true
+              }
+            }
           }
         }
       }
