@@ -80,6 +80,16 @@ const routers = [
     component: lazyLoading('Question')
   },
   {
+    name: 'TodayRank',
+    path: '/page/todayRank',
+    component: lazyLoading('TodayRank')
+  },
+  {
+    name: 'MonthRank',
+    path: '/page/monthRank',
+    component: lazyLoading('MonthRank')
+  },
+  {
     name: '404',
     path: '*',
     component: lazyLoading('NotMatch')

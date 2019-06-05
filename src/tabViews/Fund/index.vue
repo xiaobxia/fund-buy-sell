@@ -33,6 +33,26 @@
           <div class="bottom">高风偏波段</div>
         </div>
       </div>
+      <div class="img-card" @click="toNormalPath('/page/todayRank')">
+        <!--<img src="../../assets/timg.jpg" alt="">-->
+        <div class="container">
+          <div class="content">
+            <img src="../../assets/今日.png" alt="">
+            <!--<i class="fas fa-allergies"></i>-->
+          </div>
+          <div class="bottom">今日指数排行</div>
+        </div>
+      </div>
+      <div class="img-card" @click="toNormalPath('/page/monthRank')">
+        <!--<img src="../../assets/timg.jpg" alt="">-->
+        <div class="container">
+          <div class="content">
+            <img src="../../assets/月度合同.png" alt="">
+            <!--<i class="fas fa-allergies"></i>-->
+          </div>
+          <div class="bottom">月度指数排行</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +113,9 @@ export default {
           ToastBig.error(data.message, 1000)
         }
       })
+    },
+    toNormalPath (path) {
+      this.$router.push(path)
     }
   }
 }
