@@ -90,6 +90,11 @@ const routers = [
     component: lazyLoading('MonthRank')
   },
   {
+    name: 'Valuation',
+    path: '/page/valuation',
+    component: lazyLoading('Valuation')
+  },
+  {
     name: '404',
     path: '*',
     component: lazyLoading('NotMatch')

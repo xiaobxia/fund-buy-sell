@@ -7,7 +7,7 @@
     </mt-header>
     <div class="main-body content">
       <div class="title">搜索并添加客服微信号"fund_buy_sell"</div>
-      <div class="title">向客服提供您注册我们系统时使用的手机号或微信号</div>
+      <div class="title">向客服提供您注册我们系统时使用的手机号</div>
       <div class="title">就能获得10个交易日的试用权限，就这么简单</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
       <img src="../../assets/kefu.jpg" alt="">

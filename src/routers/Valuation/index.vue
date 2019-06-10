@@ -1,17 +1,26 @@
 <template>
   <div class="today-index">
-    <mt-header title="指数月收益排行" :fixed="true">
+    <mt-header title="定投估值" :fixed="true">
       <mt-button slot="left" @click="backHandler">
         <i class="fas fa-chevron-left"></i>
       </mt-button>
     </mt-header>
     <div class="main-body">
-      <mt-cell-swipe v-for="(item, index) in list" :key="item.code">
+      <mt-cell-swipe>
+        <div slot="title" class="tab-title">
+          <h3>
+            <span class="name">名称</span>
+            <span class="index-pe">PE</span>
+            <span class="index-pb">PB</span>
+          </h3>
+        </div>
+      </mt-cell-swipe>
+      <mt-cell-swipe v-for="(item) in list" :key="item.code">
         <div slot="title">
           <h3>
-            <span class="paiming">{{index + 1}}.</span>
-            <span class="name">{{item.name}}</span>
-            <span style="float: right" :class="numberClass(item.month_rate)">{{item.month_rate}}%</span>
+            <span class="name"><span :class="['valuation-tag', item.guzhi==='偏低'?'low':item.guzhi==='适中'?'normal':'high']">{{item.guzhi || ''}}</span>{{item.name}}</span>
+            <span class="index-pe">{{item.PE || 0}}</span>
+            <span class="index-pb">{{item.PB || 0}}</span>
           </h3>
         </div>
       </mt-cell-swipe>
@@ -23,7 +32,7 @@
 import storageUtil from '@/util/storageUtil.js'
 
 export default {
-  name: 'MonthRank',
+  name: 'Valuation',
   data () {
     return {
       list: []
@@ -33,17 +42,15 @@ export default {
   },
   mounted () {
     this.initPage()
-    this.addPV('月度指数排行')
   },
   methods: {
     initPage () {
       this.queryData()
+      this.addPV('定投估值')
     },
     queryData () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
-      const name = storageUtil.getUserInfo('name')
-      return this.$http.get(`customerCommon/getMonthRank`, {
-        name: name,
+      return this.$http.get(`customerCommon/getIndexValuation`, {
         device_id: deviceId
       }).then((data) => {
         if (data.success) {

@@ -3,7 +3,7 @@
     <h3>重置密码</h3>
     <div class="input-wrap">
       <div class="input-item">
-        <input type="text" v-model="name" placeholder="请输入手机/微信号">
+        <input type="text" v-model="name" placeholder="请输入手机号">
       </div>
       <div class="input-item">
         <input type="text" v-model="password" placeholder="请输入密码">

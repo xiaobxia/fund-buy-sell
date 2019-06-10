@@ -4,19 +4,26 @@
       <div class="user-img-wrap">
         <img src="../../assets/头像.png" alt="">
       </div>
-      <h3 class="user-name">{{userName}}</h3>
-      <template v-if="isVip" >
-        <img class="vip" src="../../assets/vip-1.png" alt="">
-        <div class="buy-type-wrap">
-          <div>{{userData.buy_type}}套餐</div>
-          <div>剩余{{userData.can_use_day}}天</div>
-        </div>
+      <h3 class="user-name">{{userData.name || ''}}</h3>
+      <template v-if="userData.name" >
+        <template v-if="isVip" >
+          <img class="vip" src="../../assets/vip-1.png" alt="">
+          <div class="buy-type-wrap">
+            <div>{{userData.buy_type}}套餐</div>
+            <div>剩余{{userData.can_use_day}}天</div>
+          </div>
+        </template>
+        <template v-else >
+          <img class="vip" src="../../assets/vip-0.png" alt="">
+          <div class="buy-type-wrap">
+            <div>未购买</div>
+            <div>服务</div>
+          </div>
+        </template>
       </template>
-      <template v-else >
-        <img class="vip" src="../../assets/vip-0.png" alt="">
+      <template v-else>
         <div class="buy-type-wrap">
-          <div>未购买</div>
-          <div>服务</div>
+          <div>未登录</div>
         </div>
       </template>
     </div>
@@ -26,7 +33,7 @@
           <h3><i class="fas fa-hand-holding-usd"></i>去充值</h3>
         </div>
       </mt-cell-swipe>
-      <mt-cell-swipe  v-else :to="'/page/getTest'" is-link>
+      <mt-cell-swipe  v-else-if="userData.can_use_day<=1" :to="'/page/getTest'" is-link>
         <div slot="title">
           <h3><i class="fas fa-gift"></i>去试用波段策略</h3>
         </div>
@@ -48,7 +55,8 @@
       <!--</mt-cell-swipe>-->
     </div>
     <div class="btn-wrap">
-      <mt-button type="primary" @click="okHandler" class="main-btn">退出登录</mt-button>
+      <mt-button v-if="userData.name" type="primary" @click="okHandler" class="main-btn">退出登录</mt-button>
+      <mt-button v-else type="primary" @click="toLoginHandler" class="main-btn">去登录</mt-button>
     </div>
   </div>
 </template>
@@ -87,11 +95,15 @@ export default {
           storageUtil.initUserInfo({
             isLogin: false
           })
-          this.$router.push('/page/login')
+          storageUtil.setAppConfig('homeTabSelect', 'fund')
+          window.location.reload()
         } else {
           Toast.error('操作失败')
         }
       })
+    },
+    toLoginHandler () {
+      this.$router.push('/page/login')
     }
   }
 }

@@ -67,9 +67,6 @@ export default {
   },
   mounted () {
     this.initPage()
-    setInterval(() => {
-      storageUtil.clearQueryCache()
-    }, 1000 * 60 * 5)
   },
   methods: {
     initPage () {
@@ -103,10 +100,6 @@ export default {
           storageUtil.initUserInfo({
             isLogin: false
           })
-          const user = storageUtil.getUserInfo()
-          if (user.isLogin !== true) {
-            this.$router.replace('/page/login')
-          }
         } else {
           storageUtil.initUserInfo({
             ...data.data,
@@ -178,7 +171,7 @@ export default {
     },
     checkUser (user, transition) {
       if (user.isLogin !== true) {
-        this.$router.push('/page/login')
+        // 不强制要求登录
       } else {
         const roles = this.checkPermissionPath(transition)
         if (roles) {

@@ -1,5 +1,10 @@
 <template>
   <div class="page-login">
+    <mt-header title="" :fixed="true">
+      <mt-button slot="left" @click="backHandler">
+        <i class="fas fa-chevron-left"></i>
+      </mt-button>
+    </mt-header>
     <h3>养基定投波段</h3>
     <div class="nav">
       <span :class="{'active': active === 'tab-container1'}" @click="activeChange('tab-container1')">登录</span>
@@ -10,7 +15,7 @@
       <mt-tab-container-item id="tab-container1">
         <div class="input-wrap">
           <div class="input-item">
-            <input type="text" v-model="name" placeholder="请输入手机/微信号">
+            <input type="text" v-model="name" placeholder="请输入手机号">
           </div>
           <div class="input-item">
             <input type="text" v-model="password" placeholder="请输入密码">
@@ -23,7 +28,7 @@
         <div class="input-wrap">
           <!--<div class="warn">为了避免不必要的麻烦，请务必使用真实微信号</div>-->
           <div class="input-item">
-            <input type="text" v-model="name" placeholder="请输入手机/微信号">
+            <input type="text" v-model="name" placeholder="请输入手机号">
           </div>
           <div class="input-item">
             <input type="text" v-model="password" placeholder="请输入密码">
@@ -132,6 +137,9 @@ export default {
     },
     toResetPassword () {
       this.$router.push('/page/resetPassword')
+    },
+    backHandler () {
+      this.$router.replace('/')
     }
   }
 }

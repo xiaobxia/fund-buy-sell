@@ -1,9 +1,12 @@
 .page-login {
   position: relative;
-  margin: 200px auto 0 auto;
+  margin: 150px auto 0 auto;
   width: 100%;
   padding: 0 50px;
   box-sizing: border-box;
+  .mint-header {
+    border: none;
+  }
   h3 {
     text-align: center;
     font-size: 40px;

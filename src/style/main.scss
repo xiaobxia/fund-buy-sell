@@ -149,3 +149,36 @@ input[type="text" i]:disabled {
 .top-20 {
   margin-top: 20px;
 }
+
+.tab-title {
+  span {
+    font-weight: 600;
+  }
+}
+.mint-cell {
+  .index-pe {
+    position: absolute;
+    left: 50%;
+  }
+  .index-pb {
+    position: absolute;
+    right: 0;
+  }
+  .valuation-tag {
+    position: relative;
+    top: -5px;
+    color: #fff;
+    padding: 3px 6px;
+    font-size: 20px;
+    margin-right: 5px;
+    &.low {
+      background-color: $green-color;
+    }
+    &.high {
+      background-color: $red-color;
+    }
+    &.normal {
+      background-color: $yellow-color;
+    }
+  }
+}

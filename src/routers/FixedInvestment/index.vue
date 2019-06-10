@@ -72,7 +72,7 @@ export default {
     initPage () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
       const name = storageUtil.getUserInfo('name')
-      this.$http.get('customer/getFixedInvestment', {
+      this.$http.get('customerCommon/getFixedInvestment', {
         name: name,
         device_id: deviceId,
         type: 'fixedInvestment'
@@ -85,17 +85,17 @@ export default {
           this.list = list
         }
       })
-      this.$http.get('customer/getFixedInvestmentContent').then((data) => {
+      this.$http.get('customerCommon/getFixedInvestmentContent').then((data) => {
         if (data.success) {
           this.content = data.data.value
         }
       })
-      this.$http.get('customer/addTodayQuery', {
-        name: name,
-        device_id: deviceId,
-        type: 'fixedInvestment'
-      })
       this.addPV('定投策略')
+      // this.$http.get('customer/addTodayQuery', {
+      //   name: name,
+      //   device_id: deviceId,
+      //   type: 'fixedInvestment'
+      // })
       // this.$http.get('auth/checkCustomer', {
       //   name: name,
       //   device_id: deviceId,

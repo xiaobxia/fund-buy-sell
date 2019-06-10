@@ -41,9 +41,7 @@ export default {
     },
     queryData () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
-      const name = storageUtil.getUserInfo('name')
-      return this.$http.get(`customer/getTodayRank`, {
-        name: name,
+      return this.$http.get(`customerCommon/getTodayRank`, {
         device_id: deviceId
       }).then((data) => {
         if (data.success) {

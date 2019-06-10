@@ -7,7 +7,7 @@
     </mt-header>
     <div class="main-body content">
       <h3>养基波段定投</h3>
-      <p>专注指数基金定投和波段操作，分享交易信息。拥有专属技术分析工具。</p>
+      <p>专注指数基金定投和波段操作，分享交易信息，拥有专属技术分析工具。</p>
       <mt-button type="primary" v-clipboard="'fund_do'" v-clipboard:success="clipboardSuccessHandler">一键复制公众号</mt-button>
       <img src="../../assets/aboutUs.jpg" alt="">
     </div>
@@ -27,6 +27,12 @@ export default {
   methods: {
     backHandler () {
       this.$router.history.go(-1)
+    },
+    clipboardSuccessHandler () {
+      Toast({
+        message: '复制成功',
+        duration: 1000
+      })
     }
   }
 }
