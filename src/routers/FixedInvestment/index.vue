@@ -8,7 +8,6 @@
     <div class="main-body">
       <div class="main-warn">
         <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
-        <div class="purple-text">{{content}}</div>
         <div class="purple-text">一个指数一年出25个左右的定投信号，平均下来一月2个信号，小伙伴们耐心等信号哈。</div>
       </div>
       <div>
@@ -85,11 +84,11 @@ export default {
           this.list = list
         }
       })
-      this.$http.get('customerCommon/getFixedInvestmentContent').then((data) => {
-        if (data.success) {
-          this.content = data.data.value
-        }
-      })
+      // this.$http.get('customerCommon/getFixedInvestmentContent').then((data) => {
+      //   if (data.success) {
+      //     this.content = data.data.value
+      //   }
+      // })
       this.addPV('定投策略')
       // this.$http.get('customer/addTodayQuery', {
       //   name: name,
