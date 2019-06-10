@@ -1,13 +1,13 @@
 <template>
   <div class="page-recharge">
-    <mt-header title="充值说明" :fixed="true">
+    <mt-header title="续期说明" :fixed="true">
       <mt-button slot="left" @click="backHandler">
         <i class="fas fa-chevron-left"></i>
       </mt-button>
     </mt-header>
     <div class="main-body">
       <img src="../../assets/pay.jpg" alt="">
-      <div class="title">搜索并添加客服微信号"fund_buy_sell"提交充值申请或咨询</div>
+      <div class="title">搜索并添加客服微信号"fund_buy_sell"提交续期申请或咨询</div>
       <mt-button type="primary" v-clipboard="'fund_buy_sell'" v-clipboard:success="clipboardSuccessHandler">一键复制微信号</mt-button>
       <img src="../../assets/kefu.jpg" alt="">
     </div>
@@ -24,7 +24,7 @@ export default {
     }
   },
   mounted () {
-    this.addPV('充值说明')
+    this.addPV('续期说明')
   },
   methods: {
     backHandler () {

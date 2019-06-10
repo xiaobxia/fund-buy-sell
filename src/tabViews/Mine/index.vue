@@ -4,25 +4,25 @@
       <div class="user-img-wrap">
         <img src="../../assets/头像.png" alt="">
       </div>
-      <h3 class="user-name">{{userData.name || ''}}</h3>
+      <h3 class="user-name">{{userData.name || '养基小伙伴'}}</h3>
       <template v-if="userData.name" >
         <template v-if="isVip" >
-          <img class="vip" src="../../assets/vip-1.png" alt="">
+          <img class="vip" src="../../assets/皇冠.png" alt="">
           <div class="buy-type-wrap">
             <div>{{userData.buy_type}}套餐</div>
             <div>剩余{{userData.can_use_day}}天</div>
           </div>
         </template>
         <template v-else >
-          <img class="vip" src="../../assets/vip-0.png" alt="">
+          <img class="vip" src="../../assets/皇冠1.png" alt="">
           <div class="buy-type-wrap">
-            <div>未购买</div>
-            <div>服务</div>
+            <div>波段套餐</div>
+            <div>剩余0天</div>
           </div>
         </template>
       </template>
       <template v-else>
-        <div class="buy-type-wrap">
+        <div class="no-logo">
           <div>未登录</div>
         </div>
       </template>
@@ -30,12 +30,12 @@
     <div class="my-info-wrap simple">
       <mt-cell-swipe v-if="userData.if_test" :to="'/page/recharge'" is-link>
         <div slot="title">
-          <h3><i class="fas fa-hand-holding-usd"></i>去充值</h3>
+          <h3><i class="fas fa-hand-holding-usd"></i>去续期</h3>
         </div>
       </mt-cell-swipe>
       <mt-cell-swipe  v-else-if="userData.can_use_day<=1" :to="'/page/getTest'" is-link>
         <div slot="title">
-          <h3><i class="fas fa-gift"></i>去试用波段策略</h3>
+          <h3><i class="fas fa-gift"></i>去试用</h3>
         </div>
       </mt-cell-swipe>
       <mt-cell-swipe  :to="'/page/question'" is-link>

@@ -2,7 +2,7 @@
   <div class="tab-view-fund">
     <div class="has-bar">
       <div v-if="showTopWarnTest" class="top-warn">您的套餐只剩1天了哦，快去申请试用吧！</div>
-      <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去充值吧！</div>
+      <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去续期吧！</div>
       <div class="info-warn">排行内容</div>
       <div class="img-card" @click="toNormalPath('/page/todayRank')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
