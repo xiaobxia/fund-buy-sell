@@ -6,11 +6,16 @@
       </mt-button>
     </mt-header>
     <div class="main-body">
-      <div class="main-warn">
-        <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
-        <div class="purple-text">此为高风偏波段策略，相较于波段策略会更激进，操作前请先评估自己的风险偏好</div>
-        <div class="purple-text">仓位建议：{{positionContent || 0}}%</div>
-        <div class="purple-text">操作建议：{{marketWarn || '未更新'}}</div>
+      <div class="main-warn new-main-warn">
+        <div class="yellow-warn">
+          <div>越接近收盘，信号越准确，推荐在14:45以后15:00之前操作</div>
+          <div>不能简单根据信号操作，建议结合操作建议使用</div>
+          <div>此为高风偏波段策略，相较于波段策略会更激进，操作前请先评估自己的风险偏好</div>
+        </div>
+        <div class="blue-warn">
+          <div>仓位建议：<span style="font-weight: 600;">{{positionContent || 0}}%</span></div>
+          <div>操作建议：{{marketWarn || '未更新'}}</div>
+        </div>
       </div>
       <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
       item.detail.buySellHigh[0] === '买'?'buy':item.detail.buySellHigh[0] === '卖'?'sell':'',

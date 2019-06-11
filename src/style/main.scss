@@ -182,3 +182,31 @@ input[type="text" i]:disabled {
     }
   }
 }
+
+.yellow-warn {
+   padding: 5px 20px;
+   font-size: 24px;
+   background-color: #fdf6ec;
+   color: #e6a23c;
+}
+
+.grey-warn {
+  padding: 5px 20px;
+  font-size: 24px;
+  background-color: #f4f4f5;
+  color: #909399;
+}
+
+.green-warn {
+  padding: 5px 20px;
+  font-size: 24px;
+  background-color: #f0f9eb;
+  color: #67c23a;
+}
+
+.blue-warn {
+  padding: 5px 20px;
+  font-size: 24px;
+  background-color: rgb(198, 226, 255);
+  color: #409EFF;
+}
