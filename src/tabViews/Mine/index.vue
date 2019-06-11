@@ -56,7 +56,7 @@
     </div>
     <div class="btn-wrap">
       <mt-button v-if="userData.name" type="primary" @click="okHandler" class="main-btn">退出登录</mt-button>
-      <mt-button v-else type="primary" @click="toLoginHandler" class="main-btn">去登录</mt-button>
+      <mt-button v-else type="primary" @click="toLoginHandler" class="main-btn">去登录 / 注册</mt-button>
     </div>
   </div>
 </template>

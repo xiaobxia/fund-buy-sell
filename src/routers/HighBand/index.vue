@@ -9,6 +9,8 @@
       <div class="main-warn">
         <div class="red-text">越接近收盘，信号越准确，推荐在14:45以后15:00之前根据信号操作</div>
         <div class="purple-text">此为高风偏波段策略，相较于波段策略会更激进，操作前请先评估自己的风险偏好</div>
+        <div class="purple-text">仓位建议：{{positionContent || 0}}%</div>
+        <div class="purple-text">操作建议：{{marketWarn || '未更新'}}</div>
       </div>
       <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
       item.detail.buySellHigh[0] === '买'?'buy':item.detail.buySellHigh[0] === '卖'?'sell':'',
@@ -53,7 +55,9 @@ export default {
   data () {
     return {
       watermarkId: '',
-      list: []
+      list: [],
+      positionContent: '',
+      marketWarn: ''
     }
   },
   computed: {
@@ -81,6 +85,12 @@ export default {
             name: name,
             device_id: deviceId,
             type: 'band'
+          })
+          this.$http.get('customer/getBandContent').then((data) => {
+            if (data.success) {
+              this.positionContent = data.data.positionContent
+              this.marketWarn = data.data.marketWarn
+            }
           })
           const list = data.data
           list.sort((a, b) => {
