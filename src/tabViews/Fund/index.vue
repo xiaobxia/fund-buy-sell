@@ -1,6 +1,7 @@
 <template>
   <div class="tab-view-fund">
     <div class="has-bar">
+      <div v-if="ifWechat" class="teach-warn">想知道如何更方便地使用分析工具吗？<div class="teach-btn" @click="toNormalPath('/page/wechatTeach')">去瞧瞧</div></div>
       <div v-if="showTopWarnTest" class="top-warn">您的套餐只剩1天了哦，快去申请试用吧！</div>
       <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去续期吧！</div>
       <div class="info-warn">排行内容</div>
@@ -73,11 +74,14 @@
 <script>
 import storageUtil from '@/util/storageUtil.js'
 import ToastBig from '@/common/toast.js'
+import environmentUtil from '@/util/environmentUtil.js'
 
 export default {
   name: 'Fund',
   data () {
-    return {}
+    return {
+      ifWechat: environmentUtil.ifWechat() || false
+    }
   },
   computed: {
     userData () {
@@ -100,6 +104,7 @@ export default {
   },
   mounted () {
     this.initPage()
+    this.addPV('基金首页')
   },
   methods: {
     initPage () {

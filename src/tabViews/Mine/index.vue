@@ -84,6 +84,7 @@ export default {
   },
   mounted () {
     this.initPage()
+    this.addPV('我的首页')
   },
   methods: {
     initPage () {

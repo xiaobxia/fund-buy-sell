@@ -30,7 +30,8 @@ Vue.prototype.addPV = function (name) {
   const isAdmin = userInfo.name === 'wx_4' || userInfo.name === '17681824125'
   // 不能是开发环境，也不能是管理员账户
   if (window._hmt && location.hostname !== 'localhost' && !isAdmin) {
-    window._hmt.push(['_trackPageview', `/${name}`])
+    const loginTag = userInfo.name ? '用户' : '游客'
+    window._hmt.push(['_trackPageview', `/${loginTag}-${name}`])
   }
 }
 

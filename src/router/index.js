@@ -95,6 +95,11 @@ const routers = [
     component: lazyLoading('Valuation')
   },
   {
+    name: 'WechatTeach',
+    path: '/page/wechatTeach',
+    component: lazyLoading('WechatTeach')
+  },
+  {
     name: '404',
     path: '*',
     component: lazyLoading('NotMatch')
