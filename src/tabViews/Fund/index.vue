@@ -2,7 +2,6 @@
   <div class="tab-view-fund">
     <div class="has-bar">
       <div v-if="ifWechat" class="teach-warn">想知道如何更方便地使用分析工具吗？<div class="teach-btn" @click="toNormalPath('/page/wechatTeach')">去瞧瞧</div></div>
-      <div v-if="showTopWarnTest" class="top-warn">您的套餐只剩1天了哦，快去申请试用吧！</div>
       <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去续期吧！</div>
       <div class="info-warn">排行内容</div>
       <div class="img-card" @click="toNormalPath('/page/todayRank')">
@@ -87,19 +86,9 @@ export default {
     userData () {
       return this.$store.state.userInfo || {}
     },
-    showTopWarnTest () {
-      const userInfo = this.$store.state.userInfo || {}
-      if (userInfo.can_use_day === 1 && userInfo.if_test === false) {
-        return true
-      }
-      return false
-    },
     showTopWarnBuy () {
       const userInfo = this.$store.state.userInfo || {}
-      if (userInfo.can_use_day === 1 && userInfo.if_test === true) {
-        return true
-      }
-      return false
+      return userInfo.can_use_day === 1
     }
   },
   mounted () {
@@ -130,10 +119,7 @@ export default {
         if (data.success) {
           this.$router.push(path)
         } else {
-          if (type === 'band' && this.userData.if_test === false) {
-            this.$router.push('/page/getTest')
-            return
-          } else if (type === 'band' && this.userData.if_test === true) {
+          if (type === 'band') {
             this.$router.push('/page/recharge')
             return
           }

@@ -28,14 +28,9 @@
       </template>
     </div>
     <div class="my-info-wrap simple">
-      <mt-cell-swipe v-if="userData.if_test" :to="'/page/recharge'" is-link>
+      <mt-cell-swipe :to="'/page/recharge'" is-link>
         <div slot="title">
           <h3><i class="fas fa-hand-holding-usd"></i>去续期</h3>
-        </div>
-      </mt-cell-swipe>
-      <mt-cell-swipe  v-else-if="userData.can_use_day<=1" :to="'/page/getTest'" is-link>
-        <div slot="title">
-          <h3><i class="fas fa-gift"></i>去试用</h3>
         </div>
       </mt-cell-swipe>
       <mt-cell-swipe  :to="'/page/question'" is-link>
@@ -48,11 +43,6 @@
           <h3><i class="fas fa-users"></i>关于我们</h3>
         </div>
       </mt-cell-swipe>
-      <!--<mt-cell-swipe :to="'/page/invitation'" is-link>-->
-        <!--<div slot="title">-->
-          <!--<h3><i class="fas fa-gift"></i>邀请有礼</h3>-->
-        <!--</div>-->
-      <!--</mt-cell-swipe>-->
     </div>
     <div class="btn-wrap">
       <mt-button v-if="userData.name" type="primary" @click="okHandler" class="main-btn">退出登录</mt-button>

@@ -15,11 +15,7 @@
         <div slot="content">在交易日的14:45左右就会给出当天的仓位建议和操作建议。</div>
       </fold-card>
       <fold-card>
-        <div slot="title">3.如何申请试用波段内容？</div>
-        <div slot="content">搜索并添加客服微信号"fund_buy_sell"，向客服提供您注册时的手机号，就能获得波段内容10个交易日的试用权限。关注我们的动态，节假日我们也会有赠送使用时间的活动的！</div>
-      </fold-card>
-      <fold-card>
-        <div slot="title">4.试用完如何续期波段内容？</div>
+        <div slot="title">3.试用完如何续期波段内容？</div>
         <div slot="content">
           <img src="../../assets/pay.jpg" alt="">
           <div class="l-1">搜索并添加客服微信号"fund_buy_sell"提交续期申请或咨询</div>
