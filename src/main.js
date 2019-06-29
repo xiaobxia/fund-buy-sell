@@ -41,16 +41,8 @@ Vue.prototype.showAdType = function () {
   if ((hour >= 7 && hour < 9) || (hour >= 11 && hour < 13) || (hour >= 17 && hour < 19)) {
     return '食品'
   }
-  if ((hour >= 9 && hour < 11)) {
-    return '女士用品'
-  }
-  if ((hour >= 13 && hour < 17)) {
-    return '男士用品'
-  }
-  if ((hour >= 19 && hour < 21)) {
-    return '宿舍用品'
-  }
-  return '茶具'
+  let list = ['宿舍用品', '男士用品', '女士用品', '茶具']
+  return list[hour % 4]
 }
 
 Vue.prototype.getAdIndex = function (index, length) {
