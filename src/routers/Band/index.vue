@@ -77,7 +77,7 @@ export default {
     this.addPV('波段策略')
     setTimeout(() => {
       this.getAdUrl()
-    }, 700)
+    }, 500)
   },
   methods: {
     initPage () {

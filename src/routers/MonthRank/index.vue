@@ -40,7 +40,7 @@ export default {
     this.addPV('月度指数排行')
     setTimeout(() => {
       this.getAdUrl()
-    }, 700)
+    }, 500)
   },
   methods: {
     initPage () {

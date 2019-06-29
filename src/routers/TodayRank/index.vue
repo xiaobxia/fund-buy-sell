@@ -44,7 +44,7 @@ export default {
       this.addPV('今日指数排行')
       setTimeout(() => {
         this.getAdUrl()
-      }, 700)
+      }, 500)
     },
     queryData () {
       const deviceId = storageUtil.getDeviceInfo('device_id')

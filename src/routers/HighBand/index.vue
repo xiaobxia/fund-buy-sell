@@ -78,7 +78,7 @@ export default {
     this.addPV('高风偏波段')
     setTimeout(() => {
       this.getAdUrl()
-    }, 700)
+    }, 500)
   },
   methods: {
     initPage () {

@@ -73,7 +73,7 @@ export default {
     this.initPage()
     setTimeout(() => {
       this.getAdUrl()
-    }, 700)
+    }, 500)
   },
   methods: {
     initPage () {

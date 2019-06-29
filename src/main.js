@@ -25,12 +25,12 @@ Vue.config.productionTip = false
 Vue.prototype.$http = Http
 
 Vue.prototype.ifShowAd = function () {
-  const d = new Date()
-  const hour = d.getHours()
-  const minute = d.getMinutes()
-  if (hour >= 14 && hour < 15 && minute > 44 && minute < 60) {
-    return false
-  }
+  // const d = new Date()
+  // const hour = d.getHours()
+  // const minute = d.getMinutes()
+  // if (hour >= 14 && hour < 15 && minute > 44 && minute < 60) {
+  //   return false
+  // }
   return true
 }
 
