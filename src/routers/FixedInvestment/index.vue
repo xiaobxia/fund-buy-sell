@@ -104,7 +104,7 @@ export default {
         status: 1
       }).then((data) => {
         let list = data.data.list || []
-        let index = this.getAdIndex(3, list.length)
+        let index = this.getAdIndex(1, list.length)
         let urlData = list[index] || {}
         this.ad_url = urlData.img_url
       })
