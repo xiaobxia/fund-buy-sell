@@ -39,6 +39,9 @@
           </div>
         </mt-cell-swipe>
       </div>
+      <div class="ad-block" v-if="ifShowAd()">
+        <img :src="ad_url" alt="">
+      </div>
       <div class="exemption">
         <div class="title">风险提示</div>
         <div class="bottom">以上数据均为历史回测表现，不能代表未来发展趋势，每个指标都有他的局限性，在不同的市场环境下可能会出现于回测数据不一致的表现，投资者需要根据不同场景合理应用。</div>
@@ -58,25 +61,24 @@ export default {
     return {
       watermarkId: '',
       list: [],
-      content: ''
+      content: '',
+      ad_url: ''
     }
   },
   computed: {
   },
   beforeDestroy () {
-    // Watermark.remove(this.watermarkId)
   },
   mounted () {
     this.initPage()
-    const userInfo = storageUtil.getUserInfo()
-    // this.watermarkId = Watermark.set(userInfo.name)
+    setTimeout(() => {
+      this.getAdUrl()
+    }, 700)
   },
   methods: {
     initPage () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
-      const name = storageUtil.getUserInfo('name')
       this.$http.get('customerCommon/getFixedInvestment', {
-        name: name,
         device_id: deviceId,
         type: 'fixedInvestment'
       }).then((data) => {
@@ -88,35 +90,24 @@ export default {
           this.list = list
         }
       })
-      // this.$http.get('customerCommon/getFixedInvestmentContent').then((data) => {
-      //   if (data.success) {
-      //     this.content = data.data.value
-      //   }
-      // })
       this.addPV('定投策略')
-      // this.$http.get('customer/addTodayQuery', {
-      //   name: name,
-      //   device_id: deviceId,
-      //   type: 'fixedInvestment'
-      // })
-      // this.$http.get('auth/checkCustomer', {
-      //   name: name,
-      //   device_id: deviceId,
-      //   type: 'fixedInvestment'
-      // }).then((data) => {
-      //   if (data.success) {
-      //     this.$http.get('customer/addTodayQuery', {
-      //       name: name,
-      //       device_id: deviceId,
-      //       type: 'fixedInvestment'
-      //     })
-      //   } else {
-      //     ToastBig.error(data.message, 1000)
-      //   }
-      // })
     },
     backHandler () {
       this.$router.history.go(-1)
+    },
+    getAdUrl () {
+      const type = this.showAdType()
+      this.$http.get('customerCommon/getAdvertisements', {
+        current: 1,
+        pageSize: 10,
+        type: type,
+        status: 1
+      }).then((data) => {
+        let list = data.data.list || []
+        let index = this.getAdIndex(3, list.length)
+        let urlData = list[index] || {}
+        this.ad_url = urlData.img_url
+      })
     }
   }
 }

@@ -15,6 +15,9 @@
           </h3>
         </div>
       </mt-cell-swipe>
+      <div class="ad-block" v-if="ifShowAd()">
+        <img :src="ad_url" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +29,8 @@ export default {
   name: 'TodayRank',
   data () {
     return {
-      list: []
+      list: [],
+      ad_url: ''
     }
   },
   beforeDestroy () {
@@ -38,6 +42,9 @@ export default {
     initPage () {
       this.queryData()
       this.addPV('今日指数排行')
+      setTimeout(() => {
+        this.getAdUrl()
+      }, 700)
     },
     queryData () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
@@ -51,6 +58,20 @@ export default {
     },
     backHandler () {
       this.$router.history.go(-1)
+    },
+    getAdUrl () {
+      const type = this.showAdType()
+      this.$http.get('customerCommon/getAdvertisements', {
+        current: 1,
+        pageSize: 10,
+        type: type,
+        status: 1
+      }).then((data) => {
+        let list = data.data.list || []
+        let index = this.getAdIndex(4, list.length)
+        let urlData = list[index] || {}
+        this.ad_url = urlData.img_url
+      })
     }
   }
 }

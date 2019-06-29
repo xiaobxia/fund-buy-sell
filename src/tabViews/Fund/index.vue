@@ -2,7 +2,6 @@
   <div class="tab-view-fund">
     <div class="has-bar">
       <div v-if="ifWechat" class="teach-warn">想知道如何更方便地使用分析工具吗？<div class="teach-btn" @click="toNormalPath('/page/wechatTeach')">去瞧瞧</div></div>
-      <div v-if="showTopWarnBuy" class="top-warn">您的套餐只剩1天了哦，快去续期吧！</div>
       <div class="info-warn">排行内容</div>
       <div class="img-card" @click="toNormalPath('/page/todayRank')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
@@ -25,7 +24,7 @@
         </div>
       </div>
       <div class="info-warn">定投内容</div>
-      <div class="img-card" @click="toPath('/page/fixedInvestment', 'fixedInvestment')">
+      <div class="img-card" @click="toNormalPath('/page/fixedInvestment')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
         <div class="container">
           <div class="content">
@@ -46,7 +45,7 @@
         </div>
       </div>
       <div class="info-warn">波段内容</div>
-      <div class="img-card" @click="toPath('/page/band', 'band')">
+      <div class="img-card" @click="toNormalPath('/page/band')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
         <div class="container">
           <div class="content">
@@ -56,7 +55,7 @@
           <div class="bottom">波段策略</div>
         </div>
       </div>
-      <div class="img-card" @click="toPath('/page/highBand', 'band')">
+      <div class="img-card" @click="toNormalPath('/page/highBand')">
         <!--<img src="../../assets/timg.jpg" alt="">-->
         <div class="container">
           <div class="content">
@@ -83,13 +82,6 @@ export default {
     }
   },
   computed: {
-    userData () {
-      return this.$store.state.userInfo || {}
-    },
-    showTopWarnBuy () {
-      const userInfo = this.$store.state.userInfo || {}
-      return userInfo.can_use_day === 1
-    }
   },
   mounted () {
     this.initPage()
@@ -97,35 +89,6 @@ export default {
   },
   methods: {
     initPage () {
-    },
-    toPath (path, type) {
-      // 定投策略不需要登录信息
-      if (type === 'fixedInvestment') {
-        this.$router.push(path)
-        return
-      }
-      const deviceId = storageUtil.getDeviceInfo('device_id')
-      const name = storageUtil.getUserInfo('name')
-      // 要求先登录
-      if (!name) {
-        this.$router.push('/page/login')
-        return
-      }
-      this.$http.get('auth/checkCustomer', {
-        name: name,
-        device_id: deviceId,
-        type: type
-      }).then((data) => {
-        if (data.success) {
-          this.$router.push(path)
-        } else {
-          if (type === 'band') {
-            this.$router.push('/page/recharge')
-            return
-          }
-          ToastBig.error(data.message, 1000)
-        }
-      })
     },
     toNormalPath (path) {
       this.$router.push(path)

@@ -1,29 +1,23 @@
 <template>
-  <div id="app">
-    <div class="loading-wrap" v-if="!ifChecked">
-      <i class="fas fa-spinner fa-spin"></i>
-      <p>加载中...</p>
-    </div>
+  <div>
+    <router-view v-if="subPath"/>
     <template v-else>
-      <router-view v-if="subPath"/>
-      <template v-else>
-        <fund v-if="tabSelect === 'fund'"/>
-        <configCenter v-if="tabSelect === 'configCenter'"/>
-        <mine v-if="tabSelect === 'mine'"/>
-        <square v-if="tabSelect === 'square'"></square>
-        <mt-tabbar v-model="tabSelect" :fixed="true">
-          <mt-tab-item id="fund">
-            <img src="./assets/fund.png" alt="" slot="icon">
-            <!--<i class="fas fa-donate" slot="icon"></i>-->
-            <p>基金</p>
-          </mt-tab-item>
-          <mt-tab-item id="mine">
-            <img src="./assets/my.png" alt="" slot="icon">
-            <!--<i class="far fa-user" slot="icon"></i>-->
-            <p>我的</p>
-          </mt-tab-item>
-        </mt-tabbar>
-      </template>
+      <fund v-if="tabSelect === 'fund'"/>
+      <configCenter v-if="tabSelect === 'configCenter'"/>
+      <mine v-if="tabSelect === 'mine'"/>
+      <square v-if="tabSelect === 'square'"></square>
+      <mt-tabbar v-model="tabSelect" :fixed="true">
+        <mt-tab-item id="fund">
+          <img src="./assets/fund.png" alt="" slot="icon">
+          <!--<i class="fas fa-donate" slot="icon"></i>-->
+          <p>基金</p>
+        </mt-tab-item>
+        <mt-tab-item id="mine">
+          <img src="./assets/my.png" alt="" slot="icon">
+          <!--<i class="far fa-user" slot="icon"></i>-->
+          <p>我的</p>
+        </mt-tab-item>
+      </mt-tabbar>
     </template>
   </div>
 </template>
@@ -41,8 +35,7 @@ export default {
   name: 'App',
   data () {
     return {
-      subPath: false,
-      ifChecked: false
+      subPath: false
     }
   },
   watch: {
@@ -70,13 +63,10 @@ export default {
   },
   methods: {
     initPage () {
-      this.checkLogin()
       this.checkSubPath(this.$router.history.current.path)
       // 刷新的时候before和after都不会执行
       this.$router.beforeEach((transition, from, next) => {
         if (this.checkAuthPath(transition)) {
-          const user = storageUtil.getUserInfo()
-          this.checkUser(user, transition)
         }
         this.checkSubPath(transition.path)
         next()
@@ -85,42 +75,8 @@ export default {
       this.$router.afterEach((transition) => {
         // 验证路由过去是否需要登录状态
         if (this.checkAuthPath(transition)) {
-          const user = storageUtil.getUserInfo()
-          this.checkUser(user, transition)
         }
         this.checkSubPath(transition.path)
-      })
-    },
-    checkLogin () {
-      const token = localStorage.getItem('token') || ''
-      this.$http.get('auth/checkLogin', {token}).then((data) => {
-        window._token = data.data.token
-        this.ifChecked = true
-        if (data.data.isLogin === false) {
-          storageUtil.initUserInfo({
-            isLogin: false
-          })
-        } else {
-          storageUtil.initUserInfo({
-            ...data.data,
-            isLogin: true
-          })
-          this.getUserInfo(data.data.name)
-        }
-      })
-    },
-    getUserInfo (name) {
-      this.$http.get('customer/getCustomerByName', {
-        name: name
-      }).then((data) => {
-        let isVip = false
-        if (data.data.buy_type && data.data.can_use_day > 0) {
-          isVip = true
-        }
-        this.$store.dispatch('initUserInfo', {
-          ...data.data,
-          isVip
-        })
       })
     },
     checkSubPath (path) {

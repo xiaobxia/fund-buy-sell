@@ -25,16 +25,6 @@ const routers = [
     }
   },
   {
-    name: 'Login',
-    path: '/page/login',
-    component: lazyLoading('Login')
-  },
-  {
-    name: 'ResetPassword',
-    path: '/page/resetPassword',
-    component: lazyLoading('ResetPassword')
-  },
-  {
     name: 'NoPermission',
     path: '/noPermission',
     component: lazyLoading('NoPermission')
@@ -53,16 +43,6 @@ const routers = [
     name: 'FixedInvestment',
     path: '/page/fixedInvestment',
     component: lazyLoading('FixedInvestment')
-  },
-  {
-    name: 'Recharge',
-    path: '/page/recharge',
-    component: lazyLoading('Recharge')
-  },
-  {
-    name: 'GetTest',
-    path: '/page/getTest',
-    component: lazyLoading('GetTest')
   },
   {
     name: 'Agreement',

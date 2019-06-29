@@ -41,6 +41,9 @@
           <p class="target">推荐标的：{{item.fundCode}} {{item.fundName}}</p>
         </div>
       </mt-cell-swipe>
+      <div class="ad-block" v-if="ifShowAd()">
+        <img :src="ad_url" alt="">
+      </div>
       <div class="exemption">
         <div class="title">风险提示</div>
         <div class="bottom">以上数据均为历史回测表现，不能代表未来发展趋势，每个指标都有他的局限性，在不同的市场环境下可能会出现于回测数据不一致的表现，投资者需要根据不同场景合理应用。</div>
@@ -62,36 +65,30 @@ export default {
       watermarkId: '',
       list: [],
       positionContent: '',
-      marketWarn: ''
+      marketWarn: '',
+      ad_url: ''
     }
   },
   computed: {
   },
   beforeDestroy () {
-    // Watermark.remove(this.watermarkId)
   },
   mounted () {
     this.initPage()
-    const userInfo = storageUtil.getUserInfo()
-    // this.watermarkId = Watermark.set(userInfo.name)
     this.addPV('高风偏波段')
+    setTimeout(() => {
+      this.getAdUrl()
+    }, 700)
   },
   methods: {
     initPage () {
       const deviceId = storageUtil.getDeviceInfo('device_id')
-      const name = storageUtil.getUserInfo('name')
-      this.$http.get('customer/getBand', {
-        name: name,
+      this.$http.get('customerCommon/getBand', {
         device_id: deviceId,
         type: 'band'
       }).then((data) => {
         if (data.success) {
-          this.$http.get('customer/addTodayQuery', {
-            name: name,
-            device_id: deviceId,
-            type: 'band'
-          })
-          this.$http.get('customer/getBandContent').then((data) => {
+          this.$http.get('customerCommon/getBandContent').then((data) => {
             if (data.success) {
               this.positionContent = data.data.positionContent
               this.marketWarn = data.data.marketWarn
@@ -207,6 +204,20 @@ export default {
         return 'buy'
       }
       return ''
+    },
+    getAdUrl () {
+      const type = this.showAdType()
+      this.$http.get('customerCommon/getAdvertisements', {
+        current: 1,
+        pageSize: 10,
+        type: type,
+        status: 1
+      }).then((data) => {
+        let list = data.data.list || []
+        let index = this.getAdIndex(2, list.length)
+        let urlData = list[index] || {}
+        this.ad_url = urlData.img_url
+      })
     }
   }
 }
