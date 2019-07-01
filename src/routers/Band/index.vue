@@ -9,11 +9,6 @@
       <div class="main-warn new-main-warn">
         <div class="yellow-warn">
           <div>越接近收盘，信号越准确，推荐在14:45以后15:00之前操作</div>
-          <div>不能简单根据信号操作，建议结合操作建议使用</div>
-        </div>
-        <div class="blue-warn">
-          <div>仓位建议：<span style="font-weight: 600;">{{positionContent || 0}}%</span></div>
-          <div>操作建议：{{marketWarn || '未更新'}}</div>
         </div>
       </div>
       <mt-cell-swipe v-for="(item) in list" :key="item.code" :class="[
@@ -87,12 +82,6 @@ export default {
         type: 'band'
       }).then((data) => {
         if (data.success) {
-          this.$http.get('customerCommon/getBandContent').then((data) => {
-            if (data.success) {
-              this.positionContent = data.data.positionContent
-              this.marketWarn = data.data.marketWarn
-            }
-          })
           const list = data.data
           list.sort((a, b) => {
             return a.sortIndex - b.sortIndex

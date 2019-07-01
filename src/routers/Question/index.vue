@@ -11,11 +11,7 @@
         <div slot="content">在交易日的9:40以前就会出信号了，信号是实时计算更新的，一直持续到收盘。</div>
       </fold-card>
       <fold-card>
-        <div slot="title">2.什么时候给出当天的仓位建议和操作建议？</div>
-        <div slot="content">在交易日的14:45左右就会给出当天的仓位建议和操作建议。</div>
-      </fold-card>
-      <fold-card>
-        <div slot="title">3.您们推荐的基金费率高吗？</div>
+        <div slot="title">2.您们推荐的基金费率高吗？</div>
         <div slot="content">
           <div>我们推荐的标的都是同个品种当中费率最低的。如果您分步建仓，再分步卖出是可以实现几乎零费率操作的。</div>
           <table width="100%" cellspacing="1" cellpadding="20">
@@ -148,7 +144,7 @@
         </div>
       </fold-card>
       <fold-card>
-        <div slot="title">4.怎么降低买卖时的费率？</div>
+        <div slot="title">3.怎么降低买卖时的费率？</div>
         <div slot="content">
           解决的方法是分步买入，然后分步卖出。确保每次卖出时卖出的份额是持有了7天及以上的。
         </div>
