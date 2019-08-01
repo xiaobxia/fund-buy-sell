@@ -18,9 +18,6 @@
           </h3>
         </div>
       </mt-cell-swipe>
-      <div class="ad-block" v-if="ifShowAd()">
-        <img :src="ad_url" alt="">
-      </div>
     </div>
   </div>
 </template>
@@ -45,9 +42,6 @@ export default {
     initPage () {
       this.queryData()
       this.addPV('今日指数排行')
-      setTimeout(() => {
-        this.getAdUrl()
-      }, 500)
     },
     queryData () {
       const deviceId = storageUtil.getDeviceInfo('device_id')

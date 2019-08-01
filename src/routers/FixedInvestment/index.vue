@@ -42,9 +42,6 @@
           </div>
         </mt-cell-swipe>
       </div>
-      <div class="ad-block" v-if="ifShowAd()">
-        <img :src="ad_url" alt="">
-      </div>
       <div class="exemption">
         <div class="title">风险提示</div>
         <div class="bottom">以上数据均为历史回测表现，不能代表未来发展趋势，每个指标都有他的局限性，在不同的市场环境下可能会出现于回测数据不一致的表现，投资者需要根据不同场景合理应用。</div>
@@ -74,9 +71,6 @@ export default {
   },
   mounted () {
     this.initPage()
-    setTimeout(() => {
-      this.getAdUrl()
-    }, 500)
   },
   methods: {
     initPage () {
