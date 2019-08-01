@@ -1,6 +1,9 @@
 <template>
   <div class="tab-view-fund">
     <div class="has-bar">
+      <div class="red-warn">
+        <div>喜欢的朋友可以以在公众号文章中点广告的方式支持我们！</div>
+      </div>
       <div v-if="ifWechat" class="teach-warn">想知道如何更方便地使用分析工具吗？<div class="teach-btn" @click="toNormalPath('/page/wechatTeach')">去瞧瞧</div></div>
       <div class="info-warn">排行内容</div>
       <div class="img-card" @click="toNormalPath('/page/todayRank')">

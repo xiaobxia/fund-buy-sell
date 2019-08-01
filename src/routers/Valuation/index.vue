@@ -6,6 +6,9 @@
       </mt-button>
     </mt-header>
     <div class="main-body">
+      <div class="red-warn">
+        <div>喜欢的朋友可以以在公众号文章中点广告的方式支持我们！</div>
+      </div>
       <mt-cell-swipe>
         <div slot="title" class="tab-title">
           <h3>

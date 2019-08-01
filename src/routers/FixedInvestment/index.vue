@@ -7,6 +7,9 @@
     </mt-header>
     <div class="main-body">
       <div class="main-warn new-main-warn">
+        <div class="red-warn">
+          <div>喜欢的朋友可以以在公众号文章中点广告的方式支持我们！</div>
+        </div>
         <div class="yellow-warn">
           <div>越接近收盘，信号越准确，推荐在14:45以后15:00之前操作</div>
         </div>
