@@ -1,10 +1,19 @@
 .mint-cell {
   position: relative;
-  padding: 20px 30px;
+  padding: 10px;
   //border-bottom: 1px solid $border-color;
   min-height: 0;
   border: none;
-  border-radius: 20px;
+  border-bottom: 1px solid #ccc;
+  &.buy {
+    background-color: rgba(244, 51, 60, 0.1);
+  }
+  &.sell {
+    background-color: rgba(62, 179, 121, 0.1);
+  }
+  &:last-child {
+    border-bottom: none;
+  }
   .mint-cell-wrapper {
     padding: 0;
     min-height: 0;

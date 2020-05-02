@@ -1,147 +1,134 @@
 <template>
   <div>
-    <router-view v-if="subPath"/>
-    <template v-else>
-      <fund v-if="tabSelect === 'fund'"/>
-      <configCenter v-if="tabSelect === 'configCenter'"/>
-      <mine v-if="tabSelect === 'mine'"/>
-      <square v-if="tabSelect === 'square'"></square>
-      <mt-tabbar v-model="tabSelect" :fixed="true">
-        <mt-tab-item id="fund">
-          <img src="./assets/fund.png" alt="" slot="icon">
-          <!--<i class="fas fa-donate" slot="icon"></i>-->
-          <p>基金</p>
-        </mt-tab-item>
-        <mt-tab-item id="mine">
-          <img src="./assets/my.png" alt="" slot="icon">
-          <!--<i class="far fa-user" slot="icon"></i>-->
-          <p>我的</p>
-        </mt-tab-item>
-      </mt-tabbar>
-    </template>
+    <mt-header title="操作信号" :fixed="true">
+    </mt-header>
+    <div v-if="ifWait()" class="main-body">
+      <div>今日信号在14:45更新，请耐心等待</div>
+    </div>
+    <div v-else class="main-body">
+      <div style="text-align: center">交易日：{{trade_date}}</div>
+      <div class="title">定投信号</div>
+      <div>
+        <mt-cell-swipe v-if="fix_record.length === 0">
+          <div slot="title">
+            <h3>
+              <span class="name">无</span>
+            </h3>
+          </div>
+        </mt-cell-swipe>
+        <div v-else>
+          <mt-cell-swipe class="buy" v-for="(item) in fix_record" :key="item.key" v-if="item.buy > 0">
+            <div slot="title">
+              <h3>
+                <span class="name">{{getName(item.key)}}</span>
+                <span style="float: right">买入{{item.buy}}</span>
+              </h3>
+            </div>
+          </mt-cell-swipe>
+        </div>
+      </div>
+      <div class="title">波段信号</div>
+      <div>
+        <mt-cell-swipe>
+          <div slot="title">
+            <h3>
+              <span class="name">公众号</span>
+              <span style="float: right">养基定投波段</span>
+            </h3>
+          </div>
+        </mt-cell-swipe>
+        <mt-cell-swipe v-for="(item) in band_record" :class="{buy: item.flag==='加仓', sell: item.flag==='减仓'}" :key="item.key">
+          <div slot="title">
+            <h3>
+              <span class="name">{{getName(item.key)}}</span>
+              <span style="float: right">{{item.flag || '无'}}</span>
+            </h3>
+          </div>
+        </mt-cell-swipe>
+      </div>
+      <div class="info">公众号：养基定投波段，提供最及时的操作信号</div>
+    </div>
   </div>
 </template>
 
 <script>
-import storageUtil from '@/util/storageUtil.js'
-import Mine from '@/tabViews/Mine/index.vue'
-import Index from '@/tabViews/Index/index.vue'
-import Fund from '@/tabViews/Fund/index.vue'
-import ConfigCenter from '@/tabViews/ConfigCenter/index.vue'
-import Square from '@/tabViews/Square/index.vue'
-import environmentUtil from '@/util/environmentUtil.js'
-
+import indexListAll from '@/common/indexListAll'
 export default {
   name: 'App',
   data () {
     return {
-      subPath: false
+      trade_date: '',
+      fix_record: [],
+      band_record: [],
+      ifOpen: false,
+      ifShowWait: false
     }
   },
   watch: {
-    tabSelect (val) {
-
-    }
   },
   computed: {
-    tabSelect: {
-      get () {
-        return this.$store.state.tabSelect || 'fund'
-      },
-      set (val) {
-        storageUtil.setAppConfig('homeTabSelect', val)
-        this.$store.dispatch('setTabSelect', val)
-      }
-    }
   },
-  components: {Index, Mine, Fund, ConfigCenter, Square},
   created () {
-    environmentUtil.createDeviceInfo()
-  },
-  mounted () {
+    // console.log(indexListAll)
     this.initPage()
   },
+  mounted () {
+  },
   methods: {
-    initPage () {
-      this.checkSubPath(this.$router.history.current.path)
-      // 刷新的时候before和after都不会执行
-      this.$router.beforeEach((transition, from, next) => {
-        if (this.checkAuthPath(transition)) {
+    ifWait () {
+      if (this.ifOpen) {
+        const d = this.$getDate()
+        const hour = d.getHours()
+        const minute = d.getMinutes()
+        if (hour > 14) {
+          return false
         }
-        this.checkSubPath(transition.path)
-        next()
-      })
-      // after只有真正进入了页面才会执行
-      this.$router.afterEach((transition) => {
-        // 验证路由过去是否需要登录状态
-        if (this.checkAuthPath(transition)) {
-        }
-        this.checkSubPath(transition.path)
-      })
-    },
-    checkSubPath (path) {
-      this.subPath = path !== '/'
-      // this.subPath = path.startsWith('/page')
-    },
-    checkAuthPath (current) {
-      const now = current || this.$router.history.current
-      // 需要鉴权的才转登录
-      return now.meta && now.meta.auth === true
-    },
-    checkPermissionPath (current) {
-      const now = current || this.$router.history.current
-      // 需要鉴权的才转登录
-      return now.meta && now.meta.roles
-    },
-    checkIn (userRoles, roleList) {
-      for (let i = 0; i < userRoles.length; i++) {
-        const userRole = userRoles[i]
-        for (let j = 0; j < userRoles.length; j++) {
-          const roleItem = roleList[j]
-          if (roleItem === userRole) {
-            return true
+        if (hour === 14) {
+          if (minute >= 45) {
+            return false
           }
         }
-      }
-    },
-    checkPermission (userRoles, roleMap) {
-      // roles :{include, exclude}
-      if (roleMap) {
-        let permission = true
-        const include = roleMap.include
-        const exclude = roleMap.exclude
-        // 存在于include
-        if (include) {
-          permission = this.checkIn(userRoles, include)
-        }
-        // 存在于exclude
-        if (exclude && this.checkIn(userRoles, exclude)) {
-          permission = false
-        }
-        // exclude有决定权
-        return permission
-      } else {
-        // 没有权限要求
         return true
       }
+      return false
     },
-    checkUser (user, transition) {
-      if (user.isLogin !== true) {
-        // 不强制要求登录
-      } else {
-        const roles = this.checkPermissionPath(transition)
-        if (roles) {
-          if (!this.checkPermission(user.roles, roles)) {
-            // 替换为404
-            this.$router.replace('/noPermission')
-          }
+    getName (key) {
+      for (let i = 0; i < indexListAll.length; i++) {
+        if (indexListAll[i].key === key) {
+          return indexListAll[i].name
         }
       }
+      return ''
+    },
+    initPage () {
+      this.$http.get('http://47.98.140.76:3020/fundServer/stock/getStockMarketOpen').then((res) => {
+        this.ifOpen = res.data.open || false
+      })
+      this.$http.get('signal/getLastSignal').then((res) => {
+        const data = res.data || {}
+        if (data.trade_date) {
+          this.trade_date = data.trade_date
+          this.fix_record = data.fix_record || []
+          this.band_record = data.band_record || []
+        } else {
+
+        }
+      })
     }
   }
 }
 </script>
 
-<style>
-
+<style  rel="stylesheet/scss" lang="scss" scoped>
+  .main-body {
+    padding: 20px 30px;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .info {
+    font-size: 24px;
+    text-align: center;
+    padding: 20px 0 20px 0;
+  }
 </style>

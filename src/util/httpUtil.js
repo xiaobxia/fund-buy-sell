@@ -13,10 +13,10 @@ axios.interceptors.request.use(function (config) {
 
 axios.interceptors.response.use(function (response) {
   if (response.data.success === false) {
-    console.error(response.data.message)
-    if (response.data.code === 401) {
-      router.push('/page/login')
-    }
+    // console.error(response.data.message)
+    // if (response.data.code === 401) {
+    //   router.push('/page/login')
+    // }
   }
   return response
 }, function (error) {
