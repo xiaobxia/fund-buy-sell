@@ -73,6 +73,7 @@ export default {
     this.initPage()
   },
   mounted () {
+    this.addPV('操作信号')
   },
   methods: {
     ifWait () {
