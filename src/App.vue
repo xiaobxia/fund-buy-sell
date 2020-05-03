@@ -3,7 +3,7 @@
     <mt-header title="操作信号" :fixed="true">
     </mt-header>
     <div v-if="ifWait()" class="main-body">
-      <div>今日信号在14:45更新，请耐心等待</div>
+      <div style="text-align: center">今日信号在14:45更新，请耐心等待</div>
     </div>
     <div v-else class="main-body">
       <div style="text-align: center">交易日：{{trade_date}}</div>
@@ -27,7 +27,7 @@
           </mt-cell-swipe>
         </div>
       </div>
-      <div class="title">波段信号</div>
+      <div class="title tw">波段信号</div>
       <div>
         <mt-cell-swipe>
           <div slot="title">
