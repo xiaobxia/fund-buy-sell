@@ -9,7 +9,7 @@
       <div style="text-align: center">交易日：{{trade_date}}</div>
       <div class="title">定投信号</div>
       <div>
-        <mt-cell-swipe v-if="fix_record.length === 0">
+        <mt-cell-swipe v-if="!ifHasFix()">
           <div slot="title">
             <h3>
               <span class="name">无</span>
@@ -76,6 +76,14 @@ export default {
     this.addPV('操作信号')
   },
   methods: {
+    ifHasFix () {
+      for (let i = 0; i < this.fix_record.length; i++) {
+        if (this.fix_record[i].buy) {
+          return true
+        }
+      }
+      return false
+    },
     ifWait () {
       if (this.ifOpen) {
         const d = this.$getDate()
