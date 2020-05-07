@@ -37,7 +37,7 @@
             </h3>
           </div>
         </mt-cell-swipe>
-        <mt-cell-swipe v-for="(item) in band_record" :class="{buy: item.flag==='加仓', sell: item.flag==='减仓'}" :key="item.key">
+        <mt-cell-swipe v-for="(item) in band_record" :class="{buy: item.flag==='加仓' || item.flag==='小幅加仓', sell: item.flag==='减仓'}" :key="item.key">
           <div slot="title">
             <h3>
               <span class="name">{{getName(item.key)}}</span>
