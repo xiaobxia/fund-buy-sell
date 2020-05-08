@@ -29,7 +29,7 @@
       </div>
       <div class="title tw">波段信号</div>
       <div>
-        <mt-cell-swipe>
+        <mt-cell-swipe class="blue">
           <div slot="title">
             <h3>
               <span class="name">公众号</span>
@@ -46,7 +46,7 @@
           </div>
         </mt-cell-swipe>
       </div>
-      <div class="info">公众号：养基定投波段，提供最及时的操作信号</div>
+      <div class="info">公众号：养基定投波段，永久免费提供工具</div>
     </div>
   </div>
 </template>
@@ -136,7 +136,7 @@ export default {
     font-size: 40px;
   }
   .info {
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     padding: 20px 0 20px 0;
   }
