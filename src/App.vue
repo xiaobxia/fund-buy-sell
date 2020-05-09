@@ -46,7 +46,7 @@
           </div>
         </mt-cell-swipe>
       </div>
-      <div class="info">公众号：养基定投波段，永久免费提供工具</div>
+      <div class="info">公众号：养基定投波段，信号工具永久免费</div>
     </div>
   </div>
 </template>
