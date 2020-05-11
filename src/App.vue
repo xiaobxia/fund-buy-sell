@@ -3,7 +3,7 @@
     <mt-header title="操作信号" :fixed="true">
     </mt-header>
     <div v-if="ifWait()" class="main-body">
-      <div style="text-align: center">今日信号在14:45更新，请耐心等待</div>
+      <div style="text-align: center">今日信号在<span class="red-text">14:45</span>更新，请耐心等待</div>
     </div>
     <div v-else class="main-body">
       <div style="text-align: center">交易日：{{trade_date}}</div>
