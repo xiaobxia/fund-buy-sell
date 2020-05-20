@@ -32,8 +32,8 @@
         <mt-cell-swipe class="blue">
           <div slot="title">
             <h3>
-              <span class="name">公众号</span>
-              <span style="float: right">养基定投波段</span>
+              <span class="name">公众号:养基定投波段,每个交易日14:45更新!</span>
+              <span style="float: right"></span>
             </h3>
           </div>
         </mt-cell-swipe>
@@ -130,7 +130,7 @@ export default {
 
 <style  rel="stylesheet/scss" lang="scss" scoped>
   .main-body {
-    padding: 20px 30px;
+    padding: 20px 10px;
   }
   .title {
     font-size: 40px;
