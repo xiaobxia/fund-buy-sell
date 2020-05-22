@@ -29,11 +29,11 @@
       </div>
       <div class="title tw">波段信号</div>
       <div>
-        <mt-cell-swipe class="blue">
+        <mt-cell-swipe class="buy">
           <div slot="title">
             <h3>
-              <span class="name">公众号:养基定投波段,每个交易日14:45更新!</span>
-              <span style="float: right"></span>
+              <span class="name">公众号</span>
+              <span style="float: right">养基定投波段</span>
             </h3>
           </div>
         </mt-cell-swipe>
@@ -114,11 +114,29 @@ export default {
         this.ifOpen = res.data.open || false
       })
       this.$http.get('signal/getLastSignal').then((res) => {
+        const sort = [
+          'wulin', 'sanbai', 'wubai', 'yiqian', 'chuangye',
+          'jisuanji', 'xinxi', 'dianzi',
+          'yiyao', 'yiliao', 'shengwu',
+          'shipin', 'yinhang', 'baoxian',
+          'zhengquan', 'jungong', 'chuanmei', 'qiche', 'huanbao',
+          'youse', 'dichan', 'jijian', 'gangtie', 'meitan'
+        ]
         const data = res.data || {}
         if (data.trade_date) {
           this.trade_date = data.trade_date
           this.fix_record = data.fix_record || []
-          this.band_record = data.band_record || []
+          const bandRecord = data.band_record || []
+          const newBandRecord = []
+          sort.forEach((sortKey) => {
+            for (let i = 0; i < bandRecord.length; i++) {
+              const item = bandRecord[i]
+              if (item.key === sortKey) {
+                newBandRecord.push(item)
+              }
+            }
+          })
+          this.band_record = newBandRecord
         } else {
 
         }
