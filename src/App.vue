@@ -29,7 +29,7 @@
       </div>
       <div class="title tw">波段信号</div>
       <div>
-        <mt-cell-swipe class="buy">
+        <mt-cell-swipe v-if="!ifAdmin" class="buy">
           <div slot="title">
             <h3>
               <span class="name">公众号</span>
@@ -46,7 +46,7 @@
           </div>
         </mt-cell-swipe>
       </div>
-      <div class="info">公众号：养基定投波段，信号工具永久免费</div>
+      <div v-if="!ifAdmin" class="info">公众号：养基定投波段，信号工具永久免费</div>
     </div>
   </div>
 </template>
@@ -67,6 +67,9 @@ export default {
   watch: {
   },
   computed: {
+    ifAdmin () {
+      return this.$route.query.type === 'admin'
+    }
   },
   created () {
     // console.log(indexListAll)
