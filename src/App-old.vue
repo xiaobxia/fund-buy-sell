@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ifAdmin">
+  <div>
     <mt-header title="操作信号" :fixed="true">
     </mt-header>
     <div v-if="ifWait()" class="main-body">
@@ -7,7 +7,7 @@
     </div>
     <div v-else class="main-body">
       <div style="text-align: center">交易日：{{trade_date}}</div>
-      <!--<div class="title">定投信号</div>-->
+      <div class="title">定投信号</div>
       <div>
         <mt-cell-swipe v-if="!ifHasFix()">
           <div slot="title">
@@ -17,15 +17,34 @@
           </div>
         </mt-cell-swipe>
         <div v-else>
-          <mt-cell-swipe class="buy" v-for="(item, index) in fix_record" :key="index" v-if="item.buyNum > 0">
+          <mt-cell-swipe class="buy" v-for="(item) in fix_record" :key="item.key" v-if="item.buy > 0">
             <div slot="title">
               <h3>
-                <span class="name">{{item.name}}</span>
-                <span style="float: right">买入: {{item.buyNum}}</span>
+                <span class="name">{{getName(item.key)}}</span>
+                <span style="float: right">买入{{item.buy}}</span>
               </h3>
             </div>
           </mt-cell-swipe>
         </div>
+      </div>
+      <div class="title tw">波段信号</div>
+      <div>
+        <mt-cell-swipe v-if="!ifAdmin" class="buy">
+          <div slot="title">
+            <h3>
+              <span class="name">公众号</span>
+              <span style="float: right">养基定投波段</span>
+            </h3>
+          </div>
+        </mt-cell-swipe>
+        <mt-cell-swipe v-for="(item) in band_record" :class="{buy: item.flag==='加仓' || item.flag==='小幅加仓', sell: item.flag==='减仓'}" :key="item.key">
+          <div slot="title">
+            <h3>
+              <span class="name">{{getName(item.key)}}</span>
+              <span style="float: right">{{item.flag || '无'}}</span>
+            </h3>
+          </div>
+        </mt-cell-swipe>
       </div>
       <div v-if="!ifAdmin" class="info">公众号：养基定投波段，信号工具永久免费</div>
     </div>
@@ -49,7 +68,7 @@ export default {
   },
   computed: {
     ifAdmin () {
-      return this.$route.query.type === 'tt'
+      return this.$route.query.type === 'admin'
     }
   },
   created () {
@@ -98,10 +117,29 @@ export default {
         this.ifOpen = res.data.open || false
       })
       this.$http.get('signal/getLastSignal').then((res) => {
+        const sort = [
+          'wulin', 'sanbai', 'wubai', 'yiqian', 'chuangye',
+          'jisuanji', 'xinxi', 'dianzi',
+          'yiyao', 'yiliao', 'shengwu',
+          'shipin', 'yinhang', 'baoxian',
+          'zhengquan', 'jungong', 'chuanmei', 'qiche', 'huanbao',
+          'youse', 'dichan', 'jijian', 'gangtie', 'meitan'
+        ]
         const data = res.data || {}
         if (data.trade_date) {
           this.trade_date = data.trade_date
           this.fix_record = data.fix_record || []
+          const bandRecord = data.band_record || []
+          const newBandRecord = []
+          sort.forEach((sortKey) => {
+            for (let i = 0; i < bandRecord.length; i++) {
+              const item = bandRecord[i]
+              if (item.key === sortKey) {
+                newBandRecord.push(item)
+              }
+            }
+          })
+          this.band_record = newBandRecord
         } else {
 
         }
