@@ -9,15 +9,8 @@
       <div style="text-align: center">交易日：{{trade_date}}</div>
       <!--<div class="title">定投信号</div>-->
       <div>
-        <mt-cell-swipe v-if="!ifHasFix()">
-          <div slot="title">
-            <h3>
-              <span class="name">无</span>
-            </h3>
-          </div>
-        </mt-cell-swipe>
-        <div v-else>
-          <mt-cell-swipe class="buy" v-for="(item, index) in fix_record" :key="index" v-if="item.buyNum > 0">
+        <div>
+          <mt-cell-swipe class="buy" v-for="(item, index) in fix_record" :key="index" v-if="item.name">
             <div slot="title">
               <h3>
                 <span class="name">{{item.name}}</span>
