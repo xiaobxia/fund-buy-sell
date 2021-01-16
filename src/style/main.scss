@@ -1,55 +1,31 @@
 @charset "UTF-8";
 
 @import "_var";
-@import "lib/mint";
-@import "component/header";
-@import "component/tabbar";
-@import "component/switch";
-@import "component/cell";
-@import "component/card";
-@import "component/field";
-@import "component/button";
-@import "component/toast";
-@import "component/messagebox";
-@import "component/radio";
-@import "component/mask";
-@import "component/bottom-bar";
-@import "component/search";
-@import "component/indicator";
-@import "component/table";
-
-@import "component/fold-card";
-
-@import "tabViews/mine";
-@import "tabViews/fund";
+@import "vant/index.css";
+@import "style-class";
 @import "page/login";
-@import "page/operating-info";
-@import "page/page-recharge";
-@import "page/page-get-test";
-@import "page/page-question";
-@import "page/page-about-us";
-@import "page/today-index";
-@import "page/page-wechat-teach";
 
 body {
   margin: 0;
   background-color: $body-color;
   font-size: 30px;
+  // 全站灰色
+  // filter: grayscale(100%);
 }
 
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px
+  height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #bebdbd;
-  border-radius: 4px
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
-  opacity: .5
+  opacity: .5;
 }
 
 ::-webkit-scrollbar-track-piece:decrement, ::-webkit-scrollbar-track-piece:increment {
@@ -61,9 +37,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $main-text-color;
-}
-.grey-body {
-  background-color: rgb(247,247,247);
 }
 
 .main-body {
@@ -90,34 +63,12 @@ body {
   color: $green-color !important;
 }
 
-.red-bg {
-  background-color: $red-color !important;
-}
-
-.green-bg {
-  background-color: $green-color !important;
-}
-
-.purple-text {
-  color: $purple-color !important;
-}
-
 .grey-back {
   background-color: rgba(180, 180, 180, 0.2);
 }
 
 .has-back {
   background-color: rgb(231,244,250);
-}
-
-.lock-tag {
-  background-color: $red-color;
-}
-.position-tag {
-  background-color: $purple-color
-}
-.dingtou-tag {
-  background-color: #aaa;
 }
 
 ul {
@@ -131,6 +82,7 @@ ul {
 }
 
 .loading-wrap {
+  width: 400px;
   margin-top: 400px;
   text-align: center;
   color: $lighter-text-color;
@@ -140,82 +92,4 @@ ul {
   p {
     font-size: 40px;
   }
-}
-
-input[type="text" i]:disabled {
-  background-color: #fff;
-  color: #aaa;
-}
-
-.top-20 {
-  margin-top: 20px;
-}
-
-.tab-title {
-  span {
-    font-weight: 600;
-  }
-}
-.mint-cell {
-  .index-pe {
-    position: absolute;
-    left: 50%;
-  }
-  .index-pb {
-    position: absolute;
-    right: 0;
-  }
-  .valuation-tag {
-    position: relative;
-    top: -5px;
-    color: #fff;
-    padding: 3px 6px;
-    font-size: 20px;
-    margin-right: 5px;
-    &.low {
-      background-color: $green-color;
-    }
-    &.high {
-      background-color: $red-color;
-    }
-    &.normal {
-      background-color: $yellow-color;
-    }
-  }
-}
-
-.yellow-warn {
-   padding: 5px 20px;
-   font-size: 24px;
-   background-color: #fdf6ec;
-   color: #e6a23c;
-}
-
-.grey-warn {
-  padding: 5px 20px;
-  font-size: 24px;
-  background-color: #f4f4f5;
-  color: #909399;
-}
-
-.green-warn {
-  padding: 5px 20px;
-  font-size: 24px;
-  background-color: #f0f9eb;
-  color: #67c23a;
-}
-
-.blue-warn {
-  padding: 5px 20px;
-  font-size: 24px;
-  background-color: rgb(198, 226, 255);
-  color: #409EFF;
-}
-
-
-.red-warn {
-  padding: 5px 20px;
-  font-size: 24px;
-  background-color: rgb(253, 226, 226);
-  color: #F56C6C;
 }

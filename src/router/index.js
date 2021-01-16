@@ -1,92 +1,151 @@
-/**
- * Created by xiaobxia on 2018/4/9.
- */
 import Vue from 'vue'
 import Router from 'vue-router'
 const lazyLoading = (path, index = true) => () => System.import(`@/routers/${path}${index ? '/index' : ''}.vue`)
 
 Vue.use(Router)
 
-const routers = [
+// 都有的路由
+export const constantRouterMap = [
   {
-    name: 'Index',
-    path: '/',
-    component: null
+    name: 'Login',
+    path: '/login',
+    component: lazyLoading('Login'),
+    meta: {
+      auth: false
+    }
   },
   {
     name: 'HelloWorld',
-    path: '/page/helloWorld',
+    path: '/helloWorld',
     component: lazyLoading('HelloWorld'),
     meta: {
-      auth: true,
-      roles: {
-        include: ['admin']
-      }
+      auth: true
     }
   },
   {
     name: 'NoPermission',
-    path: '/noPermission',
-    component: lazyLoading('NoPermission')
+    path: '/401',
+    component: lazyLoading('NoPermission'),
+    meta: {
+      auth: false
+    }
   },
   {
-    name: 'Band',
-    path: '/page/band',
-    component: lazyLoading('Band')
+    name: 'ToImageDemo',
+    path: '/toImageDemo',
+    component: lazyLoading('ToImageDemo'),
+    meta: {
+      auth: false
+    }
   },
   {
-    name: 'HighBand',
-    path: '/page/highBand',
-    component: lazyLoading('HighBand')
+    path: '/home',
+    component: lazyLoading('Home'),
+    name: 'Home',
+    redirect: '/home/main',
+    children: [
+      {
+        path: 'main',
+        component: lazyLoading('Home/Main'),
+        name: 'HomeMain',
+        meta: {
+          auth: false
+        }
+      },
+      {
+        path: 'mine',
+        component: lazyLoading('Home/Mine'),
+        name: 'HomeMine',
+        meta: {
+          auth: false
+        }
+      }
+    ]
   },
   {
-    name: 'FixedInvestment',
-    path: '/page/fixedInvestment',
-    component: lazyLoading('FixedInvestment')
-  },
-  {
-    name: 'Agreement',
-    path: '/page/agreement',
-    component: lazyLoading('Agreement')
-  },
-  {
-    name: 'AboutUs',
-    path: '/page/aboutUs',
-    component: lazyLoading('AboutUs')
-  },
-  {
-    name: 'Question',
-    path: '/page/question',
-    component: lazyLoading('Question')
-  },
-  {
-    name: 'TodayRank',
-    path: '/page/todayRank',
-    component: lazyLoading('TodayRank')
-  },
-  {
-    name: 'MonthRank',
-    path: '/page/monthRank',
-    component: lazyLoading('MonthRank')
-  },
-  {
-    name: 'Valuation',
-    path: '/page/valuation',
-    component: lazyLoading('Valuation')
-  },
-  {
-    name: 'WechatTeach',
-    path: '/page/wechatTeach',
-    component: lazyLoading('WechatTeach')
+    path: '',
+    redirect: 'home'
   },
   {
     name: '404',
     path: '*',
-    component: lazyLoading('NotMatch')
+    component: lazyLoading('NotMatch'),
+    meta: {
+      auth: false
+    }
   }
 ]
 
-console.log(`路由数量：${routers.length}`)
+export const asyncRouterMap = [
+  // roles方式
+  // {
+  //   path: '/testRoles',
+  //   name: 'TestRoles',
+  //   component: lazyLoading('PermissionRouterView'),
+  //   redirect: '/testRoles/main',
+  //   meta: {
+  //     auth: true,
+  //     roles: {
+  //       include: ['admin']
+  //     }
+  //   },
+  //   children: [
+  //     {
+  //       path: 'main',
+  //       component: lazyLoading('TestRoles/Main'),
+  //       name: 'TestRolesMain',
+  //       meta: {
+  //         auth: true,
+  //         roles: {
+  //           include: ['admin']
+  //         }
+  //       }
+  //     },
+  //     {
+  //       path: 'mine',
+  //       component: lazyLoading('TestRoles/Mine'),
+  //       name: 'TestRolesMine',
+  //       meta: {
+  //         auth: true,
+  //         roles: {
+  //           include: ['admin']
+  //         }
+  //       }
+  //     }
+  //   ]
+  // },
+  // 菜单方式
+  {
+    path: '/testMenu',
+    name: 'TestMenu',
+    component: lazyLoading('PermissionRouterView'),
+    redirect: '/testMenu/main',
+    meta: {
+      auth: true,
+      menu: '/testMenu'
+    },
+    children: [
+      {
+        path: 'main',
+        component: lazyLoading('TestMenu/Main'),
+        name: 'TestMenuMain',
+        meta: {
+          auth: true,
+          menu: '/testMenu/main'
+        }
+      },
+      {
+        path: 'mine',
+        component: lazyLoading('TestMenu/Mine'),
+        name: 'TestMenuMine',
+        meta: {
+          auth: true,
+          menu: '/testMenu/mine'
+        }
+      }
+    ]
+  }
+]
 
 export default new Router({
   // hash, history
@@ -94,5 +153,5 @@ export default new Router({
   linkActiveClass: 'is-active',
   // 这个功能只在 HTML5 history 模式下可用
   scrollBehavior: () => ({y: 0}),
-  routes: routers
+  routes: constantRouterMap
 })

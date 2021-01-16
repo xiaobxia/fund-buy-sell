@@ -1,9 +1,6 @@
-import uuidv1 from 'uuid/v1'
-import storageUtil from '@/util/storageUtil.js'
-
 const environmentUtil = {
   setAdaptive () {
-    let baseFontSize = 20
+    let baseFontSize = 37.5
     // 和width有关
     let winWidth = 0
     let winHeight = 0
@@ -50,33 +47,8 @@ const environmentUtil = {
       dpr: dpr,
       fontSize: fontSize,
       baseFontSize: baseFontSize,
-      zoom: fontSize / 20
+      zoom: fontSize / baseFontSize
     }
-  },
-  getDeviceType () {
-    const u = navigator.userAgent
-    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
-      return '安卓'
-    } else if (u.indexOf('iPhone') > -1) {
-      return '苹果'
-    } else {
-      const ua = window.navigator.userAgent.toLowerCase()
-      if (ua.indexOf('micromessenger') !== -1) {
-        return '微信'
-      }
-    }
-    return '其他'
-  },
-  ifWechat () {
-    const ua = window.navigator.userAgent.toLowerCase()
-    return ua.indexOf('micromessenger') !== -1
-  },
-  createDeviceInfo () {
-    const deviceInfo = storageUtil.getDeviceInfo()
-    if (!deviceInfo.device_id) {
-      storageUtil.setDeviceInfo('device_id', uuidv1())
-    }
-    storageUtil.setDeviceInfo('device_type', this.getDeviceType())
   }
 }
 

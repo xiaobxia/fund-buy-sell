@@ -1,4 +1,4 @@
-# fund-buy-sell
+# vue-mobile-cli
 
 > A Vue.js project
 

@@ -1,8 +1,15 @@
 import axios from 'axios'
 import qs from 'qs'
 import storageUtil from '@/util/storageUtil'
+import urlUtil from '@/util/urlUtil'
 import router from '../router/index'
-const basePath = '/fbsServer/'
+
+let basePath = '/serviceBase/'
+
+// 默认连接地址，只在调试时有用
+if (process.env.NODE_ENV === 'development') {
+  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'main'}${basePath}`
+}
 
 axios.interceptors.request.use(function (config) {
   config.headers.token = window._token || localStorage.getItem('token') || ''
@@ -13,10 +20,13 @@ axios.interceptors.request.use(function (config) {
 
 axios.interceptors.response.use(function (response) {
   if (response.data.success === false) {
-    // console.error(response.data.message)
-    // if (response.data.code === 401) {
-    //   router.push('/page/login')
-    // }
+    if (response.data.code === 401) {
+      storageUtil.setData('UserInfo', {
+        isLogin: false
+      })
+      router.replace('/page/login')
+    }
+    return Promise.reject(new Error(response.data.message))
   }
   return response
 }, function (error) {
@@ -30,18 +40,18 @@ function makeUrl (url) {
     return `${basePath}${url}`
   }
 }
+
 const Http = {
   get (url, query, options) {
     let queryString = ''
     if (query) {
       query.timestamp = new Date().getTime()
-      queryString = qs.stringify(query)
     } else {
-      queryString = qs.stringify({timestamp: new Date().getTime()})
+      query = { timestamp: new Date().getTime() }
     }
+    queryString = qs.stringify(query)
     return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => data.data)
   },
-
   getWithCache (url, query, cache, options) {
     let queryString = ''
     let cacheKey = url
@@ -73,7 +83,6 @@ const Http = {
       return data.data
     })
   },
-
   getRaw (url, query, options) {
     let queryString = ''
     if (query) {
@@ -84,31 +93,24 @@ const Http = {
     }
     return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options)
   },
-
   post (url, param, options) {
     return axios.post(makeUrl(url), qs.stringify(param), options).then(data => data.data)
   },
-
   postRaw (url, param, options) {
     return axios.post(makeUrl(url), qs.stringify(param), options)
   },
-
-  postJSON (url, param, options) {
+  postFormData (url, param, options) {
     return axios.post(makeUrl(url), param, options).then(data => data.data)
   },
-
-  postJSONRaw (url, param, options) {
+  postFormDataRaw (url, param, options) {
     return axios.post(makeUrl(url), param, options)
   },
-
   delete (url, options) {
     return axios.delete(makeUrl(url), options).then(data => data.data)
   },
-
   deleteRaw (url, options) {
     return axios.delete(makeUrl(url), options)
   },
-
   jsonp (url, options) {
     return axios.jsonp(makeUrl(url), options)
   },

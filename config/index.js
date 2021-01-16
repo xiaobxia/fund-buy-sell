@@ -1,24 +1,29 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
-
+const proxyTable = require('./proxyTable')
 const path = require('path')
+
+const newProxyTable = {}
+for (const key in proxyTable) {
+  let row = {
+    target: proxyTable[key],
+    changeOrigin: true,
+    pathRewrite: {}
+  }
+  row.pathRewrite[`^/${key}`] = ''
+  newProxyTable[`/${key}/serviceBase`] = row
+}
 
 module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      "/fbsServer": {
-        "target": "http://47.92.210.171:3051/"
-        // "target": "http://localhost:3051/"
-      }
-    },
-
+    proxyTable: newProxyTable,
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    port: 3006, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    port: 4000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -59,7 +64,7 @@ module.exports = {
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
     assetsPublicPath: './',
-    cdnPublicPath: 'http://fundusecdn.xiaobxia.com/',
+    cdnPublicPath: 'http://p6yy0m78z.bkt.clouddn.com/',
     ifCdn: true,
     /**
      * Source Maps
