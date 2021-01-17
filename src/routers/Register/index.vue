@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar left-arrow @click-left="backHandler" />
-    <div class="p-t">登录养基定投波段账号</div>
+    <div class="p-t">邮箱登录注册</div>
     <div class="l-p-p">
       <van-form>
         <van-field
@@ -17,11 +17,11 @@
         />
       </van-form>
       <div class="p-b">
-        <van-button square block type="primary">登录</van-button>
+        <van-button square block type="primary">注册</van-button>
       </div>
     </div>
     <div class="r-b theme-text">
-      <span @click="toPath('/register')">注册</span>
+      <span @click="toPath('/login')">登录</span>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ import md5 from 'md5'
 import storageUtil from '@/util/storageUtil.js'
 
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       account: '',

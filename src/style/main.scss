@@ -4,6 +4,8 @@
 @import "vant/index.css";
 @import "style-class";
 @import "page/login";
+@import "vant-style";
+@import "vant-theme";
 
 body {
   margin: 0;
@@ -69,6 +71,10 @@ body {
 
 .has-back {
   background-color: rgb(231,244,250);
+}
+
+.theme-text {
+  color: $active-color;
 }
 
 ul {

@@ -15,6 +15,14 @@ export const constantRouterMap = [
     }
   },
   {
+    name: 'Register',
+    path: '/register',
+    component: lazyLoading('Register'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'HelloWorld',
     path: '/helloWorld',
     component: lazyLoading('HelloWorld'),
@@ -49,7 +57,7 @@ export const constantRouterMap = [
         component: lazyLoading('Home/Main'),
         name: 'HomeMain',
         meta: {
-          auth: false
+          auth: true
         }
       },
       {
@@ -57,7 +65,7 @@ export const constantRouterMap = [
         component: lazyLoading('Home/Mine'),
         name: 'HomeMine',
         meta: {
-          auth: false
+          auth: true
         }
       }
     ]
