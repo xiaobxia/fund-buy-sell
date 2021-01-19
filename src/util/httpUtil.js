@@ -3,6 +3,7 @@ import qs from 'qs'
 import storageUtil from '@/util/storageUtil'
 import urlUtil from '@/util/urlUtil'
 import router from '../router/index'
+import { Toast } from 'vant'
 
 let basePath = '/'
 
@@ -26,6 +27,7 @@ axios.interceptors.response.use(function (response) {
       })
       router.replace('/page/login')
     }
+    Toast.fail(response.data.message || '')
     return Promise.reject(new Error(response.data.message))
   }
   return response
