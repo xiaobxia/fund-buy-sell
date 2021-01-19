@@ -13,7 +13,7 @@ export default {
   },
   created () {
     const query = this.$route.query
-    this.$http.get('', {
+    this.$http.get('fbsServer/auth/activeRegister', {
       activeToken: query.activeToken
     })
   },

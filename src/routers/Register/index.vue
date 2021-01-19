@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar left-arrow @click-left="backHandler" />
+    <!--<van-nav-bar left-arrow @click-left="backHandler" />-->
     <div class="p-t">邮箱登录注册</div>
     <div class="l-p-p">
       <van-form>
@@ -71,6 +71,7 @@ export default {
           storageUtil.setData('UserInfo', {
             ...data.data
           })
+          this.toPath('/home')
         } else {
         }
       }).catch((err) => {
@@ -87,7 +88,7 @@ export default {
   .p-t {
     text-align: center;
     font-size: 46px;
-    margin-top: 20px;
+    margin-top: 110px;
     margin-bottom: 60px;
   }
   .p-b {
