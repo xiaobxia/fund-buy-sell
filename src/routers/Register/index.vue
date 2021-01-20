@@ -34,6 +34,7 @@
 
 <script>
 import storageUtil from '@/util/storageUtil.js'
+import { Toast } from 'vant'
 
 export default {
   name: 'Register',
@@ -65,15 +66,13 @@ export default {
         inviter_email: query.inv || ''
       }).then((data) => {
         this.loading = false
-        if (data.success) {
-          window._token = data.data.token
-          localStorage.setItem('token', data.data.token)
-          storageUtil.setData('UserInfo', {
-            ...data.data
-          })
-          this.toPath('/home')
-        } else {
-        }
+        window._token = data.data.token
+        localStorage.setItem('token', data.data.token)
+        storageUtil.setData('UserInfo', {
+          ...data.data
+        })
+        this.toPath('/home')
+        Toast.success('注册成功！')
       }).catch((err) => {
         console.log(err)
         this.loading = false

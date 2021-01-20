@@ -11,7 +11,7 @@ router.beforeEach((to, from, next) => {
   // 添加过路由
   if (to.meta && to.meta.auth === true) {
     // 登陆过的那就会有用户信息，不管你是不是刷新
-    if (userInfo.isLogin === true) {
+    if (userInfo.token) {
       // 登入了还去登录，直接转首页
       if (to.path === '/login') {
         next({ path: '/' })
