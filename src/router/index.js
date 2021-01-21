@@ -15,6 +15,14 @@ export const constantRouterMap = [
     }
   },
   {
+    name: 'ActiveRegister',
+    path: '/activeRegister',
+    component: lazyLoading('ActiveRegister'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'Register',
     path: '/register',
     component: lazyLoading('Register'),
@@ -123,36 +131,36 @@ export const asyncRouterMap = [
   //   ]
   // },
   // 菜单方式
-  {
-    path: '/testMenu',
-    name: 'TestMenu',
-    component: lazyLoading('PermissionRouterView'),
-    redirect: '/testMenu/main',
-    meta: {
-      auth: true,
-      menu: '/testMenu'
-    },
-    children: [
-      {
-        path: 'main',
-        component: lazyLoading('TestMenu/Main'),
-        name: 'TestMenuMain',
-        meta: {
-          auth: true,
-          menu: '/testMenu/main'
-        }
-      },
-      {
-        path: 'mine',
-        component: lazyLoading('TestMenu/Mine'),
-        name: 'TestMenuMine',
-        meta: {
-          auth: true,
-          menu: '/testMenu/mine'
-        }
-      }
-    ]
-  }
+  // {
+  //   path: '/testMenu',
+  //   name: 'TestMenu',
+  //   component: lazyLoading('PermissionRouterView'),
+  //   redirect: '/testMenu/main',
+  //   meta: {
+  //     auth: true,
+  //     menu: '/testMenu'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'main',
+  //       component: lazyLoading('TestMenu/Main'),
+  //       name: 'TestMenuMain',
+  //       meta: {
+  //         auth: true,
+  //         menu: '/testMenu/main'
+  //       }
+  //     },
+  //     {
+  //       path: 'mine',
+  //       component: lazyLoading('TestMenu/Mine'),
+  //       name: 'TestMenuMine',
+  //       meta: {
+  //         auth: true,
+  //         menu: '/testMenu/mine'
+  //       }
+  //     }
+  //   ]
+  // }
 ]
 
 export default new Router({

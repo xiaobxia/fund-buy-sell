@@ -27,7 +27,9 @@ axios.interceptors.response.use(function (response) {
       })
       router.replace('/page/login')
     }
-    Toast.fail(response.data.message || '')
+    if (!response.config.noWarn) {
+      Toast.fail(response.data.message || '')
+    }
     return Promise.reject(new Error(response.data.message))
   }
   return response
