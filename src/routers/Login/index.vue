@@ -1,6 +1,5 @@
 <template>
   <div class="l-p-p">
-    <!--<van-nav-bar left-arrow @click-left="backHandler" />-->
     <div class="b-b">
       <van-button plain type="primary" size="small" @click="toPath('/register')">注册</van-button>
     </div>

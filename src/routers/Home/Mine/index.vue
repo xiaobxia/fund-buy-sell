@@ -10,8 +10,7 @@
       </div>
     </div>
     <div class="m-l">
-      <van-cell title="URL 跳转" is-link url="/vant/mobile.html" />
-      <van-cell title="路由跳转" is-link to="index" />
+      <van-cell title="关于我们" is-link to="/about" />
     </div>
     <div class="p-b">
       <van-button
