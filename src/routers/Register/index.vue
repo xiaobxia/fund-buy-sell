@@ -1,8 +1,14 @@
 <template>
-  <div>
+  <div class="l-p-p">
     <!--<van-nav-bar left-arrow @click-left="backHandler" />-->
-    <div class="p-t">app_name</div>
-    <div class="l-p-p">
+    <div class="b-b">
+      <van-button plain type="primary" size="small" @click="toPath('/login')">登录</van-button>
+    </div>
+    <div class="w-t">
+      <h2>您好，</h2>
+      <p>欢迎来到app_name</p>
+    </div>
+    <div>
       <van-form>
         <van-field
           v-model="email"
@@ -19,15 +25,13 @@
       <div class="p-b">
         <van-button
           :loading="loading"
-          square
+          round
           block
+          class="liner-bg"
           type="primary"
           @click="registerHandler"
         >注册</van-button>
       </div>
-    </div>
-    <div class="r-b theme-text">
-      <span @click="toPath('/login')">登录</span>
     </div>
   </div>
 </template>
@@ -86,18 +90,30 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
   .p-t {
     text-align: center;
-    font-size: 46px;
     margin-top: 110px;
     margin-bottom: 60px;
   }
   .p-b {
-    margin-top: 60px;
+    margin-top: 40px;
   }
   .r-b {
-    margin-top: 60px;
-    text-align: center;
+    margin-top: 20px;
+    text-align: left;
   }
   .l-p-p {
     padding: 0 25px;
+  }
+  .b-b {
+    text-align: right;
+    margin: 20px 0;
+  }
+  .w-t {
+    h2 {
+      margin-bottom: 10px;
+    }
+    p {
+      color: #909399;
+      margin-bottom: 40px;
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 $original--color-white: #FFFFFF !default;
 $original--color-black: #000000 !default;
-$original-theme: rgb(183, 32, 51);
+$original-theme: #E2684D;
 $original-light-1: mix($original--color-white, $original-theme, 10%) !default;
 $original-light-2: mix($original--color-white, $original-theme, 20%) !default;
 $original-light-3: mix($original--color-white, $original-theme, 30%) !default;
@@ -10,7 +10,14 @@ $original-light-6: mix($original--color-white, $original-theme, 60%) !default;
 $original-light-7: mix($original--color-white, $original-theme, 70%) !default;
 $original-light-8: mix($original--color-white, $original-theme, 80%) !default;
 $original-light-9: mix($original--color-white, $original-theme, 90%) !default;
+
 .van-button--primary {
   background-color: $original-theme;
   border-color: $original-theme;
+}
+
+.van-button--plain.van-button--primary {
+  background: $original-light-8;
+  border: none;
+  color: $original-theme;
 }
