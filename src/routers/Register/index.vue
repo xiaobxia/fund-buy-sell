@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--<van-nav-bar left-arrow @click-left="backHandler" />-->
-    <div class="p-t">邮箱登录注册</div>
+    <div class="p-t">app_name</div>
     <div class="l-p-p">
       <van-form>
         <van-field
@@ -98,6 +98,6 @@ export default {
     text-align: center;
   }
   .l-p-p {
-    padding: 0 60px;
+    padding: 0 25px;
   }
 </style>

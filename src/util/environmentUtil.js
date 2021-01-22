@@ -1,5 +1,6 @@
 const environmentUtil = {
   setAdaptive () {
+    let uiWidth = 375
     let baseFontSize = 37.5
     // 和width有关
     let winWidth = 0
@@ -19,7 +20,7 @@ const environmentUtil = {
       winWidth = document.documentElement.clientWidth
       winHeight = document.documentElement.clientHeight
     }
-    let fontScale = winWidth / 375
+    let fontScale = winWidth * 2 / uiWidth
     let ua = navigator.userAgent
     let matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i)
     let UCversion = ua.match(/U3\/((\d+|\.){5,})/i)
