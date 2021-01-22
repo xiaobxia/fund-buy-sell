@@ -3,9 +3,15 @@
     <div class="router-wrap" :class="{showTabbar: showTabbar}">
       <router-view :key="key"/>
     </div>
-    <van-tabbar v-if="showTabbar" v-model="active">
+    <van-tabbar v-if="showTabbar" v-model="active" active-color="#E2684D">
       <van-tabbar-item name="/home/main" icon="home-o" replace to="/home/main">主页</van-tabbar-item>
-      <van-tabbar-item name="/home/mine" icon="setting-o" info="20" replace to="/home/mine">我的</van-tabbar-item>
+      <van-tabbar-item name="/home/mine" icon="setting-o" replace to="/home/mine">
+        <span>我的</span>
+        <template #icon="props">
+          <van-icon v-if="props.active" name="manager"/>
+          <van-icon v-else name="manager-o" />
+        </template>
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

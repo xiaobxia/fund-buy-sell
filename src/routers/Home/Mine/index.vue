@@ -20,7 +20,7 @@
         type="primary"
         class="liner-bg"
         @click="logoutHandler"
-      >退出登录</van-button>
+      >退出账号</van-button>
     </div>
   </div>
 </template>
