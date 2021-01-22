@@ -35,6 +35,9 @@ export default {
   },
   created () {
     this.active = this.$route.path
+    this.$http.get('fbsServer/user/getUserByToken').then((res) => {
+      this.$store.commit('SET_userInfo', res.data || {})
+    })
   },
   methods: {
   }

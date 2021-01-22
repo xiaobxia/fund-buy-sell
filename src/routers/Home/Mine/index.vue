@@ -1,16 +1,30 @@
 <template>
   <div class="home-mine">
-    <span>home-mine</span>
+    <div class="u-i-w">
+      <img src="../../../assets/img-h-bg.png" alt="" style="position: absolute">
+      <div class="u-i-c">
+        <img src="../../../assets/user-img.png" alt="">
+        <div class="d-t">
+          <div class="d-t-e">{{userInfo.email}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'HomeMine',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  computed: {
+    ...mapGetters([
+      'userInfo'
+    ])
   },
   created () {
   },
@@ -23,4 +37,27 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+  .u-i-w {
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+    .u-i-c {
+      margin: 20px;
+      z-index: 100;
+      position: relative;
+      img {
+        height: 60px;
+      }
+      .d-t {
+        display: inline-block;
+        color: #fff;
+        vertical-align: top;
+        margin-left: 10px;
+        .d-t-e {
+          margin: 7px 0 10px 0;
+          font-size: 20px;
+        }
+      }
+    }
+  }
 </style>
