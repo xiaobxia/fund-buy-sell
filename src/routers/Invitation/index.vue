@@ -4,6 +4,10 @@
     <div class="grey-page">
       <div class="c-w">
         <div class="c-w-c">
+          <div style="text-align: left">
+            <span class="title-icon"></span>
+            <span class="t-t">我的专属二维码</span>
+          </div>
           <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
           <div class="b-w">
             <span
@@ -15,6 +19,10 @@
           </div>
         </div>
       </div>
+      <!--<div class="c-w">-->
+        <!--<div class="c-w-c">-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
@@ -80,7 +88,12 @@ export default {
     .c-w-c {
       text-align: center;
       background-color: #fff;
-      padding: 20px 0;
+      padding: 12px 12px;
+    }
+    .t-t {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 5px;
     }
   }
   .qr-img {

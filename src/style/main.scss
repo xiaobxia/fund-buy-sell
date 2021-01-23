@@ -3,9 +3,10 @@
 @import "_var";
 @import "vant/index.css";
 @import "style-class";
-@import "page/login";
 @import "vant-style";
 @import "vant-theme";
+@import "component/index";
+@import "page/login";
 
 body {
   margin: 0;
