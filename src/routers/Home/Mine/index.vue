@@ -6,22 +6,28 @@
         <img src="../../../assets/user-img.png" alt="">
         <div class="d-t">
           <div class="d-t-e">{{userInfo.email}}</div>
-          <template>
-            <div v-if="userInfo.email_active">
-              <span class="icon-wrap"><van-icon name="gem-o" /></span>
-              <span>会员剩余{{userInfo.vip_days}}天</span>
-            </div>
-          </template>
+          <div class="d-t-s">
+            <template>
+              <div v-if="userInfo.email_active">
+                <span class="icon-wrap"><van-icon name="gem-o" /></span>
+                <span>会员剩余{{userInfo.vip_days}}天</span>
+              </div>
+              <div v-else>
+                <span>未完成邮箱验证</span>
+                <span style="vertical-align: top">
+                <van-tag type="primary" @click="sendActiveEmail">去验证</van-tag>
+              </span>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
     </div>
     <div class="m-l">
-      <van-cell is-link to="/invitation" >
+      <van-cell is-link to="/invitation">
         <div slot="title">
           <span>邀请好友</span>
-          <span class="c-icon">
-            <van-icon name="fire"/>
-          </span>
+          <van-tag type="danger">赢奖励</van-tag>
         </div>
       </van-cell>
       <van-cell title="关于我们" is-link to="/about" />
@@ -40,6 +46,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { Toast } from 'vant'
 export default {
   name: 'HomeMine',
   data () {
@@ -60,6 +67,13 @@ export default {
     },
     logoutHandler () {
 
+    },
+    sendActiveEmail () {
+      this.$http.post('fbsServer/auth/sendActiveEmail', {
+        email: this.userInfo.email
+      }).then(() => {
+        Toast.success('邮件已发送，请注意查收！')
+      })
     }
   }
 }
@@ -83,8 +97,11 @@ export default {
         vertical-align: top;
         margin-left: 10px;
         .d-t-e {
-          margin: 7px 0 5px 0;
+          margin: 7px 0 7px 0;
           font-size: 20px;
+        }
+        .d-t-s {
+          font-size: 12px;
         }
       }
     }
@@ -119,7 +136,7 @@ export default {
     }
   }
   .icon-wrap {
-    font-size: 18px;
+    font-size: 12px;
     /deep/ {
       .van-icon {
         position: relative;
