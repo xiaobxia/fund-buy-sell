@@ -19,10 +19,14 @@
           </div>
         </div>
       </div>
-      <!--<div class="c-w">-->
-        <!--<div class="c-w-c">-->
-        <!--</div>-->
-      <!--</div>-->
+      <div>
+        <div class="c-w-c">
+          <div style="text-align: left">
+            <span class="title-icon"></span>
+            <span class="t-t">我的邀请记录</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,19 +86,19 @@ export default {
     margin-top: 40px;
     padding: 0 120px;
   }
+  .c-w-c {
+    text-align: center;
+    background-color: #fff;
+    padding: 12px 12px;
+  }
+  .t-t {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+  }
   .c-w {
     padding-top: 20px;
     margin-bottom: 10px;
-    .c-w-c {
-      text-align: center;
-      background-color: #fff;
-      padding: 12px 12px;
-    }
-    .t-t {
-      display: inline-block;
-      vertical-align: top;
-      margin-left: 5px;
-    }
   }
   .qr-img {
     width: 200px;
