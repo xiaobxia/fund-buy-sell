@@ -6,6 +6,12 @@
         <img src="../../../assets/user-img.png" alt="">
         <div class="d-t">
           <div class="d-t-e">{{userInfo.email}}</div>
+          <template>
+            <div v-if="userInfo.email_active">
+              <span class="icon-wrap"><van-icon name="gem-o" /></span>
+              <span>会员剩余{{userInfo.vip_days}}天</span>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -77,7 +83,7 @@ export default {
         vertical-align: top;
         margin-left: 10px;
         .d-t-e {
-          margin: 7px 0 10px 0;
+          margin: 7px 0 5px 0;
           font-size: 20px;
         }
       }
@@ -106,6 +112,13 @@ export default {
   .c-icon {
     color: red;
     font-size: 20px;
+    /deep/ {
+      .van-icon {
+        vertical-align: middle;
+      }
+    }
+  }
+  .icon-wrap {
     /deep/ {
       .van-icon {
         vertical-align: middle;
