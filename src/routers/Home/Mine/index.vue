@@ -10,7 +10,14 @@
       </div>
     </div>
     <div class="m-l">
-      <van-cell title="邀请好友" is-link to="/invitation" />
+      <van-cell is-link to="/invitation" >
+        <div slot="title">
+          <span>邀请好友</span>
+          <span class="c-icon">
+            <van-icon name="fire"/>
+          </span>
+        </div>
+      </van-cell>
       <van-cell title="关于我们" is-link to="/about" />
     </div>
     <div class="p-b">
@@ -93,6 +100,15 @@ export default {
         border-bottom: 0.02667rem solid #ebedf0;
         -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
+      }
+    }
+  }
+  .c-icon {
+    color: red;
+    font-size: 20px;
+    /deep/ {
+      .van-icon {
+        vertical-align: middle;
       }
     }
   }
