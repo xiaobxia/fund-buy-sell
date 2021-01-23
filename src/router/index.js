@@ -95,6 +95,38 @@ export const asyncRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/about',
+    component: AppLayout,
+    name: 'About',
+    redirect: '/about/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('About'),
+        name: 'AboutIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/invitation',
+    component: AppLayout,
+    name: 'Invitation',
+    redirect: '/invitation/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('Invitation'),
+        name: 'InvitationIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
   }
 ]
 

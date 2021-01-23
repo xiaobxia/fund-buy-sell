@@ -8,16 +8,33 @@ import Vant from 'vant'
 // import '../static/web-fonts-with-css/css/fontawesome-all.css'
 import environmentUtil from './util/environmentUtil'
 import Http from '@/util/httpUtil.js'
+import Clipboard from '@/directive/clipboard'
 import store from './store'
 import './permission'
+import fileUtil from '@/util/fileUtil.js'
 
 Vue.use(Vant)
+
+Vue.use(Clipboard)
 
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
 
+function registerUtil (util) {
+  for (const key in util) {
+    if (util.hasOwnProperty(key)) {
+      Vue.prototype['$' + key] = util[key]
+    }
+  }
+}
+
+// 文件工具
+registerUtil(fileUtil)
+
 environmentUtil.setAdaptive()
+
+Vue.prototype.$webUrl = 'http://funduse.xiaobxia.com/#'
 
 /* eslint-disable no-new */
 new Vue({
