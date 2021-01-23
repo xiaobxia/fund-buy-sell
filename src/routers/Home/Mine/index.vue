@@ -1,7 +1,7 @@
 <template>
   <div class="home-mine">
     <div class="u-i-w">
-      <img src="../../../assets/img-h-bg.png" alt="" style="position: absolute">
+      <img src="../../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%">
       <div class="u-i-c">
         <img src="../../../assets/user-img.png" alt="">
         <div class="d-t">
@@ -119,8 +119,11 @@ export default {
     }
   }
   .icon-wrap {
+    font-size: 18px;
     /deep/ {
       .van-icon {
+        position: relative;
+        top: -1px;
         vertical-align: middle;
       }
     }
