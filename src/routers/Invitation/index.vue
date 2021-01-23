@@ -29,7 +29,8 @@ export default {
   data () {
     return {
       qrUrl: '',
-      invitationUrl: ''
+      invitationUrl: '',
+      list: []
     }
   },
   computed: {
@@ -42,6 +43,9 @@ export default {
     this.invitationUrl = invitationUrl
     QRCode.toDataURL(invitationUrl).then(url => {
       this.qrUrl = url
+    })
+    this.$http.get('fbsServer/log/getInvitationLogByToken').then((res) => {
+      this.list = res.data || []
     })
   },
   methods: {
