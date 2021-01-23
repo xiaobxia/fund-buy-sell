@@ -47,6 +47,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Toast } from 'vant'
+import storageUtil from '@/util/storageUtil'
+
 export default {
   name: 'HomeMine',
   data () {
@@ -66,7 +68,11 @@ export default {
       this.$router.history.go(-1)
     },
     logoutHandler () {
-
+      storageUtil.setData('UserInfo', {
+        isLogin: false
+      })
+      Toast.success('退出成功！')
+      this.$router.replace('/login')
     },
     sendActiveEmail () {
       this.$http.post('fbsServer/auth/sendActiveEmail', {

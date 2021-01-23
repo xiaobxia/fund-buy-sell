@@ -1,5 +1,5 @@
 <template>
-  <div class="app-layout">
+  <div v-if="showLayout" class="app-layout">
     <div class="router-wrap" :class="{showTabbar: showTabbar}">
       <router-view :key="key"/>
     </div>
@@ -22,7 +22,8 @@ export default {
   name: 'App',
   data () {
     return {
-      active: 'main'
+      active: 'main',
+      showLayout: false
     }
   },
   computed: {
@@ -41,8 +42,10 @@ export default {
   },
   created () {
     this.active = this.$route.path
+    this.showLayout = false
     this.$http.get('fbsServer/user/getUserByToken').then((res) => {
       this.$store.commit('SET_userInfo', res.data || {})
+      this.showLayout = true
     })
   },
   methods: {

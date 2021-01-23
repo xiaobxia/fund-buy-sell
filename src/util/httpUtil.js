@@ -25,7 +25,7 @@ axios.interceptors.response.use(function (response) {
       storageUtil.setData('UserInfo', {
         isLogin: false
       })
-      router.replace('/page/login')
+      router.replace('/login')
     }
     if (!response.config.noWarn) {
       Toast.fail(response.data.message || '')

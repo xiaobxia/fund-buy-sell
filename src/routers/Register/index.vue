@@ -6,10 +6,10 @@
     </div>
     <div class="w-t">
       <h2>您好，</h2>
-      <p>欢迎来到app_name</p>
+      <p>欢迎来到<span class="theme-text">app_name</span></p>
     </div>
     <div>
-      <van-form>
+      <van-form ref="form">
         <van-field
           v-model="email"
           placeholder="请输入邮箱"
@@ -62,24 +62,26 @@ export default {
     initPage () {
     },
     registerHandler () {
-      const query = this.$route.query
-      this.loading = true
-      this.$http.post('fbsServer/auth/registerWidthEmail', {
-        email: this.email,
-        password: this.password,
-        inviter_email: query.inv || ''
-      }).then((data) => {
-        this.loading = false
-        window._token = data.data.token
-        localStorage.setItem('token', data.data.token)
-        storageUtil.setData('UserInfo', {
-          ...data.data
+      this.$refs.form.validate().then(() => {
+        const query = this.$route.query
+        this.loading = true
+        this.$http.post('fbsServer/auth/registerWidthEmail', {
+          email: this.email,
+          password: this.password,
+          inviter_email: query.inv || ''
+        }).then((data) => {
+          this.loading = false
+          window._token = data.data.token
+          localStorage.setItem('token', data.data.token)
+          storageUtil.setData('UserInfo', {
+            ...data.data
+          })
+          this.toPath('/home')
+          Toast.success('注册成功！')
+        }).catch((err) => {
+          console.log(err)
+          this.loading = false
         })
-        this.toPath('/home')
-        Toast.success('注册成功！')
-      }).catch((err) => {
-        console.log(err)
-        this.loading = false
       })
     }
   }

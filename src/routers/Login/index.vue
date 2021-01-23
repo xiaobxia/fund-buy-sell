@@ -3,8 +3,11 @@
     <div class="b-b">
       <van-button plain type="primary" size="small" @click="toPath('/register')">注册</van-button>
     </div>
+    <div class="l-n theme-text">
+      <span>app_name</span>
+    </div>
     <div>
-      <van-form>
+      <van-form ref="form">
         <van-field
           v-model="email"
           placeholder="请输入邮箱"
@@ -61,22 +64,24 @@ export default {
     initPage () {
     },
     loginHandler () {
-      this.loading = true
-      this.$http.post('fbsServer/auth/login', {
-        email: this.email,
-        password: this.password
-      }).then((data) => {
-        this.loading = false
-        window._token = data.data.token
-        localStorage.setItem('token', data.data.token)
-        storageUtil.setData('UserInfo', {
-          ...data.data
+      this.$refs.form.validate().then(() => {
+        this.loading = true
+        this.$http.post('fbsServer/auth/login', {
+          email: this.email,
+          password: this.password
+        }).then((data) => {
+          this.loading = false
+          window._token = data.data.token
+          localStorage.setItem('token', data.data.token)
+          storageUtil.setData('UserInfo', {
+            ...data.data
+          })
+          this.toPath('/home')
+          Toast.success('登录成功！')
+        }).catch((err) => {
+          console.log(err)
+          this.loading = false
         })
-        this.toPath('/home')
-        Toast.success('登录成功！')
-      }).catch((err) => {
-        console.log(err)
-        this.loading = false
       })
     }
   }
@@ -103,5 +108,25 @@ export default {
   .b-b {
     text-align: right;
     margin: 20px 0;
+  }
+  .ic-w {
+    position: relative;
+    margin: 10px auto 40px auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .l-n {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 60px;
   }
 </style>
