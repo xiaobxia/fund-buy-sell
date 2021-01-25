@@ -15,18 +15,29 @@
     <div>
       <router-link :to="'/toImageDemo'">toImageDemo</router-link>
     </div>
+    <van-count-down v-if="time" :time="time" format="DD 天 HH 时 mm 分 ss 秒" >
+    </van-count-down>
   </div>
 </template>
 
 <script>
+import openCountDown from '@/util/openCountDown'
 export default {
   name: 'HomeMain',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      time: 0
     }
   },
   created () {
+    const time = openCountDown.marketOpenDayCountDown()
+    if (time) {
+      this.time = time
+    } else {
+      this.time = 0
+    }
+    console.log(time)
   },
   methods: {
     backHandler () {
