@@ -83,6 +83,10 @@ body {
   color: $active-color;
 }
 
+.theme-bg {
+  background-color: $active-color;
+}
+
 .liner-bg {
   background: linear-gradient(135deg, #F06C46 0%, #D74C35 100%);
 }

@@ -21,3 +21,7 @@ $original-light-9: mix($original--color-white, $original-theme, 90%) !default;
   border: none;
   color: $original-theme;
 }
+
+.van-dialog__confirm, .van-dialog__confirm:active {
+  color: $original-theme;
+}
