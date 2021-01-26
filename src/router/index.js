@@ -87,6 +87,14 @@ export const asyncRouterMap = [
         }
       },
       {
+        path: 'gzh',
+        component: lazyLoading('Home/Gzh'),
+        name: 'HomeGzh',
+        meta: {
+          auth: true
+        }
+      },
+      {
         path: 'mine',
         component: lazyLoading('Home/Mine'),
         name: 'HomeMine',

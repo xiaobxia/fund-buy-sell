@@ -5,6 +5,7 @@ import router from './router/index'
 import App from './App'
 import './style/main.scss'
 import Vant from 'vant'
+import moment from 'moment'
 // import '../static/web-fonts-with-css/css/fontawesome-all.css'
 import environmentUtil from './util/environmentUtil'
 import Http from '@/util/httpUtil.js'
@@ -20,6 +21,20 @@ Vue.use(Clipboard)
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
+
+Vue.prototype.$formatToDay = function (day) {
+  if (!day) {
+    return ''
+  }
+  return moment(day).format('YYYY-MM-DD')
+}
+
+Vue.prototype.$formatToDateTime = function (day) {
+  if (!day) {
+    return ''
+  }
+  return moment(day).format('YYYY-MM-DD HH:mm:ss')
+}
 
 function registerUtil (util) {
   for (const key in util) {
