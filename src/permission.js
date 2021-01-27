@@ -1,5 +1,5 @@
 import router from './router'
-import store from './store'
+// import store from './store'
 import storageUtil from '@/util/storageUtil'
 // import permissionUtil from '@/util/permission'
 

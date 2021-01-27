@@ -48,10 +48,10 @@ export default {
   .d-c {
     margin-top: 20vh;
     text-align: center;
-    font-size: 36px;
+    font-size: 18px;
     img {
-      width: 250px;
-      margin-bottom: 100px;
+      width: 125px;
+      margin-bottom: 50px;
     }
   }
 </style>

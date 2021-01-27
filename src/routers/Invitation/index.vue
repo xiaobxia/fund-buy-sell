@@ -1,7 +1,7 @@
 <template>
   <div class="page-About">
     <van-nav-bar title="邀请好友" left-arrow @click-left="backHandler" />
-    <div class="grey-page">
+    <div v-if="userInfo.email_active" class="grey-page">
       <div class="c-w">
         <div class="c-w-c">
           <div style="text-align: left">
@@ -28,6 +28,9 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <should-active-email/>
+    </div>
   </div>
 </template>
 
@@ -35,9 +38,14 @@
 import { mapGetters } from 'vuex'
 import QRCode from 'qrcode'
 import { Toast } from 'vant'
+import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
 
 export default {
   name: 'Invitation',
+  components: {ShouldActiveEmail},
+  component: {
+    ShouldActiveEmail
+  },
   data () {
     return {
       qrUrl: '',
@@ -51,14 +59,16 @@ export default {
     ])
   },
   created () {
-    const invitationUrl = this.$webUrl + `/?register=${this.userInfo.email}`
-    this.invitationUrl = invitationUrl
-    QRCode.toDataURL(invitationUrl).then(url => {
-      this.qrUrl = url
-    })
-    this.$http.get('fbsServer/log/getInvitationLogByToken').then((res) => {
-      this.list = res.data || []
-    })
+    if (this.userInfo.email_active === true) {
+      const invitationUrl = this.$webUrl + `/register?inv=${this.userInfo.email}`
+      this.invitationUrl = invitationUrl
+      QRCode.toDataURL(invitationUrl).then(url => {
+        this.qrUrl = url
+      })
+      this.$http.get('fbsServer/log/getInvitationLogByToken').then((res) => {
+        this.list = res.data || []
+      })
+    }
   },
   methods: {
     backHandler () {
