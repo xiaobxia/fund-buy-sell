@@ -34,3 +34,10 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+.van-list__loading {
+  .van-loading__spinner {
+    width: 16px!important;
+    height: 16px!important;
+  }
+}

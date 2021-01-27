@@ -5,13 +5,21 @@
       <div v-if="status === 'success'">
         <img src="../../assets/result/成功.png" alt="">
         <p>邮箱验证成功</p>
+        <div class="p-b">
+          <van-button
+            round
+            block
+            type="primary"
+            class="liner-bg"
+            @click="toLoginHandler"
+          >立即登录</van-button>
+        </div>
       </div>
       <div v-if="status === 'error'">
         <img src="../../assets/result/失败.png" alt="">
         <p>{{text}}</p>
       </div>
     </div>
-    <span></span>
   </div>
 </template>
 
@@ -39,6 +47,9 @@ export default {
   methods: {
     backHandler () {
       this.$router.history.go(-1)
+    },
+    toLoginHandler () {
+      this.$router.replace('/login')
     }
   }
 }
@@ -46,12 +57,18 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   .d-c {
-    margin-top: 20vh;
+    margin-top: 15vh;
     text-align: center;
     font-size: 18px;
     img {
       width: 125px;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
     }
+  }
+  .p-b {
+    position: relative;
+    margin: auto;
+    width: 260px;
+    margin-top: 40px;
   }
 </style>

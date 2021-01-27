@@ -10,7 +10,7 @@
             <template>
               <div v-if="userInfo.email_active">
                 <span class="icon-wrap"><van-icon name="gem-o" /></span>
-                <span>会员剩余{{userInfo.vip_days}}天</span>
+                <span>会员剩余{{userInfo.vip_days}}个交易日</span>
               </div>
               <div v-else>
                 <span>未完成邮箱验证</span>

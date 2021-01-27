@@ -6,6 +6,15 @@
         <div class="c-w-c">
           <div style="text-align: left">
             <span class="title-icon"></span>
+            <span class="t-t">活动说明</span>
+          </div>
+          <div style="text-align: left" class="w-t">您邀请的好友通过您的专属链接和二维码，成功注册并且完成邮箱验证，您将获得5个交易日的奖励。</div>
+        </div>
+      </div>
+      <div class="c-w-g">
+        <div class="c-w-c">
+          <div style="text-align: left">
+            <span class="title-icon"></span>
             <span class="t-t">我的专属二维码</span>
           </div>
           <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
@@ -19,12 +28,27 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="c-w-g">
         <div class="c-w-c">
           <div style="text-align: left">
             <span class="title-icon"></span>
             <span class="t-t">我的邀请记录</span>
           </div>
+          <div class="re-w" v-if="list.length > 0">
+            <div
+              v-for="(item, index) in list"
+              :key="index"
+              class="re-i"
+            >
+              <div
+                v-if="item.type_name === '激活'"
+              >您邀请的好友“<span class="theme-text">{{item.register_email}}</span>”已注册并验证邮箱，您获得5个交易日的奖励！</div>
+              <div
+                v-else
+              >您邀请的好友“<span class="theme-text">{{item.register_email}}</span>”已注册但还未验证邮箱，快提醒他验证！</div>
+            </div>
+          </div>
+          <div v-else class="d-w-s">暂无数据</div>
         </div>
       </div>
     </div>
@@ -124,5 +148,28 @@ export default {
         border-right: none;
       }
     }
+  }
+  .d-w-s {
+    line-height: 40px;
+    color: #C0C4CC;
+  }
+  .re-w {
+    text-align: left;
+    .re-i {
+      padding: 10px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #E9E9E9;
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+  .c-w-g {
+    margin-top: 10px;
+  }
+  .w-t {
+    margin-top: 6px;
+    font-size: 14px;
   }
 </style>
