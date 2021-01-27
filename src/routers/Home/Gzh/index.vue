@@ -4,7 +4,7 @@
       <van-list
         v-model="loading"
         :finished="finished"
-        finished-text="只显示最近十篇"
+        finished-text=""
         @load="onLoad"
         class="a-l-l"
       >
@@ -115,7 +115,8 @@ export default {
       margin-left: 10px;
       h4 {
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 0;
+        color: #303133;
       }
       .d-p {
         color: #909399;
@@ -124,11 +125,14 @@ export default {
         -webkit-line-clamp:2;
         -webkit-box-orient: vertical;
         word-break: break-all;
+        word-wrap: break-word;
         font-size: 12px;
       }
       .d-time {
+        margin-top: 2px;
         font-size: 12px;
         text-align: right;
+        color: #909399;
       }
     }
   }
