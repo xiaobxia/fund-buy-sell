@@ -15,6 +15,11 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
+      window.trackPageview = function (pageName) {
+        if (window._hmt && location.hostname !== 'localhost') {
+          window._hmt.push(['_trackPageview', '/'+pageName])
+        }
+      }
     </script>
   </head>
   <body>
