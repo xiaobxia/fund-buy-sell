@@ -100,6 +100,9 @@ export default {
         border: 1px solid #E9E9E9;
         border-radius: 4px;
       }
+      &.van-cell:not(:last-child)::after {
+        display: none;
+      }
     }
   }
 </style>
