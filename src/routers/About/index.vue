@@ -3,13 +3,9 @@
     <van-nav-bar title="关于" left-arrow @click-left="backHandler" />
     <div class="grey-page">
       <div class="c-w">
-        <div class="c-w-c">11</div>
-      </div>
-      <div class="c-w-g">
-        <div class="title-info-block">
-          <div class="title-wrap">
-            <span class="title-icon"></span>
-            <span class="t-t">常见问题</span>
+        <div class="c-w-c">
+          <div>
+            <img src="../../assets/gzh-s.png" alt="">
           </div>
         </div>
       </div>
@@ -22,6 +18,7 @@ export default {
   name: 'About',
   data () {
     return {
+      activeQA: ''
     }
   },
   methods: {
@@ -45,10 +42,13 @@ export default {
     padding: 0 120px;
   }
   .c-w {
-    padding-top: 20px;
+    padding-top: 10px;
     margin-bottom: 10px;
     .c-w-c {
       background-color: #fff;
+    }
+    img {
+      width: 100%;
     }
   }
 </style>

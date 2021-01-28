@@ -1,31 +1,41 @@
 <template>
-  <div class="home-main">
-    <div class="c-l-w">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text=""
-        @load="onLoad"
-        class="a-l-l"
-      >
-        <div
-          v-for="(item, index) in wxList"
-          :key="index"
-          class="rt-i"
-          @click="toOther(item.news_item[0].url)"
-        >
-          <div>
-            <div class="rt-i-i">
-              <img :src="item.news_item[0].thumb_url" alt="">
-            </div>
-            <div class="rt-i-t">
-              <h4>{{item.news_item[0].title}}</h4>
-              <div class="d-p">{{item.news_item[0].digest}}</div>
-              <div class="d-time">{{item.updateTime}}</div>
-            </div>
-          </div>
+  <div class="home-main grey-page">
+    <div class="p-t">公众号文章</div>
+    <img src="../../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
+    <div class="con-w">
+      <div class="title-info-block round shadow">
+        <div class="title-wrap">
+          <span class="title-icon"></span>
+          <span class="t-t">交易小记</span>
         </div>
-      </van-list>
+        <div class="c-l-w">
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text=""
+            @load="onLoad"
+            class="a-l-l"
+          >
+            <div
+              v-for="(item, index) in wxList"
+              :key="index"
+              class="rt-i"
+              @click="toOther(item.news_item[0].url)"
+            >
+              <div>
+                <div class="rt-i-i">
+                  <img :src="item.news_item[0].thumb_url" alt="">
+                </div>
+                <div class="rt-i-t">
+                  <h4>{{item.news_item[0].title}}</h4>
+                  <div class="d-p">{{item.news_item[0].digest}}</div>
+                  <div class="d-time">{{item.updateTime}}</div>
+                </div>
+              </div>
+            </div>
+          </van-list>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,19 +99,35 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   .home-main {
-    margin-bottom: 50px;
+    position: relative;
+    height: calc(100vh - 50px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .p-t {
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    color: #fff;
+    line-height: 45px;
+    font-size: 18px;
+  }
+  .con-w {
+    position: relative;
+    z-index: 100;
+    padding: 0 10px;
   }
   .rt-i {
     background-color: #fff;
-    padding: 10px 10px;
+    padding: 10px 0;
     border-bottom: 1px solid #E9E9E9;
     &:last-child {
       border-bottom: 0;
     }
     .rt-i-i {
       vertical-align: top;
-      width: 80px;
-      height: 71px;
+      width: 100px;
+      height: 68px;
       display: inline-block;
       img {
         width: 100%;
@@ -111,7 +137,7 @@ export default {
     .rt-i-t {
       vertical-align: top;
       display: inline-block;
-      width: 260px;
+      width: 210px;
       margin-left: 10px;
       h4 {
         margin-top: 0;

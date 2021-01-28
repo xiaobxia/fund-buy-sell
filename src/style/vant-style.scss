@@ -41,3 +41,16 @@
     height: 16px!important;
   }
 }
+
+.van-collapse-item--border::after {
+  position: absolute;
+  box-sizing: border-box;
+  content: ' ';
+  pointer-events: none;
+  top: 0;
+  right: 16px;
+  left: 16px;
+  border-top: 1px solid #ebedf0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}

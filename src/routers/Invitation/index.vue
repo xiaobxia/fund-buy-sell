@@ -17,14 +17,16 @@
             <span class="title-icon"></span>
             <span class="t-t">我的专属二维码</span>
           </div>
-          <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
-          <div class="b-w">
+          <div style="text-align: center">
+            <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
+            <div class="b-w">
             <span
               v-clipboard:copy="invitationUrl"
               v-clipboard:success="copySuccess"
               class="c-b theme-text"
             >复制邀请链接</span>
-            <span class="c-b theme-text" @click="downloadQr">保存邀请码</span>
+              <span class="c-b theme-text" @click="downloadQr">保存邀请码</span>
+            </div>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div class="router-wrap" :class="{showTabbar: showTabbar}">
       <router-view :key="key"/>
     </div>
-    <van-tabbar v-if="showTabbar" v-model="active" active-color="#E2684D">
+    <van-tabbar v-if="showTabbar" v-model="active" active-color="#E2684D" :fixed="true">
       <van-tabbar-item name="/home/main" icon="home-o" replace to="/home/main">主页</van-tabbar-item>
       <van-tabbar-item name="/home/gzh" replace to="/home/gzh">
         <span>公众号</span>
