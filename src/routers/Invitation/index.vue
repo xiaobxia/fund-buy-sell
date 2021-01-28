@@ -3,17 +3,17 @@
     <van-nav-bar title="邀请好友" left-arrow @click-left="backHandler" />
     <div v-if="userInfo.email_active" class="grey-page">
       <div class="c-w">
-        <div class="c-w-c">
-          <div style="text-align: left">
+        <div class="title-info-block">
+          <div class="title-wrap">
             <span class="title-icon"></span>
             <span class="t-t">活动说明</span>
           </div>
-          <div style="text-align: left" class="w-t">您邀请的好友通过您的专属链接和二维码，成功注册并且完成邮箱验证，您将获得5个交易日的奖励。</div>
+          <div style="text-align: left" class="w-t">您邀请的好友通过您的专属链接或二维码，成功注册并且完成邮箱验证，您将获得5个交易日的奖励。</div>
         </div>
       </div>
       <div class="c-w-g">
-        <div class="c-w-c">
-          <div style="text-align: left">
+        <div class="title-info-block">
+          <div class="title-wrap">
             <span class="title-icon"></span>
             <span class="t-t">我的专属二维码</span>
           </div>
@@ -29,8 +29,8 @@
         </div>
       </div>
       <div class="c-w-g">
-        <div class="c-w-c">
-          <div style="text-align: left">
+        <div class="title-info-block">
+          <div class="title-wrap">
             <span class="title-icon"></span>
             <span class="t-t">我的邀请记录</span>
           </div>
@@ -125,13 +125,8 @@ export default {
     background-color: #fff;
     padding: 12px 12px;
   }
-  .t-t {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 5px;
-  }
   .c-w {
-    padding-top: 20px;
+    padding-top: 10px;
     margin-bottom: 10px;
   }
   .qr-img {

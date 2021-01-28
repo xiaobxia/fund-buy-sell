@@ -5,6 +5,14 @@
       <div class="c-w">
         <div class="c-w-c">11</div>
       </div>
+      <div class="c-w-g">
+        <div class="title-info-block">
+          <div class="title-wrap">
+            <span class="title-icon"></span>
+            <span class="t-t">常见问题</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

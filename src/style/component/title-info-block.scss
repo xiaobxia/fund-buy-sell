@@ -1,0 +1,23 @@
+.title-info-block {
+  background-color: #fff;
+  padding: 12px 14px;
+  &.round {
+    border-radius: 8px;
+  }
+  &.shadow {
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.05);
+  }
+  .title-wrap {
+    line-height: 20px;
+    font-size: 14px;
+    text-align: left;
+  }
+  .title-icon {
+    vertical-align: middle;
+    height: 14px;
+    margin-right: 3px;
+  }
+  .t-t {
+    vertical-align: middle;
+  }
+}
