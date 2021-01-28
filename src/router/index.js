@@ -14,7 +14,8 @@ export const constantRouterMap = [
     path: '/login',
     component: lazyLoading('Login'),
     meta: {
-      auth: false
+      auth: false,
+      pageName: '登录'
     }
   },
   {
@@ -22,7 +23,8 @@ export const constantRouterMap = [
     path: '/activeRegister',
     component: lazyLoading('ActiveRegister'),
     meta: {
-      auth: false
+      auth: false,
+      pageName: '注册激活'
     }
   },
   {
@@ -30,7 +32,8 @@ export const constantRouterMap = [
     path: '/register',
     component: lazyLoading('Register'),
     meta: {
-      auth: false
+      auth: false,
+      pageName: '注册'
     }
   },
   {
@@ -66,7 +69,8 @@ export const constantRouterMap = [
     path: '*',
     component: lazyLoading('NotMatch'),
     meta: {
-      auth: false
+      auth: false,
+      pageName: '404'
     }
   }
 ]
@@ -83,7 +87,8 @@ export const asyncRouterMap = [
         component: lazyLoading('Home/Main'),
         name: 'HomeMain',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '信号首页'
         }
       },
       {
@@ -91,7 +96,8 @@ export const asyncRouterMap = [
         component: lazyLoading('Home/Gzh'),
         name: 'HomeGzh',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '公众号'
         }
       },
       {
@@ -99,7 +105,8 @@ export const asyncRouterMap = [
         component: lazyLoading('Home/Mine'),
         name: 'HomeMine',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '我的'
         }
       }
     ]
@@ -115,7 +122,8 @@ export const asyncRouterMap = [
         component: lazyLoading('About'),
         name: 'AboutIndex',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '关于'
         }
       }
     ]
@@ -131,7 +139,8 @@ export const asyncRouterMap = [
         component: lazyLoading('Feedback'),
         name: 'FeedbackIndex',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '意见反馈'
         }
       }
     ]
@@ -147,7 +156,8 @@ export const asyncRouterMap = [
         component: lazyLoading('Invitation'),
         name: 'InvitationIndex',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '邀请好友'
         }
       }
     ]

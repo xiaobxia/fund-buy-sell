@@ -28,6 +28,9 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to, from) => {
   console.log('afterEach')
-  console.log(from)
-  console.log(to)
+  console.log('from', from)
+  console.log('to', to)
+  if (to.meta && to.meta.pageName) {
+
+  }
 })
