@@ -31,6 +31,9 @@ router.afterEach((to, from) => {
   console.log('from', from)
   console.log('to', to)
   if (to.meta && to.meta.pageName) {
-
+    // 不能是开发环境，也不能是管理员账户
+    if (window._hmt && location.hostname !== 'localhost') {
+      window._hmt.push(['_trackPageview', `/${to.meta.pageName}`])
+    }
   }
 })
