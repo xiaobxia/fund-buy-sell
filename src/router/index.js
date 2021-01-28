@@ -121,6 +121,22 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/feedback',
+    component: AppLayout,
+    name: 'Feedback',
+    redirect: '/feedback/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('Feedback'),
+        name: 'FeedbackIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
+  },
+  {
     path: '/invitation',
     component: AppLayout,
     name: 'Invitation',

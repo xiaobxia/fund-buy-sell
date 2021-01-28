@@ -9,6 +9,7 @@
           </div>
         </div>
       </div>
+      <van-cell title="意见反馈" is-link to="/feedback" />
     </div>
   </div>
 </template>
