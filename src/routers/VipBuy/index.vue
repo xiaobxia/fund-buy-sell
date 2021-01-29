@@ -2,15 +2,17 @@
   <div class="page-VipBuy">
     <van-nav-bar title="app_name会员" left-arrow @click-left="backHandler" />
     <div v-if="userInfo.email_active" class="v-w">
+      <div class="p-t">app_nameVIP会员</div>
+      <div class="p-e">中国股市的股票的交易日为除节假日外的周一至周五。(AM9;30-11;30 , PM13;00-15;00) 一个交易日就是一天,股票的交易日为周一至周五。</div>
       <van-row>
         <van-col v-for="(card, index) in cardList" :key="index" span="8">
           <div class="m-card" :class="{active: card.day === active}" @click="selectCard(card.day)">
             <div class="ti">{{card.day}}个交易日</div>
             <div class="money">
               <span>￥</span>
-              <span class="money-t">{{$formatMoney(card.money)}}</span>
+              <span class="money-t">{{card.money}}</span>
             </div>
-            <span class="d-text">111</span>
+            <span class="d-text">{{$keepTwoDecimals(card.money/card.day)}}元/日</span>
           </div>
         </van-col>
       </van-row>
@@ -35,10 +37,10 @@ export default {
       loading: false,
       cardList: [
         {day: 1, money: 2},
-        {day: 20, money: 2},
-        {day: 60, money: 2},
-        {day: 120, money: 2},
-        {day: 240, money: 2}
+        {day: 20, money: 15},
+        {day: 60, money: 40},
+        {day: 120, money: 70},
+        {day: 240, money: 120}
       ],
       active: 20
     }
@@ -86,13 +88,28 @@ export default {
       background-color: rgb(250,240,230);
     }
     .ti {
-      margin-top: 5px;
+      font-size: 12px;
+      margin-top: 8px;
     }
     .money {
+      margin: 4px 0;
       color: rgb(220,176,130);
     }
     .money-t {
-      font-size: 24px;
+      font-size: 26px;
     }
+    .d-text {
+      font-size: 12px;
+    }
+  }
+  .p-t {
+    margin: 10px 0;
+    padding: 0 10px;
+    font-size: 20px;
+  }
+  .p-e {
+    padding: 0 10px;
+    color: #909399;
+    font-size: 10px;
   }
 </style>
