@@ -11,10 +11,10 @@ function marketOpenDayCountDown () {
     const open = (new Date(year, month, day, 9)).getTime()
     return open - d.getTime()
   }
-  if (hour === 14) {
-    const open = (new Date(year, month, day, 15)).getTime()
-    return open - d.getTime()
-  }
+  // if (hour === 14) {
+  //   const open = (new Date(year, month, day, 15)).getTime()
+  //   return open - d.getTime()
+  // }
   if (hour >= 22) {
     const open = (new Date(year, month, day + 1, 9)).getTime()
     return open - d.getTime()

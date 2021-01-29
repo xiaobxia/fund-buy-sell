@@ -119,7 +119,10 @@ export default {
       this.buyWarnHandler()
     },
     buyWarnHandler () {
-
+      this.toBuyQr()
+    },
+    toBuyQr () {
+      this.$router.push(`/buyQr/index?days=${this.active}`)
     }
   }
 }
@@ -161,6 +164,7 @@ export default {
     }
     .d-text {
       font-size: 12px;
+      color: #909399;
     }
   }
   .p-t {

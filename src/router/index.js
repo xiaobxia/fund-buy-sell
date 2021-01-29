@@ -178,6 +178,23 @@ export const asyncRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/buyQr',
+    component: AppLayout,
+    name: 'BuyQr',
+    redirect: '/buyQr/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('BuyQr'),
+        name: 'BuyQrIndex',
+        meta: {
+          auth: true,
+          pageName: '支付二维码'
+        }
+      }
+    ]
   }
 ]
 
