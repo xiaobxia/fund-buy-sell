@@ -117,6 +117,9 @@ export default {
     z-index: 100;
     padding: 0 10px;
   }
+  .c-l-w {
+    min-height: calc(100vh - 150px);
+  }
   .rt-i {
     background-color: #fff;
     padding: 10px 0;

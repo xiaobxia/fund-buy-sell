@@ -69,9 +69,6 @@ import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
 export default {
   name: 'Invitation',
   components: {ShouldActiveEmail},
-  component: {
-    ShouldActiveEmail
-  },
   data () {
     return {
       qrUrl: '',

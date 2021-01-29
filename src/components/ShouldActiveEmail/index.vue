@@ -57,7 +57,7 @@ export default {
     text-align: center;
     font-size: 18px;
     img {
-      width: 125px;
+      width: 100px;
       margin-bottom: 20px;
     }
   }

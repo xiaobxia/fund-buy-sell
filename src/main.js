@@ -13,6 +13,7 @@ import Clipboard from '@/directive/clipboard'
 import store from './store'
 import './permission'
 import fileUtil from '@/util/fileUtil.js'
+import numberUtil from '@/util/numberUtil.js'
 
 Vue.use(Vant)
 
@@ -46,6 +47,8 @@ function registerUtil (util) {
 
 // 文件工具
 registerUtil(fileUtil)
+// 数字工具
+registerUtil(numberUtil)
 
 environmentUtil.setAdaptive()
 

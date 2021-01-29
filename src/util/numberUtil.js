@@ -31,6 +31,14 @@ function formatNum (str) {
     return startCode + str
   }
 }
+
+function toTwoDecimals (number) {
+  let newNumber = parseFloat(number)
+  if (isNaN(newNumber)) {
+    newNumber = 0
+  }
+  return newNumber.toFixed(2)
+}
 const numberUtil = {
   countRate: function (numerator, denominator) {
     denominator = denominator || 1
@@ -44,13 +52,7 @@ const numberUtil = {
   keepTwoDecimals: function (number) {
     return Math.round(100 * number) / 100
   },
-  toTwoDecimals: function (number) {
-    let newNumber = parseFloat(number)
-    if (isNaN(newNumber)) {
-      newNumber = 0
-    }
-    return newNumber.toFixed(2)
-  },
+  toTwoDecimals: toTwoDecimals,
   keepFourDecimals: function (number) {
     return Math.round(10000 * number) / 10000
   },
@@ -59,7 +61,7 @@ const numberUtil = {
     return (number >= (target - step)) && (number <= (target + step))
   },
   formatMoney (number) {
-    return formatNum(this.toTwoDecimals(number))
+    return formatNum(toTwoDecimals(number))
   }
 }
 

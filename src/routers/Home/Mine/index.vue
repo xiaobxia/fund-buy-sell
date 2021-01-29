@@ -24,6 +24,7 @@
       </div>
     </div>
     <div class="m-l">
+      <van-cell :title="`${userInfo.vip_days ? '续费':'购买'}会员`" is-link to="/vipBuy" />
       <van-cell is-link to="/invitation">
         <div slot="title">
           <span>邀请好友</span>

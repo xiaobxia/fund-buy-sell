@@ -161,6 +161,23 @@ export const asyncRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/vipBuy',
+    component: AppLayout,
+    name: 'VipBuy',
+    redirect: '/vipBuy/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('VipBuy'),
+        name: 'VipBuyIndex',
+        meta: {
+          auth: true,
+          pageName: '会员购买'
+        }
+      }
+    ]
   }
 ]
 
