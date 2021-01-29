@@ -16,6 +16,29 @@
           </div>
         </van-col>
       </van-row>
+      <div class="buy-block">
+        <div class="b-c">
+          <van-row>
+            <van-col :span="12">
+              <div>
+                <span>合计:</span>
+                <div class="money">
+                  <span>￥</span>
+                  <span class="money-t">{{getCardItem(active).money}}</span>
+                </div>
+              </div>
+            </van-col>
+            <van-col :span="12" style="text-align: right">
+              <van-button
+                :loading="buyBLoading"
+                round
+                type="primary"
+                class="b-button"
+              >立即购买</van-button>
+            </van-col>
+          </van-row>
+        </div>
+      </div>
     </div>
     <div v-else>
       <should-active-email/>
@@ -42,7 +65,8 @@ export default {
         {day: 120, money: 70},
         {day: 240, money: 120}
       ],
-      active: 20
+      active: 20,
+      buyBLoading: false
     }
   },
   computed: {
@@ -51,6 +75,13 @@ export default {
     ])
   },
   methods: {
+    getCardItem (day) {
+      for (let i = 0; i < this.cardList.length; i++) {
+        if (day === this.cardList[i].day) {
+          return this.cardList[i]
+        }
+      }
+    },
     backHandler () {
       this.$router.history.go(-1)
     },
@@ -111,5 +142,33 @@ export default {
     padding: 0 10px;
     color: #909399;
     font-size: 10px;
+  }
+  .buy-block {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(250,240,230);
+    height: 56px;
+    line-height: 56px;
+    width: 100%;
+    color: #909399;
+    .b-c {
+      padding: 0 20px;
+    }
+    .money {
+      display: inline-block;
+      color: rgb(220,176,130);
+    }
+    .money-t {
+      /*font-size: 26px;*/
+    }
+  }
+  .b-button {
+    /deep/ {
+      &.van-button--primary {
+        background-color: rgb(220,176,130);
+        border-color: rgb(220,176,130);
+      }
+    }
   }
 </style>
