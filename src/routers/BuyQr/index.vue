@@ -17,7 +17,11 @@
         <van-step>
           <div class="v-s-t">扫描二维码完成支付<span class="theme-text">(付款时,请备注6位支付令牌)</span></div>
           <div class="qr-img">
+            <img v-if="day === '240'" src="../../assets/payQr/240d.jpg" alt="">
+            <img v-if="day === '120'" src="../../assets/payQr/120d.jpg" alt="">
+            <img v-if="day === '60'" src="../../assets/payQr/60d.jpg" alt="">
             <img v-if="day === '20'" src="../../assets/payQr/20d.jpg" alt="">
+            <img v-if="day === '1'" src="../../assets/payQr/1d.jpg" alt="">
           </div>
         </van-step>
         <van-step>
