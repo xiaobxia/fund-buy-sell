@@ -10,12 +10,14 @@
       <van-form ref="form">
         <van-field
           v-model="email"
+          maxlength="50"
           placeholder="请输入邮箱"
           :rules="[{ required: true, message: '请输入邮箱' }]"
         />
         <van-field
           v-model="password"
           type="password"
+          maxlength="16"
           placeholder="请输入密码"
           :rules="[{ required: true, message: '请输入密码' }]"
         />

@@ -5,28 +5,17 @@
       <van-button plain type="primary" size="small" @click="toPath('/login')">登录</van-button>
     </div>
     <div class="w-t">
-      <h2>您好，</h2>
-      <p>欢迎来到<span class="theme-text">app_name</span></p>
+      <h2>找回密码</h2>
     </div>
     <div>
       <van-form ref="form">
         <van-field
           v-model="email"
-          placeholder="请输入邮箱"
           maxlength="50"
+          placeholder="请输入邮箱"
           :rules="[
             { required: true, message: '请输入邮箱' },
             { validator: emailValidator, message: '邮箱格式不正确' }
-          ]"
-        />
-        <van-field
-          v-model="password"
-          type="password"
-          placeholder="请输入密码，8-16位数字和字母"
-          maxlength="16"
-          :rules="[
-            { required: true, message: '请输入密码' },
-            { validator: passwordValidator, message: '8-16位数字和字母' }
           ]"
         />
       </van-form>
@@ -37,23 +26,21 @@
           block
           class="liner-bg"
           type="primary"
-          @click="registerHandler"
-        >注册</van-button>
+          @click="sendHandler"
+        >发送找回密码邮件</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import storageUtil from '@/util/storageUtil.js'
 import { Toast } from 'vant'
 
 export default {
-  name: 'Register',
+  name: 'ForgetPassword',
   data () {
     return {
       email: '',
-      password: '',
       loading: false
     }
   },
@@ -73,27 +60,14 @@ export default {
       const reg = new RegExp('^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$')
       return reg.test(val)
     },
-    passwordValidator (val) {
-      const pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-      return pwdReg.test(val)
-    },
-    registerHandler () {
+    sendHandler () {
       this.$refs.form.validate().then(() => {
-        const query = this.$route.query
         this.loading = true
-        this.$http.post('fbsServer/auth/registerWidthEmail', {
-          email: this.email,
-          password: this.password,
-          inviter_email: query.inv || ''
-        }).then((data) => {
+        this.$http.post('fbsServer/auth/sendForgetEmail', {
+          email: this.email
+        }).then(() => {
           this.loading = false
-          window._token = data.data.token
-          localStorage.setItem('token', data.data.token)
-          storageUtil.setData('UserInfo', {
-            ...data.data
-          })
-          this.toPath('/home')
-          Toast.success('注册成功！')
+          Toast.success('找回密码邮件已发送，请注意查收！')
         }).catch((err) => {
           console.log(err)
           this.loading = false
