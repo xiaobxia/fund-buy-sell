@@ -101,6 +101,7 @@ export default {
   .r-b {
     margin-top: 20px;
     text-align: left;
+    color: #606266;
   }
   .l-p-p {
     padding: 0 25px;
