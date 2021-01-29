@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="r-b">
-      <span>忘记密码</span>
+      <span @click="toPath('/forgetPassword')">忘记密码</span>
     </div>
   </div>
 </template>

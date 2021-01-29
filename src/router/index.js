@@ -46,6 +46,15 @@ export const constantRouterMap = [
     }
   },
   {
+    name: 'FindPassword',
+    path: '/findPassword',
+    component: lazyLoading('FindPassword'),
+    meta: {
+      auth: false,
+      pageName: '找回密码'
+    }
+  },
+  {
     name: 'HelloWorld',
     path: '/helloWorld',
     component: lazyLoading('HelloWorld'),

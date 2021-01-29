@@ -1,21 +1,19 @@
 <template>
   <div class="l-p-p">
-    <!--<van-nav-bar left-arrow @click-left="backHandler" />-->
-    <div class="b-b">
-      <van-button plain type="primary" size="small" @click="toPath('/login')">登录</van-button>
-    </div>
+    <van-nav-bar title="找回密码" />
     <div class="w-t">
-      <h2>找回密码</h2>
+      <h2>请重新设置密码</h2>
     </div>
     <div>
       <van-form ref="form">
         <van-field
-          v-model="email"
-          maxlength="50"
-          placeholder="请输入邮箱"
+          v-model="password"
+          type="password"
+          placeholder="请输入密码，8-16位数字和字母"
+          maxlength="16"
           :rules="[
-            { required: true, message: '请输入邮箱' },
-            { validator: emailValidator, message: '邮箱格式不正确' }
+            { required: true, message: '请输入密码' },
+            { validator: passwordValidator, message: '8-16位数字和字母' }
           ]"
         />
       </van-form>
@@ -26,21 +24,22 @@
           block
           class="liner-bg"
           type="primary"
-          @click="sendHandler"
-        >发送找回密码邮件</van-button>
+          @click="submitHandler"
+        >提交</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
 
 export default {
-  name: 'ForgetPassword',
+  name: 'FindPassword',
   data () {
     return {
       email: '',
+      password: '',
       loading: false
     }
   },
@@ -60,14 +59,25 @@ export default {
       const reg = new RegExp('^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$')
       return reg.test(val)
     },
-    sendHandler () {
+    passwordValidator (val) {
+      const pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+      return pwdReg.test(val)
+    },
+    submitHandler () {
       this.$refs.form.validate().then(() => {
+        const query = this.$route.query
         this.loading = true
-        this.$http.post('fbsServer/auth/sendForgetEmail', {
-          email: this.email
+        this.$http.post('fbsServer/auth/resetPassword', {
+          code: query.activeToken,
+          password: this.password
         }).then(() => {
           this.loading = false
-          Toast.success('找回密码邮件已发送，请注意查收！')
+          Dialog.alert({
+            message: '密码重置成功！',
+            confirmButtonText: '去登陆'
+          }).then(() => {
+            this.toPath('/login')
+          })
         }).catch((err) => {
           console.log(err)
           this.loading = false
