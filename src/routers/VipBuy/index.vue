@@ -34,6 +34,7 @@
                 round
                 type="primary"
                 class="b-button"
+                @click="buyHandler"
               >立即购买</van-button>
             </van-col>
           </van-row>
@@ -43,6 +44,7 @@
     <div v-else>
       <should-active-email/>
     </div>
+    <buy-count-down-dialog ref="buyCountDownDialog" @finish="countDownFinish"/>
   </div>
 </template>
 
@@ -50,10 +52,15 @@
 import { Toast } from 'vant'
 import { mapGetters } from 'vuex'
 import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
+import BuyCountDownDialog from '@/components/BuyCountDownDialog/index.vue'
+import openCountDown from '@/util/openCountDown'
 
 export default {
   name: 'VipBuy',
-  components: {ShouldActiveEmail},
+  components: {
+    ShouldActiveEmail,
+    BuyCountDownDialog
+  },
   data () {
     return {
       message: '',
@@ -90,6 +97,29 @@ export default {
     },
     selectCard (day) {
       this.active = day
+    },
+    buyHandler () {
+      window.trackEvent('购买', '点击购买', this.active)
+      this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
+        const data = res.data || {}
+        const open = data.open || false
+        let time = openCountDown.marketCloseDayCountDown()
+        // 开市的时间
+        if (open) {
+          time = openCountDown.marketOpenDayCountDown()
+        }
+        if (time) {
+          this.$refs.buyCountDownDialog.open(time)
+        } else {
+          this.buyWarnHandler()
+        }
+      })
+    },
+    countDownFinish () {
+      this.buyWarnHandler()
+    },
+    buyWarnHandler () {
+
     }
   }
 }

@@ -42,7 +42,6 @@ export default {
     } else {
       this.time = 0
     }
-    console.log(time)
   },
   methods: {
     openCountDownShow () {
