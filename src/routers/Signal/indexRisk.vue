@@ -85,20 +85,14 @@ export default {
             message: this.noUpdateText,
             duration: 1000 * 3
           })
-          for (let i = 0; i < record.length; i++) {
-            const item = record[i]
-            if (item.trade_date !== today) {
-              this.setListData(item)
-              return false
-            }
+          const notTodayItem = this.getNotTodayItem(record, today)
+          if (notTodayItem) {
+            this.setListData(notTodayItem)
           }
         } else {
-          for (let i = 0; i < record.length; i++) {
-            const item = record[i]
-            if (item.trade_date === today) {
-              this.setListData(item)
-              return false
-            }
+          const todayItem = this.getTodayItem(record, today)
+          if (todayItem) {
+            this.setListData(todayItem)
           }
         }
       } else {
@@ -109,6 +103,24 @@ export default {
     })
   },
   methods: {
+    getTodayItem (record, today) {
+      for (let i = 0; i < record.length; i++) {
+        const item = record[i]
+        if (item.trade_date === today) {
+          return item
+        }
+      }
+      return false
+    },
+    getNotTodayItem (record, today) {
+      for (let i = 0; i < record.length; i++) {
+        const item = record[i]
+        if (item.trade_date !== today) {
+          return item
+        }
+      }
+      return false
+    },
     setListData (data) {
       const record = data.record || []
       const list = []
