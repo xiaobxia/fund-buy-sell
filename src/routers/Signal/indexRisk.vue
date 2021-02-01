@@ -148,7 +148,7 @@ export default {
         return a.r - b.r
       })
       listGreen.sort((a, b) => {
-        return a.r - b.r
+        return b.r - a.r
       })
       this.list = list
       this.listGreen = listGreen
