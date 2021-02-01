@@ -213,6 +213,22 @@ export const asyncRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/signal',
+    component: AppLayout,
+    name: 'Signal',
+    children: [
+      {
+        path: 'indexRisk',
+        component: lazyLoading('Signal/indexRisk', false),
+        name: 'IndexRisk',
+        meta: {
+          auth: true,
+          pageName: '指数风险'
+        }
+      }
+    ]
   }
 ]
 

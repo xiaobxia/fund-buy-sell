@@ -4,6 +4,7 @@ const getters = {
   ifAddRouters: state => state.permission.ifAdd,
   // 用户信息部分
   userInfo: state => state.user.userInfo,
+  buyActive: state => state.user.buyActive,
   // app部分
   wxList: state => state.app.wxList
 }

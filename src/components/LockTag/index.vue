@@ -9,11 +9,11 @@
 <script>
 export default {
   name: 'LockTag',
-  data() {
+  data () {
     return {
     }
   },
-  created() {
+  created () {
   },
   methods: {
   }
@@ -22,7 +22,7 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "~@/style/_var.scss";
-  @import "~@/style/theme/theme-color.scss";
+  @import "~@/style/vant-theme.scss";
   .lock-tag {
     position: absolute;
     width: 10px;
@@ -49,10 +49,10 @@ export default {
       bottom: 0;
       margin: auto;
       height: 30px;
-      width: 6px;
+      width: 4px;
       border: 1px solid #fff;
       background-color: $original-light-7;
-      border-radius: 6px;
+      border-radius: 3px;
     }
   }
 </style>

@@ -116,6 +116,7 @@ export default {
     position: relative;
     z-index: 100;
     padding: 0 10px;
+    padding-bottom: 20px;
   }
   .c-l-w {
     min-height: calc(100vh - 150px);

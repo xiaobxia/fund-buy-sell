@@ -1,32 +1,10 @@
 <template>
   <div class="home-main">
-    <van-button type="primary" @click="openCountDownShow">主要按钮</van-button>
-    <van-dialog v-model="countDownShow" :show-cancel-button="false">
-      <div class="c-d-w">
-        <div class="c-d-w-h">购买开放倒计时</div>
-        <van-count-down v-if="time" :time="time">
-          <template #default="timeData">
-            <div class="c-d-w-t">
-              <span class="t-w theme-bg">{{ timeData.hours }}</span>
-              <span class="theme-text">:</span>
-              <span class="t-w theme-bg">{{ timeData.minutes }}</span>
-              <span class="theme-text">:</span>
-              <span class="t-w theme-bg">{{ timeData.seconds }}</span>
-            </div>
-          </template>
-        </van-count-down>
-        <div class="d-t">
-          <div>开放时间：</div>
-          <div>非交易日（9:00 - 22:00）</div>
-          <div>交易日（9:00 - 14:00，15:00 - 22:00）</div>
-        </div>
-      </div>
-    </van-dialog>
+    <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
   </div>
 </template>
 
 <script>
-import openCountDown from '@/util/openCountDown'
 export default {
   name: 'HomeMain',
   data () {
@@ -36,16 +14,10 @@ export default {
     }
   },
   created () {
-    const time = openCountDown.marketOpenDayCountDown()
-    if (time) {
-      this.time = time
-    } else {
-      this.time = 0
-    }
   },
   methods: {
     openCountDownShow () {
-      this.countDownShow = true
+      this.$router.push('/signal/indexRisk')
     },
     backHandler () {
       this.$router.history.go(-1)

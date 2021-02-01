@@ -58,6 +58,11 @@ body {
   min-height: calc(100vh - 46px);
 }
 
+.grey-page-full {
+  background-color: #F1F2F3;
+  min-height: 100vh;
+}
+
 .tab-view {
   margin-bottom: 90px;
 }
@@ -118,5 +123,21 @@ ul {
   }
   p {
     font-size: 40px;
+  }
+}
+
+
+.lock-tag-block-bottom {
+  position: relative;
+  .lock-tag {
+    position: absolute;
+    z-index: 100;
+    bottom: -23px;
+    &:first-child {
+      left: 12px;
+    }
+    &:last-child {
+      right: 12px;
+    }
   }
 }

@@ -54,3 +54,26 @@
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5);
 }
+
+.op-nav-bar {
+  background-color: transparent;
+  &::after {
+    display: none;
+  }
+  .van-nav-bar__title {
+    color: #fff;
+  }
+  .van-icon {
+    color: #fff;
+  }
+}
+
+.van-notify--primary {
+  color: #fff;
+}
+.van-notify--warning {
+  color: #fff;
+}
+.van-notify--danger {
+  color: #fff;
+}

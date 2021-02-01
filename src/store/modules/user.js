@@ -1,10 +1,14 @@
 const user = {
   state: {
-    userInfo: {}
+    userInfo: {},
+    buyActive: 20
   },
   mutations: {
     SET_userInfo: (state, info) => {
       state.userInfo = info
+    },
+    SET_buyActive: (state, info) => {
+      state.buyActive = info
     }
   },
   actions: {

@@ -6,7 +6,7 @@
       <div class="p-e">中国股市的股票的交易日为除节假日外的周一至周五。(AM9;30-11;30 , PM13;00-15;00) 一个交易日就是一天,股票的交易日为周一至周五。</div>
       <van-row>
         <van-col v-for="(card, index) in cardList" :key="index" span="8">
-          <div class="m-card" :class="{active: card.day === active}" @click="selectCard(card.day)">
+          <div class="m-card" :class="{active: card.day === buyActive}" @click="selectCard(card.day)">
             <div class="ti">{{card.day}}个交易日</div>
             <div class="money">
               <span>￥</span>
@@ -24,7 +24,7 @@
                 <span>合计:</span>
                 <div class="money">
                   <span>￥</span>
-                  <span class="money-t">{{getCardItem(active).money}}</span>
+                  <span class="money-t">{{getCardItem(buyActive).money}}</span>
                 </div>
               </div>
             </van-col>
@@ -72,13 +72,13 @@ export default {
         {day: 120, money: 70},
         {day: 240, money: 120}
       ],
-      active: 20,
       buyBLoading: false
     }
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'buyActive'
     ])
   },
   methods: {
@@ -96,10 +96,10 @@ export default {
       this.$router.replace('/')
     },
     selectCard (day) {
-      this.active = day
+      this.$store.commit('SET_buyActive', day)
     },
     buyHandler () {
-      window.trackEvent('购买', '点击购买', this.active)
+      window.trackEvent('购买', '点击购买', this.buyActive)
       this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
         const data = res.data || {}
         const open = data.open || false
@@ -122,7 +122,7 @@ export default {
       this.toBuyQr()
     },
     toBuyQr () {
-      this.$router.push(`/buyQr/index?days=${this.active}`)
+      this.$router.push(`/buyQr/index?days=${this.buyActive}`)
     }
   }
 }
