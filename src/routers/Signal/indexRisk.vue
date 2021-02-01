@@ -13,6 +13,7 @@
         <div class="index-list-wrap">
           <div v-for="(item, index) in list" :key="index" :style="getBg(item.color)" class="index-item">
             <span>{{item.name}}</span>
+            <span class="ri-t">安全系数:{{formatXS(item.netChangeRatio)}}</span>
           </div>
         </div>
         <lock-tag/>
@@ -26,6 +27,7 @@
         <div class="index-list-wrap">
           <div v-for="(item, index) in listGreen" :key="index" :style="getBg(item.color)" class="index-item">
             <span>{{item.name}}</span>
+            <span class="ri-t">风险系数:{{formatXS(item.netChangeRatio)}}</span>
           </div>
         </div>
       </div>
@@ -50,7 +52,9 @@ export default {
     return {
       list: [],
       listGreen: [],
-      tradeDate: ''
+      tradeDate: '',
+      noUpdate: false,
+      noUpdateText: '今日信号未更新，请耐心等待'
     }
   },
   computed: {
@@ -95,12 +99,13 @@ export default {
       this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
         const data = res.data || {}
         const open = data.open || false
-        if (!open) {
+        if (open) {
           if (moment().format('YYYY-MM-DD') !== this.tradeDate) {
             // 主要通知
+            this.noUpdate = true
             Notify({
               type: 'danger',
-              message: '今日信号未更新，请耐心等待',
+              message: this.noUpdateText,
               duration: 1000 * 3
             })
           }
@@ -109,6 +114,9 @@ export default {
     })
   },
   methods: {
+    formatXS (value) {
+      return Math.abs(value).toFixed(2)
+    },
     getBg (item) {
       return `background-color: ${item}`
     },
@@ -178,5 +186,8 @@ export default {
     color: #fff;
     font-size: 12px;
     margin-bottom: 10px;
+  }
+  .ri-t {
+    float: right;
   }
 </style>
