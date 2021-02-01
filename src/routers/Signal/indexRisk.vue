@@ -64,7 +64,7 @@ export default {
   },
   created () {
     Promise.all([
-      this.$http.get('fbsServer/riskSignal/getLastTSignal'),
+      this.$http.get('fbsServer/user/getLastTSignal'),
       this.$http.get('fbsServer/user/getMarketOpen')
     ]).then((resList) => {
       const today = moment().format('YYYY-MM-DD')
