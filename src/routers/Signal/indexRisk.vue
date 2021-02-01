@@ -42,6 +42,7 @@ import { mapGetters } from 'vuex'
 import LockTag from '@/components/LockTag'
 import moment from 'moment'
 import { Notify } from 'vant'
+import dateUtil from '@/util/dateUtil'
 
 export default {
   name: 'IndexRisk',
@@ -62,8 +63,53 @@ export default {
     ])
   },
   created () {
-    this.$http.get('fbsServer/riskSignal/getLastSignal').then((res) => {
-      const data = res.data
+    Promise.all([
+      this.$http.get('fbsServer/riskSignal/getLastTSignal'),
+      this.$http.get('fbsServer/user/getMarketOpen')
+    ]).then((resList) => {
+      const today = moment().format('YYYY-MM-DD')
+      const signalData = resList[0].data
+      const record = signalData.record || []
+      // 开盘部分
+      const openData = resList[1].data || {}
+      const open = openData.open || false
+      if (open) {
+        const d = dateUtil.getDate()
+        const hour = d.getHours()
+        const minute = d.getMinutes()
+        if (hour < 14 || (hour === 14 && minute < 30)) {
+          // 主要通知
+          this.noUpdate = true
+          Notify({
+            type: 'danger',
+            message: this.noUpdateText,
+            duration: 1000 * 3
+          })
+          for (let i = 0; i < record.length; i++) {
+            const item = record[i]
+            if (item.trade_date !== today) {
+              this.setListData(item)
+              return false
+            }
+          }
+        } else {
+          for (let i = 0; i < record.length; i++) {
+            const item = record[i]
+            if (item.trade_date === today) {
+              this.setListData(item)
+              return false
+            }
+          }
+        }
+      } else {
+        if (record[0]) {
+          this.setListData(record[0])
+        }
+      }
+    })
+  },
+  methods: {
+    setListData (data) {
       const record = data.record || []
       const list = []
       const listGreen = []
@@ -95,25 +141,7 @@ export default {
       this.list = list
       this.listGreen = listGreen
       this.tradeDate = data.trade_date
-    }).then(() => {
-      this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
-        const data = res.data || {}
-        const open = data.open || false
-        if (open) {
-          if (moment().format('YYYY-MM-DD') !== this.tradeDate) {
-            // 主要通知
-            this.noUpdate = true
-            Notify({
-              type: 'danger',
-              message: this.noUpdateText,
-              duration: 1000 * 3
-            })
-          }
-        }
-      })
-    })
-  },
-  methods: {
+    },
     formatXS (value) {
       return Math.abs(value).toFixed(2)
     },
