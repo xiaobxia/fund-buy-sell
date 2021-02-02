@@ -1,7 +1,9 @@
 <template>
   <div class="home-main">
+    <div class="p-t">策略工具</div>
     <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
     <van-button type="primary" @click="toToday">今日涨跌幅</van-button>
+    <van-button type="primary" @click="toBuySell">买卖信号</van-button>
   </div>
 </template>
 
@@ -22,6 +24,9 @@ export default {
     },
     toToday () {
       this.$router.push('/signal/indexTodayRate')
+    },
+    toBuySell () {
+      this.$router.push('/signal/buySell')
     },
     backHandler () {
       this.$router.history.go(-1)
@@ -56,5 +61,11 @@ export default {
       margin-top: 20px;
       font-size: 12px;
     }
+  }
+  .home-main {
+    padding: 10px 10px;
+  }
+  .p-t {
+    font-size: 26px;
   }
 </style>

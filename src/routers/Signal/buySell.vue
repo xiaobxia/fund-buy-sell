@@ -3,14 +3,26 @@
     <van-nav-bar class="p-h op-nav-bar" title="操作参谋" left-arrow @click-left="backHandler" />
     <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
     <div class="con-w b-10">
-      <div class="h-t">数据日期：{{tradeDate}}</div>
-      <div class="title-info-block round shadow lock-tag-block-bottom">
+      <div class="h-t">参谋日期：{{tradeDate}}</div>
+      <div
+        v-for="(item, index) in list"
+        :key="index"
+        class="title-info-block round shadow lock-tag-block-bottom"
+        :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
+      >
+        <div class="title-wrap">
+          <span class="title-icon"></span>
+          <span class="t-t">{{nameMap[item.code]}}</span>
+        </div>
         <div class="index-list-wrap">
-          <div v-for="(item, index) in list" :key="index" class="index-item">
-            <span>{{nameMap[item.code]}}</span>
+          <div class="index-item">
             <span class="ri-t" :class="$stockNumberClass(item.netChangeRatio)">{{item.netChangeRatio}}%</span>
           </div>
         </div>
+        <template v-if="index !== list.length -1">
+          <lock-tag/>
+          <lock-tag/>
+        </template>
       </div>
     </div>
   </div>
