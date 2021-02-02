@@ -13,10 +13,11 @@
         <div class="title-wrap">
           <span class="title-icon"></span>
           <span class="t-t">{{nameMap[item.code]}}</span>
+          <span style="float: right" :class="$stockNumberClass(item.netChangeRatio)">{{item.netChangeRatio}}%</span>
         </div>
         <div class="index-list-wrap">
           <div class="index-item">
-            <span class="ri-t" :class="$stockNumberClass(item.netChangeRatio)">{{item.netChangeRatio}}%</span>
+
           </div>
         </div>
         <template v-if="index !== list.length -1">
