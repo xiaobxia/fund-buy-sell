@@ -1,6 +1,7 @@
 <template>
   <div class="home-main">
     <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
+    <van-button type="primary" @click="toToday">今日涨跌幅</van-button>
   </div>
 </template>
 
@@ -18,6 +19,9 @@ export default {
   methods: {
     openCountDownShow () {
       this.$router.push('/signal/indexRisk')
+    },
+    toToday () {
+      this.$router.push('/signal/indexTodayRate')
     },
     backHandler () {
       this.$router.history.go(-1)

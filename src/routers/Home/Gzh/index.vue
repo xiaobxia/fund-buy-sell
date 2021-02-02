@@ -23,7 +23,7 @@
               @click="toOther(item.news_item[0].url)"
             >
               <div>
-                <div class="rt-i-i">
+                <div class="rt-i-i i-w">
                   <img :src="item.news_item[0].thumb_url" alt="">
                 </div>
                 <div class="rt-i-t">
@@ -137,6 +137,10 @@ export default {
         width: 100%;
         height: 100%;
       }
+    }
+    .i-w {
+      overflow: hidden;
+      border-radius: 4px;
     }
     .rt-i-t {
       vertical-align: top;

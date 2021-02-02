@@ -227,6 +227,15 @@ export const asyncRouterMap = [
           auth: true,
           pageName: '指数风险'
         }
+      },
+      {
+        path: 'indexTodayRate',
+        component: lazyLoading('Signal/indexTodayRate', false),
+        name: 'IndexTodayRate',
+        meta: {
+          auth: true,
+          pageName: '今日涨跌幅'
+        }
       }
     ]
   }
