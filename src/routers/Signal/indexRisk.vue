@@ -1,6 +1,6 @@
 <template>
   <div class="index-risk grey-page-full">
-    <van-nav-bar class="p-h op-nav-bar" title="指数风险" left-arrow @click-left="backHandler" />
+    <van-nav-bar class="p-h op-nav-bar" title="风险分布" left-arrow @click-left="backHandler" />
     <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
     <div class="con-w">
       <div class="h-t">信号日期：{{tradeDate}}</div>

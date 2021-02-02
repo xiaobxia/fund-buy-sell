@@ -1,6 +1,6 @@
 <template>
   <div class="index-rate grey-page-full">
-    <van-nav-bar class="p-h op-nav-bar" title="涨跌幅度" left-arrow @click-left="backHandler" />
+    <van-nav-bar class="p-h op-nav-bar" title="操作参谋" left-arrow @click-left="backHandler" />
     <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
     <div class="con-w b-10">
       <div class="h-t">数据日期：{{tradeDate}}</div>
@@ -29,7 +29,7 @@ indexList.forEach((v) => {
 })
 
 export default {
-  name: 'IndexTodayRate',
+  name: 'IndexBuySell',
   components: {
     LockTag
   },

@@ -236,6 +236,15 @@ export const asyncRouterMap = [
           auth: true,
           pageName: '今日涨跌幅'
         }
+      },
+      {
+        path: 'buySell',
+        component: lazyLoading('Signal/buySell', false),
+        name: 'IndexBuySell',
+        meta: {
+          auth: true,
+          pageName: '买卖信号'
+        }
       }
     ]
   }
