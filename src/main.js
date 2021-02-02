@@ -50,6 +50,13 @@ registerUtil(fileUtil)
 // 数字工具
 registerUtil(numberUtil)
 
+Vue.prototype.$stockNumberClass = function (number) {
+  if (!number) {
+    return ''
+  }
+  return number < 0 ? 'green-text' : 'red-text'
+}
+
 environmentUtil.setAdaptive()
 
 Vue.prototype.$webUrl = 'http://funduse.xiaobxia.com/#'

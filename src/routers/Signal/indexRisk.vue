@@ -204,6 +204,7 @@ export default {
     border-radius: 8px;
     padding: 0 10px;
     margin-bottom: 4px;
+    background-color: #F1F2F3;
     &:last-child {
       margin: 0;
     }
