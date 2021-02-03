@@ -6,7 +6,10 @@ import urlUtil from '@/util/urlUtil'
 import router from '../router/index'
 import { Toast } from 'vant'
 
-const axiosHttp = rateLimit(axios.create(), { maxRequests: 20, perMilliseconds: 1000 * 10})
+const axiosHttp = rateLimit(axios.create(), {
+  maxRequests: 20,
+  perMilliseconds: 1000 * 10}
+)
 
 let basePath = '/'
 
