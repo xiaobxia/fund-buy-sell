@@ -4,6 +4,7 @@
     <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
     <van-button type="primary" @click="toToday">今日涨跌幅</van-button>
     <van-button type="primary" @click="toBuySell">买卖信号</van-button>
+    <van-button type="primary" @click="toFixBuy">定投参谋</van-button>
   </div>
 </template>
 
@@ -27,6 +28,9 @@ export default {
     },
     toBuySell () {
       this.$router.push('/signal/buySell')
+    },
+    toFixBuy () {
+      this.$router.push('/signal/fixBuy')
     },
     backHandler () {
       this.$router.history.go(-1)

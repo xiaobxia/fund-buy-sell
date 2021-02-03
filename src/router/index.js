@@ -296,6 +296,15 @@ export const asyncRouterMap = [
           auth: true,
           pageName: '买卖信号'
         }
+      },
+      {
+        path: 'fixBuy',
+        component: lazyLoading('Signal/fixBuy', false),
+        name: 'IndexFixBuy',
+        meta: {
+          auth: true,
+          pageName: '定投参谋'
+        }
       }
     ]
   }
