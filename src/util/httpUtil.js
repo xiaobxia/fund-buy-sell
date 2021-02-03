@@ -1,25 +1,28 @@
 import axios from 'axios'
+import rateLimit from 'axios-rate-limit'
 import qs from 'qs'
 import storageUtil from '@/util/storageUtil'
 import urlUtil from '@/util/urlUtil'
 import router from '../router/index'
 import { Toast } from 'vant'
 
+const axiosHttp = rateLimit(axios.create(), { maxRequests: 20, perMilliseconds: 1000 * 10})
+
 let basePath = '/'
 
 // 默认连接地址，只在调试时有用
 if (process.env.NODE_ENV === 'development') {
-  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'local'}${basePath}`
+  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'online'}${basePath}`
 }
 
-axios.interceptors.request.use(function (config) {
+axiosHttp.interceptors.request.use(function (config) {
   config.headers.token = window._token || localStorage.getItem('token') || ''
   return config
 }, function (error) {
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use(function (response) {
+axiosHttp.interceptors.response.use(function (response) {
   if (response.data.success === false) {
     if (response.data.code === 401) {
       storageUtil.setData('UserInfo', {
@@ -54,7 +57,7 @@ const Http = {
       query = { timestamp: new Date().getTime() }
     }
     queryString = qs.stringify(query)
-    return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => data.data)
+    return axiosHttp.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => data.data)
   },
   getWithCache (url, query, cache, options) {
     let queryString = ''
@@ -78,7 +81,7 @@ const Http = {
         })
       }
     }
-    return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => {
+    return axiosHttp.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => {
       cacheData = {
         time: Date.now(),
         data: data.data
@@ -95,28 +98,28 @@ const Http = {
     } else {
       queryString = qs.stringify({timestamp: new Date().getTime()})
     }
-    return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options)
+    return axiosHttp.get(makeUrl(url + (queryString ? '?' + queryString : '')), options)
   },
   post (url, param, options) {
-    return axios.post(makeUrl(url), qs.stringify(param), options).then(data => data.data)
+    return axiosHttp.post(makeUrl(url), qs.stringify(param), options).then(data => data.data)
   },
   postRaw (url, param, options) {
-    return axios.post(makeUrl(url), qs.stringify(param), options)
+    return axiosHttp.post(makeUrl(url), qs.stringify(param), options)
   },
   postFormData (url, param, options) {
-    return axios.post(makeUrl(url), param, options).then(data => data.data)
+    return axiosHttp.post(makeUrl(url), param, options).then(data => data.data)
   },
   postFormDataRaw (url, param, options) {
-    return axios.post(makeUrl(url), param, options)
+    return axiosHttp.post(makeUrl(url), param, options)
   },
   delete (url, options) {
-    return axios.delete(makeUrl(url), options).then(data => data.data)
+    return axiosHttp.delete(makeUrl(url), options).then(data => data.data)
   },
   deleteRaw (url, options) {
-    return axios.delete(makeUrl(url), options)
+    return axiosHttp.delete(makeUrl(url), options)
   },
   jsonp (url, options) {
-    return axios.jsonp(makeUrl(url), options)
+    return axiosHttp.jsonp(makeUrl(url), options)
   },
   generateUrl (url) {
     return makeUrl(url)
