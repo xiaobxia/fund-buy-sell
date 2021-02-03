@@ -7,7 +7,7 @@ const user = {
   mutations: {
     SET_userInfo: (state, info) => {
       state.userInfo = info
-      state.isVipUser = info.email_active === true && info.vip_days
+      state.isVipUser = info.email_active === true && (info.vip_days && info.vip_days > 0)
     },
     SET_buyActive: (state, info) => {
       state.buyActive = info
