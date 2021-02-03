@@ -105,7 +105,25 @@ export const asyncRouterMap = [
         component: lazyLoading('Schedule'),
         name: 'ScheduleIndex',
         meta: {
-          auth: true
+          auth: true,
+          pageName: '管理员-手动定时任务'
+        }
+      }
+    ]
+  },
+  {
+    path: '/vipAdmin',
+    component: AppLayout,
+    name: 'VipAdmin',
+    redirect: '/vipAdmin/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('VipAdmin'),
+        name: 'VipAdminIndex',
+        meta: {
+          auth: true,
+          pageName: '管理员-VIP管理'
         }
       }
     ]
