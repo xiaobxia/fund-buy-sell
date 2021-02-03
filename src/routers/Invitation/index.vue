@@ -54,9 +54,6 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <should-active-email/>
-    </div>
   </div>
 </template>
 
@@ -64,11 +61,11 @@
 import { mapGetters } from 'vuex'
 import QRCode from 'qrcode'
 import { Toast } from 'vant'
-import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
 
 export default {
   name: 'Invitation',
-  components: {ShouldActiveEmail},
+  components: {
+  },
   data () {
     return {
       qrUrl: '',
@@ -78,11 +75,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'isVipUser'
     ])
   },
   created () {
-    if (this.userInfo.email_active === true) {
+    if (this.isVipUser === true) {
       const invitationUrl = this.$webUrl + `/register?inv=${this.userInfo.email}`
       this.invitationUrl = invitationUrl
       QRCode.toDataURL(invitationUrl).then(url => {
@@ -91,9 +89,18 @@ export default {
       this.$http.get('fbsServer/log/getInvitationLogByToken').then((res) => {
         this.list = res.data || []
       })
+    } else {
+      this.jump()
     }
   },
   methods: {
+    jump () {
+      if (!this.userInfo.email_active) {
+        this.$router.replace('/emailWarn/index')
+      } else if (!this.userInfo.vip_days) {
+        this.$router.replace('/vipBuy/index')
+      }
+    },
     backHandler () {
       this.$router.history.go(-1)
     },

@@ -95,6 +95,23 @@ export const constantRouterMap = [
 
 export const asyncRouterMap = [
   {
+    path: '/emailWarn',
+    component: AppLayout,
+    name: 'EmailWarn',
+    redirect: '/emailWarn/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('EmailWarn'),
+        name: 'EmailWarnIndex',
+        meta: {
+          auth: true,
+          pageName: '提示邮箱验证'
+        }
+      }
+    ]
+  },
+  {
     path: '/schedule',
     component: AppLayout,
     name: 'Schedule',

@@ -1,37 +1,39 @@
 <template>
   <div class="index-risk grey-page-full">
     <van-nav-bar class="p-h op-nav-bar" title="风险分布" left-arrow @click-left="backHandler" />
-    <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
-    <div class="con-w">
-      <div class="h-t">信号日期：{{tradeDate}}</div>
-      <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
-      <div class="title-info-block round shadow lock-tag-block-bottom b-10">
-        <div class="title-wrap">
-          <span class="title-icon"></span>
-          <span class="t-t">安全区</span>
+    <div v-if="userInfo.email_active">
+      <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
+      <div class="con-w">
+        <div class="h-t">信号日期：{{tradeDate}}</div>
+        <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
+        <div class="title-info-block round shadow lock-tag-block-bottom b-10">
+          <div class="title-wrap">
+            <span class="title-icon"></span>
+            <span class="t-t">安全区</span>
+          </div>
+          <div class="index-list-wrap">
+            <div v-for="(item, index) in list" :key="index" :style="getBg(item.color)" class="index-item">
+              <span>{{item.name}}</span>
+              <span class="ri-t">安全系数:{{formatXS(item.netChangeRatio)}}</span>
+            </div>
+          </div>
+          <lock-tag/>
+          <lock-tag/>
         </div>
-        <div class="index-list-wrap">
-          <div v-for="(item, index) in list" :key="index" :style="getBg(item.color)" class="index-item">
-            <span>{{item.name}}</span>
-            <span class="ri-t">安全系数:{{formatXS(item.netChangeRatio)}}</span>
+        <div class="title-info-block round shadow t-10">
+          <div class="title-wrap">
+            <span class="title-icon"></span>
+            <span class="t-t">风控区</span>
+          </div>
+          <div class="index-list-wrap">
+            <div v-for="(item, index) in listGreen" :key="index" :style="getBg(item.color)" class="index-item">
+              <span>{{item.name}}</span>
+              <span class="ri-t">风险系数:{{formatXS(item.netChangeRatio)}}</span>
+            </div>
           </div>
         </div>
-        <lock-tag/>
-        <lock-tag/>
+        <div class="b-10"></div>
       </div>
-      <div class="title-info-block round shadow t-10">
-        <div class="title-wrap">
-          <span class="title-icon"></span>
-          <span class="t-t">风控区</span>
-        </div>
-        <div class="index-list-wrap">
-          <div v-for="(item, index) in listGreen" :key="index" :style="getBg(item.color)" class="index-item">
-            <span>{{item.name}}</span>
-            <span class="ri-t">风险系数:{{formatXS(item.netChangeRatio)}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="b-10"></div>
     </div>
   </div>
 </template>
@@ -60,49 +62,62 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'userInfo',
+      'isVipUser'
     ])
   },
   created () {
-    Promise.all([
-      this.$http.get('fbsServer/user/getLastTSignal'),
-      this.$http.get('fbsServer/user/getMarketOpen')
-    ]).then((resList) => {
-      const today = moment().format('YYYY-MM-DD')
-      const signalData = resList[0].data
-      const record = signalData.record || []
-      // 开盘部分
-      const openData = resList[1].data || {}
-      const open = openData.open || false
-      if (open) {
-        const d = dateUtil.getDate()
-        const hour = d.getHours()
-        const minute = d.getMinutes()
-        if (hour < 14 || (hour === 14 && minute < 30)) {
-          // 主要通知
-          this.noUpdate = true
-          Notify({
-            type: 'danger',
-            message: this.noUpdateText,
-            duration: 1000 * 3
-          })
-          const notTodayItem = this.getNotTodayItem(record, today)
-          if (notTodayItem) {
-            this.setListData(notTodayItem)
+    if (this.isVipUser === true) {
+      Promise.all([
+        this.$http.get('fbsServer/user/getLastTSignal'),
+        this.$http.get('fbsServer/user/getMarketOpen')
+      ]).then((resList) => {
+        const today = moment().format('YYYY-MM-DD')
+        const signalData = resList[0].data
+        const record = signalData.record || []
+        // 开盘部分
+        const openData = resList[1].data || {}
+        const open = openData.open || false
+        if (open) {
+          const d = dateUtil.getDate()
+          const hour = d.getHours()
+          const minute = d.getMinutes()
+          if (hour < 14 || (hour === 14 && minute < 30)) {
+            // 主要通知
+            this.noUpdate = true
+            Notify({
+              type: 'danger',
+              message: this.noUpdateText,
+              duration: 1000 * 3
+            })
+            const notTodayItem = this.getNotTodayItem(record, today)
+            if (notTodayItem) {
+              this.setListData(notTodayItem)
+            }
+          } else {
+            const todayItem = this.getTodayItem(record, today)
+            if (todayItem) {
+              this.setListData(todayItem)
+            }
           }
         } else {
-          const todayItem = this.getTodayItem(record, today)
-          if (todayItem) {
-            this.setListData(todayItem)
+          if (record[0]) {
+            this.setListData(record[0])
           }
         }
-      } else {
-        if (record[0]) {
-          this.setListData(record[0])
-        }
-      }
-    })
+      })
+    } else {
+      this.jump()
+    }
   },
   methods: {
+    jump () {
+      if (!this.userInfo.email_active) {
+        this.$router.replace('/emailWarn/index')
+      } else if (!this.userInfo.vip_days) {
+        this.$router.replace('/vipBuy/index')
+      }
+    },
     getTodayItem (record, today) {
       for (let i = 0; i < record.length; i++) {
         const item = record[i]
