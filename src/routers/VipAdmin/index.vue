@@ -37,6 +37,7 @@
       <van-popup v-model="showPicker" position="bottom">
         <van-picker
           show-toolbar
+          :item-height="itemHeight"
           :columns="columns"
           @confirm="onConfirm"
           @cancel="showPicker = false"
@@ -68,7 +69,8 @@ export default {
       days: '',
       showPicker: false,
       columns: [1, 20, 60, 120, 240],
-      userDetail: {}
+      userDetail: {},
+      itemHeight: (72 / 75) * window.adaptive.fontSize
     }
   },
   watch: {
