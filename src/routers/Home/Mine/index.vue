@@ -32,6 +32,9 @@
         </div>
       </van-cell>
       <van-cell title="关于我们" is-link to="/about" />
+      <template v-if="isAdmin">
+        <van-cell title="定时任务手动" is-link to="/schedule" />
+      </template>
     </div>
     <div class="p-b">
       <van-button
@@ -60,7 +63,11 @@ export default {
   computed: {
     ...mapGetters([
       'userInfo'
-    ])
+    ]),
+    isAdmin () {
+      const roles = this.userInfo.roles
+      return roles && (roles.indexOf('admin') !== -1)
+    }
   },
   created () {
   },

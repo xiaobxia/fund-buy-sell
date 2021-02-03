@@ -95,6 +95,22 @@ export const constantRouterMap = [
 
 export const asyncRouterMap = [
   {
+    path: '/schedule',
+    component: AppLayout,
+    name: 'Schedule',
+    redirect: '/schedule/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('Schedule'),
+        name: 'ScheduleIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
+  },
+  {
     path: '/home',
     component: AppLayout,
     name: 'Home',
