@@ -11,7 +11,7 @@
             <div v-for="(item, index) in list" :key="index" class="index-item">
               <span>{{nameKeyMap[item.key]}}</span>
               <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
-              <div class="buy-tag">买入20份</div>
+              <div class="buy-tag">买入{{item.buyNum}}份</div>
             </div>
           </div>
           <signal-count-down ref="signalCountDown" @finish="querySignal"/>
