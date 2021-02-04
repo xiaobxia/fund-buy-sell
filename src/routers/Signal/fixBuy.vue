@@ -20,7 +20,7 @@
               <div class="theme-text">无信号</div>
             </div>
           </div>
-          <signal-count-down ref="signalCountDown" @finish="querySignal"/>
+          <signal-count-down ref="signalCountDown" @finish="openReQuery"/>
         </div>
       </div>
     </div>

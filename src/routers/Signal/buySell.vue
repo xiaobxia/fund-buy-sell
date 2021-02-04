@@ -6,26 +6,31 @@
       <div class="con-w b-10">
         <div class="h-t">信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
-        <div
-          v-for="(item, index) in list"
-          :key="index"
-          class="title-info-block round shadow lock-tag-block-bottom"
-          :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
-        >
-          <div class="title-wrap">
-            <span class="title-icon"></span>
-            <span class="t-t">{{nameMap[item.code]}}</span>
-            <span style="float: right" :class="$stockNumberClass(item.netChangeRatio)">{{item.netChangeRatio}}%</span>
-          </div>
-          <div class="index-list-wrap">
-            <div class="index-item">
-
+        <div v-if="open">
+          <div
+            v-for="(item, index) in list"
+            :key="index"
+            class="title-info-block round shadow lock-tag-block-bottom"
+            :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
+          >
+            <div class="title-wrap">
+              <span class="title-icon"></span>
+              <span class="t-t">{{nameKeyMap[item.key]}}</span>
+              <span style="float: right" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
             </div>
+            <div class="index-list-wrap">
+              <div class="index-item">
+
+              </div>
+            </div>
+            <template v-if="index !== list.length -1">
+              <lock-tag/>
+              <lock-tag/>
+            </template>
           </div>
-          <template v-if="index !== list.length -1">
-            <lock-tag/>
-            <lock-tag/>
-          </template>
+        </div>
+        <div v-else class="title-info-block round shadow lock-tag-block-bottom n-w" style="margin-bottom: 0">
+          <signal-count-down ref="signalCountDown" @finish="openReQuery"/>
         </div>
       </div>
     </div>
@@ -35,19 +40,24 @@
 <script>
 import { mapGetters } from 'vuex'
 import LockTag from '@/components/LockTag'
-import { Notify } from 'vant'
-import themeUtil from '@/util/themeUtil.js'
+import SignalCountDown from '@/components/SignalCountDown'
 import indexList from '@/common/indexList'
+import openCountDown from '@/util/openCountDown'
 
 const nameMap = {}
+const nameKeyMap = {}
+const codeKeyMap = {}
 indexList.forEach((v) => {
+  codeKeyMap[v.key] = v.code
   nameMap[v.code] = v.name
+  nameKeyMap[v.key] = v.name
 })
 
 export default {
   name: 'IndexBuySell',
   components: {
-    LockTag
+    LockTag,
+    SignalCountDown
   },
   data () {
     return {
@@ -56,7 +66,10 @@ export default {
       tradeDate: '',
       noUpdate: false,
       noUpdateText: '',
-      nameMap
+      nameMap,
+      nameKeyMap,
+      codeKeyMap,
+      open: false
     }
   },
   computed: {
@@ -67,8 +80,19 @@ export default {
   },
   created () {
     if (this.isVipUser === true) {
-      this.$http.get('fbsServer/user/getIndexRate').then((res) => {
-        this.setListData(res.data)
+      this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
+        // 开盘部分
+        const openData = res.data || {}
+        return openData.open || false
+      }).then((open) => {
+        const diff = openCountDown.signalOpenCountDown()
+        if (open && diff) {
+          this.open = false
+          this.$refs.signalCountDown.open(diff)
+        } else {
+          this.open = true
+          this.querySignal()
+        }
       })
     } else {
       this.jump()
@@ -82,32 +106,36 @@ export default {
         this.$router.replace('/vipBuy/index')
       }
     },
+    openReQuery () {
+      this.querySignal()
+      this.open = true
+    },
+    querySignal () {
+      Promise.all([
+        this.$http.get('fbsServer/user/getIndexRate'),
+        this.$http.get('fbsServer/user/getLastBSSignal')
+      ]).then((resList) => {
+        const indexRateDada = resList[0].data
+        const signalDada = resList[1].data
+        this.tradeDate = signalDada.trade_date
+        const record = indexRateDada.record || []
+        let map = {}
+        record.forEach((v) => {
+          map[v.code] = v.netChangeRatio
+        })
+        const list = signalDada.band_record || []
+        const newList = []
+        list.forEach((v) => {
+          if (v.flag !== undefined) {
+            v.rate = map[this.codeKeyMap[v.key]]
+            newList.push(v)
+          }
+        })
+        this.list = newList
+      })
+    },
     setListData (data) {
-      const record = data.record || []
-      const list = []
-      record.forEach((v) => {
-        let r = (Math.abs(v.netChangeRatio) * 20)
-        if (r > 90) {
-          r = 90
-        }
-        if (r < 10) {
-          r = 10
-        }
-        r = 100 - r
-        v.r = r
-        // 越大越淡
-        if (v.netChangeRatio > 0) {
-          v.color = themeUtil.tintColor('F56C6C', Number((r / 100).toFixed(2)))
-          list.push(v)
-        } else {
-          v.color = themeUtil.tintColor('67C23A', Number((r / 100).toFixed(2)))
-          list.push(v)
-        }
-      })
-      list.sort((a, b) => {
-        return b.netChangeRatio - a.netChangeRatio
-      })
-      this.list = list
+      this.list = data.band_record || []
       this.tradeDate = data.trade_date
     },
     onLoad () {
@@ -183,5 +211,8 @@ export default {
   }
   .ri-t {
     float: right;
+  }
+  .n-w {
+    min-height: calc(100vh - 170px);
   }
 </style>
