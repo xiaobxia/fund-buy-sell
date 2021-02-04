@@ -7,11 +7,17 @@
         <div class="h-t">参谋日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div class="title-info-block round shadow lock-tag-block-bottom" style="margin-bottom: 0">
-          <div class="index-list-wrap" v-if="list.length > 0">
-            <div v-for="(item, index) in list" :key="index" class="index-item">
-              <span>{{nameKeyMap[item.key]}}</span>
-              <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
-              <div class="buy-tag">买入{{item.buyNum}}份</div>
+          <div class="index-list-wrap" v-if="open">
+            <div v-if="list.length > 0">
+              <div v-for="(item, index) in list" :key="index" class="index-item">
+                <span>{{nameKeyMap[item.key]}}</span>
+                <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
+                <div class="buy-tag">买入{{item.buyNum}}份</div>
+              </div>
+            </div>
+            <div v-else class="r-i-w">
+              <img src="../../assets/result/空.png" alt="">
+              <div class="theme-text">无信号</div>
             </div>
           </div>
           <signal-count-down ref="signalCountDown" @finish="querySignal"/>
@@ -52,7 +58,8 @@ export default {
       noUpdateText: '今日信号未更新，请耐心等待',
       nameMap,
       nameKeyMap,
-      codeKeyMap
+      codeKeyMap,
+      open: false
     }
   },
   computed: {
@@ -70,8 +77,10 @@ export default {
       }).then((open) => {
         const diff = openCountDown.signalOpenCountDown()
         if (open && diff) {
+          this.open = false
           this.$refs.signalCountDown.open(diff)
         } else {
+          this.open = true
           this.querySignal()
         }
       })
@@ -86,6 +95,10 @@ export default {
       } else if (!this.userInfo.vip_days) {
         this.$router.replace('/vipBuy/index')
       }
+    },
+    openReQuery () {
+      this.querySignal()
+      this.open = true
     },
     querySignal () {
       Promise.all([
@@ -204,5 +217,12 @@ export default {
   }
   .ri-t {
     float: right;
+  }
+  .r-i-w {
+    margin-top: 10vh;
+    text-align: center;
+    img {
+      width: 100px;
+    }
   }
 </style>
