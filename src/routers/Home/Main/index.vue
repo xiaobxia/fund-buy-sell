@@ -4,7 +4,7 @@
     <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
     <van-button type="primary" @click="toToday">今日涨跌幅</van-button>
     <van-button type="primary" @click="toBuySell">买卖信号</van-button>
-    <van-button type="primary" @click="toFixBuy">定投参谋</van-button>
+    <van-button type="primary" @click="toFixBuy">定投信号</van-button>
   </div>
 </template>
 

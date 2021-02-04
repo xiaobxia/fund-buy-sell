@@ -1,10 +1,10 @@
 <template>
   <div class="index-rate grey-page-full">
-    <van-nav-bar class="p-h op-nav-bar" title="定投参谋" left-arrow @click-left="backHandler" />
+    <van-nav-bar class="p-h op-nav-bar" title="定投信号" left-arrow @click-left="backHandler" />
     <div v-if="userInfo.email_active">
       <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
       <div class="con-w b-10">
-        <div class="h-t">参谋日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
+        <div class="h-t">信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div class="title-info-block round shadow lock-tag-block-bottom" style="margin-bottom: 0">
           <div class="index-list-wrap" v-if="open">

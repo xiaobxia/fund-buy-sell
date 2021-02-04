@@ -303,7 +303,7 @@ export const asyncRouterMap = [
         name: 'IndexFixBuy',
         meta: {
           auth: true,
-          pageName: '定投参谋'
+          pageName: '定投信号'
         }
       }
     ]
