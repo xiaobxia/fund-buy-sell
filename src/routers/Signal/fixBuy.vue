@@ -11,6 +11,7 @@
             <div v-for="(item, index) in list" :key="index" class="index-item">
               <span>{{nameKeyMap[item.key]}}</span>
               <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
+              <div class="buy-tag">买入20份</div>
             </div>
           </div>
         </div>
@@ -45,7 +46,7 @@ export default {
       listGreen: [],
       tradeDate: '',
       noUpdate: false,
-      noUpdateText: '',
+      noUpdateText: '今日信号未更新，请耐心等待',
       nameMap,
       nameKeyMap
     }
@@ -174,6 +175,7 @@ export default {
     color: #484848;
   }
   .index-item {
+    position: relative;
     overflow: hidden;
     height: 32px;
     line-height: 32px;
@@ -183,6 +185,22 @@ export default {
     background-color: #F1F2F3;
     &:last-child {
       margin: 0;
+    }
+    .buy-tag {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 22px;
+      width: 70px;
+      line-height: 22px;
+      border-radius: 22px;
+      background-color: rgb(244, 51, 60);
+      color: #fff;
+      font-size: 13px;
+      text-align: center;
     }
   }
   .title-info-block {
