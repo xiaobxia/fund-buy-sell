@@ -180,6 +180,7 @@ export default {
     padding: 0 10px;
   }
   .n-t {
+    position: relative;
     min-height: calc(100vh - 170px);
   }
   .c-l-w {
@@ -228,7 +229,14 @@ export default {
     min-height: calc(100vh - 170px);
   }
   .l-w {
-    margin-top: 10vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 40px;
     text-align: center;
   }
 </style>
