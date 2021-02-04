@@ -5,26 +5,19 @@
       <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
       <div class="con-w b-10">
         <div class="h-t">参谋日期：{{tradeDate}}</div>
+        <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div
           v-for="(item, index) in list"
           :key="index"
           class="title-info-block round shadow lock-tag-block-bottom"
           :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
         >
-          <div class="title-wrap">
-            <span class="title-icon"></span>
-            <span class="t-t">{{nameMap[item.code]}}</span>
-            <span style="float: right" :class="$stockNumberClass(item.netChangeRatio)">{{item.netChangeRatio}}%</span>
-          </div>
           <div class="index-list-wrap">
-            <div class="index-item">
-
+            <div v-for="(item, index) in list" :key="index" class="index-item">
+              <span>{{nameKeyMap[item.key]}}</span>
+              <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
             </div>
           </div>
-          <template v-if="index !== list.length -1">
-            <lock-tag/>
-            <lock-tag/>
-          </template>
         </div>
       </div>
     </div>
@@ -34,13 +27,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import LockTag from '@/components/LockTag'
+import moment from 'moment'
+import dateUtil from '@/util/dateUtil'
 import { Notify } from 'vant'
-import themeUtil from '@/util/themeUtil.js'
 import indexList from '@/common/indexList'
 
 const nameMap = {}
+const nameKeyMap = {}
 indexList.forEach((v) => {
   nameMap[v.code] = v.name
+  nameKeyMap[v.key] = v.name
 })
 
 export default {
@@ -55,7 +51,8 @@ export default {
       tradeDate: '',
       noUpdate: false,
       noUpdateText: '',
-      nameMap
+      nameMap,
+      nameKeyMap
     }
   },
   computed: {
@@ -66,8 +63,43 @@ export default {
   },
   created () {
     if (this.isVipUser === true) {
-      this.$http.get('fbsServer/user/getIndexRate').then((res) => {
-        this.setListData(res.data)
+      Promise.all([
+        this.$http.get('fbsServer/user/getLastBSTSignal'),
+        this.$http.get('fbsServer/user/getMarketOpen')
+      ]).then((resList) => {
+        const today = moment().format('YYYY-MM-DD')
+        const signalData = resList[0].data
+        const record = signalData.record || []
+        // 开盘部分
+        const openData = resList[1].data || {}
+        const open = openData.open || false
+        if (open) {
+          const d = dateUtil.getDate()
+          const hour = d.getHours()
+          const minute = d.getMinutes()
+          if (hour < 14 || (hour === 14 && minute < 30)) {
+            // 主要通知
+            this.noUpdate = true
+            Notify({
+              type: 'danger',
+              message: this.noUpdateText,
+              duration: 1000 * 3
+            })
+            const notTodayItem = this.getNotTodayItem(record, today)
+            if (notTodayItem) {
+              this.setListData(notTodayItem)
+            }
+          } else {
+            const todayItem = this.getTodayItem(record, today)
+            if (todayItem) {
+              this.setListData(todayItem)
+            }
+          }
+        } else {
+          if (record[0]) {
+            this.setListData(record[0])
+          }
+        }
       })
     } else {
       this.jump()
@@ -81,32 +113,26 @@ export default {
         this.$router.replace('/vipBuy/index')
       }
     },
+    getTodayItem (record, today) {
+      for (let i = 0; i < record.length; i++) {
+        const item = record[i]
+        if (item.trade_date === today) {
+          return item
+        }
+      }
+      return false
+    },
+    getNotTodayItem (record, today) {
+      for (let i = 0; i < record.length; i++) {
+        const item = record[i]
+        if (item.trade_date !== today) {
+          return item
+        }
+      }
+      return false
+    },
     setListData (data) {
-      const record = data.record || []
-      const list = []
-      record.forEach((v) => {
-        let r = (Math.abs(v.netChangeRatio) * 20)
-        if (r > 90) {
-          r = 90
-        }
-        if (r < 10) {
-          r = 10
-        }
-        r = 100 - r
-        v.r = r
-        // 越大越淡
-        if (v.netChangeRatio > 0) {
-          v.color = themeUtil.tintColor('F56C6C', Number((r / 100).toFixed(2)))
-          list.push(v)
-        } else {
-          v.color = themeUtil.tintColor('67C23A', Number((r / 100).toFixed(2)))
-          list.push(v)
-        }
-      })
-      list.sort((a, b) => {
-        return b.netChangeRatio - a.netChangeRatio
-      })
-      this.list = list
+      this.list = data.fix_record || []
       this.tradeDate = data.trade_date
     },
     onLoad () {
