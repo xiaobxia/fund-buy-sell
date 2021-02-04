@@ -4,16 +4,17 @@
     <div v-if="userInfo.email_active">
       <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
       <div class="con-w b-10">
-        <div class="h-t">参谋日期：{{tradeDate}}</div>
+        <div class="h-t">参谋日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
-        <div class="title-info-block round shadow lock-tag-block-bottom">
-          <div class="index-list-wrap">
+        <div class="title-info-block round shadow lock-tag-block-bottom" style="margin-bottom: 0">
+          <div class="index-list-wrap" v-if="list.length > 0">
             <div v-for="(item, index) in list" :key="index" class="index-item">
               <span>{{nameKeyMap[item.key]}}</span>
               <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
               <div class="buy-tag">买入20份</div>
             </div>
           </div>
+          <signal-count-down ref="signalCountDown" @finish="querySignal"/>
         </div>
       </div>
     </div>
@@ -23,10 +24,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import LockTag from '@/components/LockTag'
-import moment from 'moment'
-import dateUtil from '@/util/dateUtil'
-import { Notify } from 'vant'
+import SignalCountDown from '@/components/SignalCountDown'
 import indexList from '@/common/indexList'
+import openCountDown from '@/util/openCountDown'
 
 const nameMap = {}
 const nameKeyMap = {}
@@ -38,7 +38,8 @@ indexList.forEach((v) => {
 export default {
   name: 'IndexFixBuy',
   components: {
-    LockTag
+    LockTag,
+    SignalCountDown
   },
   data () {
     return {
@@ -59,42 +60,16 @@ export default {
   },
   created () {
     if (this.isVipUser === true) {
-      Promise.all([
-        this.$http.get('fbsServer/user/getLastBSTSignal'),
-        this.$http.get('fbsServer/user/getMarketOpen')
-      ]).then((resList) => {
-        const today = moment().format('YYYY-MM-DD')
-        const signalData = resList[0].data
-        const record = signalData.record || []
+      this.$http.get('fbsServer/user/getMarketOpen').then((res) => {
         // 开盘部分
-        const openData = resList[1].data || {}
-        const open = openData.open || false
-        if (open) {
-          const d = dateUtil.getDate()
-          const hour = d.getHours()
-          const minute = d.getMinutes()
-          if (hour < 14 || (hour === 14 && minute < 30)) {
-            // 主要通知
-            this.noUpdate = true
-            Notify({
-              type: 'danger',
-              message: this.noUpdateText,
-              duration: 1000 * 3
-            })
-            const notTodayItem = this.getNotTodayItem(record, today)
-            if (notTodayItem) {
-              this.setListData(notTodayItem)
-            }
-          } else {
-            const todayItem = this.getTodayItem(record, today)
-            if (todayItem) {
-              this.setListData(todayItem)
-            }
-          }
+        const openData = res.data || {}
+        return openData.open || false
+      }).then((open) => {
+        const diff = openCountDown.signalOpenCountDown()
+        if (open && diff) {
+          this.$refs.signalCountDown.open(diff)
         } else {
-          if (record[0]) {
-            this.setListData(record[0])
-          }
+          this.querySignal()
         }
       })
     } else {
@@ -109,23 +84,10 @@ export default {
         this.$router.replace('/vipBuy/index')
       }
     },
-    getTodayItem (record, today) {
-      for (let i = 0; i < record.length; i++) {
-        const item = record[i]
-        if (item.trade_date === today) {
-          return item
-        }
-      }
-      return false
-    },
-    getNotTodayItem (record, today) {
-      for (let i = 0; i < record.length; i++) {
-        const item = record[i]
-        if (item.trade_date !== today) {
-          return item
-        }
-      }
-      return false
+    querySignal () {
+      this.$http.get('fbsServer/user/getLastBSSignal').then((res) => {
+        this.setListData(res.data)
+      })
     },
     setListData (data) {
       this.list = data.fix_record || []
@@ -154,7 +116,7 @@ export default {
     overflow-y: auto;
   }
   .title-info-block {
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 170px);
   }
   .p-h {
     position: relative;
