@@ -6,12 +6,7 @@
       <div class="con-w b-10">
         <div class="h-t">参谋日期：{{tradeDate}}</div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
-        <div
-          v-for="(item, index) in list"
-          :key="index"
-          class="title-info-block round shadow lock-tag-block-bottom"
-          :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
-        >
+        <div class="title-info-block round shadow lock-tag-block-bottom">
           <div class="index-list-wrap">
             <div v-for="(item, index) in list" :key="index" class="index-item">
               <span>{{nameKeyMap[item.key]}}</span>
@@ -156,6 +151,9 @@ export default {
     height: calc(100vh - 50px);
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  .title-info-block {
+    min-height: calc(100vh - 160px);
   }
   .p-h {
     position: relative;
