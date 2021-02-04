@@ -50,12 +50,12 @@ function signalOpenCountDown () {
   const minute = d.getMinutes()
   // const second = d.getSeconds()
   const open = (new Date(year, month, day, 14, 30)).getTime()
-  if (hour < 14) {
-    return open - d.getTime()
-  }
-  if (hour === 14 && minute < 30) {
-    return open - d.getTime()
-  }
+  // if (hour < 14) {
+  //   return open - d.getTime()
+  // }
+  // if (hour === 14 && minute < 30) {
+  //   return open - d.getTime()
+  // }
   return false
 }
 

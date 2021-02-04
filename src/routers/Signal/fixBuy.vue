@@ -30,7 +30,9 @@ import openCountDown from '@/util/openCountDown'
 
 const nameMap = {}
 const nameKeyMap = {}
+const codeKeyMap = {}
 indexList.forEach((v) => {
+  codeKeyMap[v.key] = v.code
   nameMap[v.code] = v.name
   nameKeyMap[v.key] = v.name
 })
@@ -49,7 +51,8 @@ export default {
       noUpdate: false,
       noUpdateText: '今日信号未更新，请耐心等待',
       nameMap,
-      nameKeyMap
+      nameKeyMap,
+      codeKeyMap
     }
   },
   computed: {
@@ -85,8 +88,23 @@ export default {
       }
     },
     querySignal () {
-      this.$http.get('fbsServer/user/getLastBSSignal').then((res) => {
-        this.setListData(res.data)
+      Promise.all([
+        this.$http.get('fbsServer/user/getIndexRate'),
+        this.$http.get('fbsServer/user/getLastBSSignal')
+      ]).then((resList) => {
+        const indexRateDada = resList[0].data
+        const signalDada = resList[1].data
+        this.tradeDate = signalDada.trade_date
+        const record = indexRateDada.record || []
+        let map = {}
+        record.forEach((v) => {
+          map[v.code] = v.netChangeRatio
+        })
+        const list = signalDada.fix_record || []
+        list.forEach((v) => {
+          v.rate = map[this.codeKeyMap[v.key]]
+        })
+        this.list = list
       })
     },
     setListData (data) {
