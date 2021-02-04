@@ -7,26 +7,33 @@
         <div class="h-t">信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div v-if="open">
-          <div
-            v-for="(item, index) in list"
-            :key="index"
-            class="title-info-block round shadow lock-tag-block-bottom"
-            :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
-          >
-            <div class="title-wrap">
-              <span class="title-icon"></span>
-              <span class="t-t">{{nameKeyMap[item.key]}}</span>
-              <span style="float: right" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
+          <div v-if="list.length > 0">
+            <div
+              v-for="(item, index) in list"
+              :key="index"
+              class="title-info-block round shadow lock-tag-block-bottom"
+              :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
+            >
+              <div class="title-wrap">
+                <span class="title-icon"></span>
+                <span class="t-t">{{nameKeyMap[item.key]}}</span>
+                <span style="float: right" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
+              </div>
+              <div>
+                <b-s-card :info="item"/>
+              </div>
+              <template v-if="index !== list.length -1">
+                <lock-tag/>
+                <lock-tag/>
+              </template>
             </div>
-            <div class="index-list-wrap">
-              <div class="index-item">
-
+          </div>
+          <div v-else>
+            <div class="title-info-block round shadow lock-tag-block-bottom n-t" style="margin-bottom: 0">
+              <div class="l-w">
+                <van-loading type="spinner" color="#E2684D" />
               </div>
             </div>
-            <template v-if="index !== list.length -1">
-              <lock-tag/>
-              <lock-tag/>
-            </template>
           </div>
         </div>
         <div v-else class="title-info-block round shadow lock-tag-block-bottom n-w" style="margin-bottom: 0">
@@ -43,6 +50,7 @@ import LockTag from '@/components/LockTag'
 import SignalCountDown from '@/components/SignalCountDown'
 import indexList from '@/common/indexList'
 import openCountDown from '@/util/openCountDown'
+import BSCard from './components/BSCard'
 
 const nameMap = {}
 const nameKeyMap = {}
@@ -57,7 +65,8 @@ export default {
   name: 'IndexBuySell',
   components: {
     LockTag,
-    SignalCountDown
+    SignalCountDown,
+    BSCard
   },
   data () {
     return {
@@ -170,6 +179,9 @@ export default {
     z-index: 100;
     padding: 0 10px;
   }
+  .n-t {
+    min-height: calc(100vh - 170px);
+  }
   .c-l-w {
     min-height: calc(100vh - 150px);
   }
@@ -214,5 +226,9 @@ export default {
   }
   .n-w {
     min-height: calc(100vh - 170px);
+  }
+  .l-w {
+    margin-top: 10vh;
+    text-align: center;
   }
 </style>
