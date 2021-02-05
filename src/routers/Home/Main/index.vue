@@ -120,10 +120,11 @@ export default {
       width: 80px;
     }
     &.c-1 {
-      color: mix($original--color-white, #FFCC00, 40%);
+      color: rgb(135, 56, 0);
       background-color: rgb(255, 204, 0);
     }
     &.c-2 {
+      color: mix($original--color-white, #FFCC00, 40%);
       background-color: rgb(255, 102, 52);
     }
     &.c-3 {
