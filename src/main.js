@@ -5,7 +5,7 @@ import router from './router/index'
 import App from './App'
 import './style/main.scss'
 import Vant from 'vant'
-import moment from 'moment'
+import moment from 'moment-timezone'
 // import '../static/web-fonts-with-css/css/fontawesome-all.css'
 import environmentUtil from './util/environmentUtil'
 import Http from '@/util/httpUtil.js'
@@ -14,6 +14,8 @@ import store from './store'
 import './permission'
 import fileUtil from '@/util/fileUtil.js'
 import numberUtil from '@/util/numberUtil.js'
+
+moment.tz.setDefault('Asia/Shanghai')
 
 Vue.use(Vant)
 

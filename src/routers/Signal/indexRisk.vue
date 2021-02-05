@@ -42,9 +42,10 @@
 import themeUtil from '@/util/themeUtil.js'
 import { mapGetters } from 'vuex'
 import LockTag from '@/components/LockTag'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import { Notify } from 'vant'
 import dateUtil from '@/util/dateUtil'
+moment.tz.setDefault('Asia/Shanghai')
 
 export default {
   name: 'IndexRisk',

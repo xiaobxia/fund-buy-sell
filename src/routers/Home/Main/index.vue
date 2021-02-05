@@ -10,28 +10,28 @@
       <div class="e-card c-1"   @click="toToday">
         <div class="card-title">
           <div class="m-t">涨跌幅度</div>
-          <div class="d-t">swrwerwsss</div>
+          <div class="d-t">掌握行情，决策快人一步</div>
         </div>
         <img src="../../../assets/card/涨幅.png" alt="">
       </div>
       <div class="e-card c-2" @click="openCountDownShow">
         <div class="card-title">
           <div class="m-t">风险分布</div>
-          <div class="d-t">swrwerwsss</div>
+          <div class="d-t">纵观全局，揭示市场运行状态</div>
         </div>
         <img src="../../../assets/card/分布.png" alt="">
       </div>
       <div class="e-card c-3" @click="toFixBuy">
         <div class="card-title">
           <div class="m-t">定投信号</div>
-          <div class="d-t">swrwerwsss</div>
+          <div class="d-t">择时定投，打造仓位基石</div>
         </div>
         <img src="../../../assets/card/我的定投.png" alt="">
       </div>
       <div class="e-card c-4" @click="toBuySell">
         <div class="card-title">
           <div class="m-t">波段信号</div>
-          <div class="d-t">swrwerwsss</div>
+          <div class="d-t">机器决策，消灭纠结</div>
         </div>
         <img src="../../../assets/card/波段.png" alt="">
       </div>
