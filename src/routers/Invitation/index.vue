@@ -25,7 +25,7 @@
               v-clipboard:success="copySuccess"
               class="c-b theme-text"
             >复制邀请链接</span>
-              <span class="c-b theme-text" @click="downloadQr">保存邀请码</span>
+              <!--<span class="c-b theme-text" @click="downloadQr">保存邀请码</span>-->
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default {
   },
   created () {
     if (this.isVipUser === true) {
-      const invitationUrl = this.$webUrl + `/register?inv=${this.userInfo.email}`
+      const invitationUrl = this.$webUrl + `/register?inv=${encodeURIComponent(this.userInfo.email)}`
       this.invitationUrl = invitationUrl
       QRCode.toDataURL(invitationUrl).then(url => {
         this.qrUrl = url
