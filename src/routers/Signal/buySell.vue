@@ -51,6 +51,7 @@ import SignalCountDown from '@/components/SignalCountDown'
 import indexList from '@/common/indexList'
 import openCountDown from '@/util/openCountDown'
 import BSCard from './components/BSCard'
+import themeUtil from '@/util/themeUtil.js'
 
 const nameMap = {}
 const nameKeyMap = {}
@@ -137,11 +138,31 @@ export default {
         list.forEach((v) => {
           if (v.flag !== undefined) {
             v.rate = map[this.codeKeyMap[v.key]]
+            this.setColor(v)
             newList.push(v)
           }
         })
         this.list = newList
       })
+    },
+    setColor (v) {
+      let r = (Math.abs(v.qdiff) * 3) + 10
+      if (r > 90) {
+        r = 90
+      }
+      if (r < 10) {
+        r = 10
+      }
+      r = 100 - r
+      v.r = r
+      // 越大越淡
+      if (v.qdiff > 0 && !v.stockIndexPSF) {
+        v.color = themeUtil.tintColor('F56C6C', Number((r / 100).toFixed(2)))
+        v.fb = 'r'
+      } else {
+        v.color = themeUtil.tintColor('67C23A', Number((r / 100).toFixed(2)))
+        v.fb = 'g'
+      }
     },
     setListData (data) {
       this.list = data.band_record || []

@@ -1,28 +1,18 @@
 <template>
   <div class="bs-card">
     <van-row>
-      <van-col span="8">
-        <div class="s-w">
-          <div class="title">仓位</div>
-          <div class="de">
-            <van-progress
-              :percentage="75"
-              pivot-text="紫色"
-              pivot-color="#7232dd"
-              color="linear-gradient(to right, #be99ff, #7232dd)"
-            />
-          </div>
+      <van-col span="12">
+        <div class="xs-tag"  :style="getBg(info.color)" >
+          <span v-if="info.fb === 'r'">安全系数:{{formatXS(info.qdiff)}}</span>
+          <span v-if="info.fb === 'g'">风险系数:{{formatXS(info.qdiff)}}</span>
         </div>
       </van-col>
-      <van-col span="8">
-        <div class="s-w c-t">span: 8</div>
-      </van-col>
-      <van-col span="8">
-        <div class="s-w">
-          <div class="title">信号</div>
-          <div class="de">
-            <div>1122</div>
-          </div>
+      <van-col span="12">
+        <div>
+          <div
+            class="bs-tag"
+            :class="{'red-bg': info.flag === '加仓', 'green-bg': info.flag === '减仓'}"
+          >{{info.flag || '无'}}</div>
         </div>
       </van-col>
     </van-row>
@@ -30,6 +20,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'BSCard',
   props: {
@@ -44,7 +35,23 @@ export default {
     return {
     }
   },
+  watch: {
+    info () {
+      this.init()
+    }
+  },
+  created () {
+
+  },
   methods: {
+    formatXS (value) {
+      return Math.abs(value).toFixed(2)
+    },
+    getBg (item) {
+      return `background-color: ${item}`
+    },
+    init () {
+    }
   }
 }
 </script>
@@ -53,31 +60,23 @@ export default {
 <style  rel="stylesheet/scss" lang="scss" scoped>
   .bs-card {
     margin-top: 10px;
-    .title {
+    .xs-tag {
       text-align: center;
-      line-height: 20px;
       font-size: 12px;
+      line-height: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 9em;
     }
-    .de {
-      position: relative;
-      height: 30px;
-    }
-    .s-w {
+    .bs-tag {
+      float: right;
       text-align: center;
-      height: 50px;
-    }
-    .c-t {
-      border: 1px solid #bbb;
-      border-top: none;
-      border-bottom: none;
-    }
-    /deep/ {
-      .van-progress {
-        position: absolute;
-        margin: auto;
-        top: 0;
-        bottom: 0;
-      }
+      font-size: 12px;
+      line-height: 20px;
+      border-radius: 10px;
+      color: #fff;
+      background-color: #ccc;
+      width: 4em;
     }
   }
 </style>
