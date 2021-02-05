@@ -8,16 +8,18 @@
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div class="title-info-block round shadow lock-tag-block-bottom" style="margin-bottom: 0">
           <div class="index-list-wrap" v-if="open">
-            <div v-if="list.length > 0">
-              <div v-for="(item, index) in list" :key="index" class="index-item">
-                <span>{{nameKeyMap[item.key]}}</span>
-                <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
-                <div class="buy-tag">买入{{item.buyNum}}份</div>
+            <div v-if="!loading">
+              <div v-if="list.length > 0">
+                <div v-for="(item, index) in list" :key="index" class="index-item">
+                  <span>{{nameKeyMap[item.key]}}</span>
+                  <span class="ri-t" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
+                  <div class="buy-tag">买入{{item.buyNum}}份</div>
+                </div>
               </div>
-            </div>
-            <div v-else class="r-i-w">
-              <img src="../../assets/result/空.png" alt="">
-              <div class="theme-text">无信号</div>
+              <div v-else class="r-i-w">
+                <img src="../../assets/result/空.png" alt="">
+                <div class="theme-text">无信号</div>
+              </div>
             </div>
           </div>
           <signal-count-down ref="signalCountDown" @finish="openReQuery"/>
@@ -52,6 +54,7 @@ export default {
   data () {
     return {
       list: [],
+      loading: false,
       listGreen: [],
       tradeDate: '',
       noUpdate: false,
@@ -101,6 +104,7 @@ export default {
       this.open = true
     },
     querySignal () {
+      this.loading = true
       Promise.all([
         this.$http.get('fbsServer/user/getIndexRate'),
         this.$http.get('fbsServer/user/getLastBSSignal')
@@ -118,6 +122,10 @@ export default {
           v.rate = map[this.codeKeyMap[v.key]]
         })
         this.list = list
+        this.loading = false
+      }).catch((err) => {
+        console.log(err)
+        this.loading = false
       })
     },
     setListData (data) {
