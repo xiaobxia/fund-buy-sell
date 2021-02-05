@@ -7,20 +7,16 @@
     />
     <div class="h-c">
       <div class="p-t">策略工具</div>
-      <van-button type="primary" @click="openCountDownShow">指数风险</van-button>
-      <van-button type="primary" @click="toToday">今日涨跌幅</van-button>
-      <van-button type="primary" @click="toBuySell">买卖信号</van-button>
-      <van-button type="primary" @click="toFixBuy">定投信号</van-button>
-      <div class="e-card c-1">
+      <div class="e-card c-1"   @click="toToday">
         <img src="../../../assets/card/涨幅.png" alt="">
       </div>
-      <div class="e-card c-2">
+      <div class="e-card c-2" @click="openCountDownShow">
         <img src="../../../assets/card/分布.png" alt="">
       </div>
-      <div class="e-card c-3">
+      <div class="e-card c-3" @click="toFixBuy">
         <img src="../../../assets/card/我的定投.png" alt="">
       </div>
-      <div class="e-card c-4">
+      <div class="e-card c-4" @click="toBuySell">
         <img src="../../../assets/card/波段.png" alt="">
       </div>
     </div>
