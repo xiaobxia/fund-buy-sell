@@ -111,7 +111,7 @@ export default {
       Toast.success('复制成功！')
     },
     downloadQr () {
-      this.$downloadBase64File('app_name.jpg', this.qrUrl)
+      this.$downloadBase64File('养基定投波段.jpg', this.qrUrl)
     }
   }
 }

@@ -4,7 +4,7 @@
       <van-button plain type="primary" size="small" @click="toPath('/register')">注册</van-button>
     </div>
     <div class="l-n theme-text">
-      <span>app_name</span>
+      <span>养基定投波段</span>
     </div>
     <div>
       <van-form ref="form">

@@ -6,7 +6,7 @@
     </div>
     <div class="w-t">
       <h2>您好，</h2>
-      <p>欢迎来到<span class="theme-text">app_name</span></p>
+      <p>欢迎来到<span class="theme-text">养基定投波段</span></p>
     </div>
     <div>
       <van-form ref="form">

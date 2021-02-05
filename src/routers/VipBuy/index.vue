@@ -1,8 +1,8 @@
 <template>
   <div class="page-VipBuy">
-    <van-nav-bar title="app_name会员" left-arrow @click-left="backHandler" />
+    <van-nav-bar title="养基定投波段会员" left-arrow @click-left="backHandler" />
     <div v-if="userInfo.email_active" class="v-w">
-      <div class="p-t">app_nameVIP会员</div>
+      <div class="p-t">养基定投波段VIP会员</div>
       <div class="p-e">中国股市的股票的交易日为除节假日外的周一至周五。(AM9;30-11;30 , PM13;00-15;00) 一个交易日就是一天,股票的交易日为周一至周五。</div>
       <van-row>
         <van-col v-for="(card, index) in cardList" :key="index" span="8">
