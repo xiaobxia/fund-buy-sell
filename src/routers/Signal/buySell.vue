@@ -4,7 +4,10 @@
     <div v-if="userInfo.email_active">
       <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
       <div class="con-w b-10">
-        <div class="h-t">信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
+        <div class="h-t">
+          <span>信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></span>
+          <span style="float: right">仓位：<span v-if="list.length > 0">{{position}}</span></span>
+        </div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div v-if="open">
           <div
@@ -118,6 +121,7 @@ export default {
         const indexRateDada = resList[0].data
         const signalDada = resList[1].data
         this.tradeDate = signalDada.trade_date
+        this.position = signalDada.position
         const record = indexRateDada.record || []
         let map = {}
         record.forEach((v) => {
