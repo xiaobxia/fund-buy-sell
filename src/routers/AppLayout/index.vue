@@ -57,6 +57,10 @@ export default {
     this.active = this.$route.path
     this.showLayout = false
     this.$http.get('fbsServer/user/getUserByToken').then((res) => {
+      const data = res.data || {}
+      if (data.roles && data.roles.indexOf('admin') !== -1) {
+        window.userRoles = 'admin'
+      }
       this.$store.commit('SET_userInfo', res.data || {})
       this.showLayout = true
     })

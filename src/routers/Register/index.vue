@@ -88,6 +88,9 @@ export default {
         }).then((data) => {
           this.loading = false
           window._token = data.data.token
+          if (data.data.roles && data.data.roles.indexOf('admin') !== -1) {
+            window.userRoles = 'admin'
+          }
           localStorage.setItem('token', data.data.token)
           storageUtil.setData('UserInfo', {
             ...data.data
