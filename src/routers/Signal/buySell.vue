@@ -68,7 +68,8 @@ export default {
       nameMap,
       nameKeyMap,
       codeKeyMap,
-      open: false
+      open: false,
+      position: 0
     }
   },
   computed: {

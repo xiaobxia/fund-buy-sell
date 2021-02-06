@@ -132,7 +132,7 @@ export default {
     min-height: calc(100vh - 150px);
   }
   .index-list-wrap {
-    margin-top: 10px;
+    margin-top: 2px;
     font-size: 13px;
     color: #484848;
   }
