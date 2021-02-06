@@ -45,6 +45,17 @@ import openCountDown from '@/util/openCountDown'
 import BSCard from './components/BSCard'
 import themeUtil from '@/util/themeUtil.js'
 
+const indexSort = [
+  'chuangye', 'chuangWL', 'wulin', 'sanbai', 'wubai', 'yiqian',
+  'yiyao', 'yiliao', 'shengwu',
+  'dianzi', 'xinxi', 'jisuanji',
+  'shipin', 'baijiu',
+  'yinhang', 'baoxian', 'zhengquan', 'dichan',
+  'gangtie', 'meitan', 'youse',
+  'jungong', 'huanbao', 'qiche', 'chuanmei',
+  'jijian'
+]
+
 const nameMap = {}
 const nameKeyMap = {}
 const codeKeyMap = {}
@@ -137,8 +148,21 @@ export default {
             newList.push(v)
           }
         })
-        this.list = newList
+        this.list = this.setSort(newList)
       })
+    },
+    setSort (list) {
+      const newList = []
+      indexSort.forEach((key) => {
+        for (let i = 0; i < list.length; i++) {
+          const item = list[i]
+          if (key === item.key) {
+            newList.push(item)
+            return false
+          }
+        }
+      })
+      return newList
     },
     setColor (v) {
       let r = (Math.abs(v.qdiff) * 3) + 10
