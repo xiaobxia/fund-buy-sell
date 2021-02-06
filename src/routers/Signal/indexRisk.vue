@@ -13,7 +13,7 @@
           </div>
           <div class="index-list-wrap">
             <div v-for="(item, index) in list" :key="index" :style="getBg(item.color)" class="index-item">
-              <span>{{item.name}}</span>
+              <span>{{nameMap[item.name]}}</span>
               <span class="ri-t">安全系数:{{formatXS(item.netChangeRatio)}}</span>
             </div>
           </div>
@@ -27,7 +27,7 @@
           </div>
           <div class="index-list-wrap">
             <div v-for="(item, index) in listGreen" :key="index" :style="getBg(item.color)" class="index-item">
-              <span>{{item.name}}</span>
+              <span>{{nameMap[item.name]}}</span>
               <span class="ri-t">风险系数:{{formatXS(item.netChangeRatio)}}</span>
             </div>
           </div>
@@ -45,7 +45,13 @@ import LockTag from '@/components/LockTag'
 import moment from 'moment-timezone'
 import { Notify } from 'vant'
 import dateUtil from '@/util/dateUtil'
+import indexList from '@/common/indexList'
 moment.tz.setDefault('Asia/Shanghai')
+
+const nameMap = {}
+indexList.forEach((v) => {
+  nameMap[v.name] = v.realName || v.name
+})
 
 export default {
   name: 'IndexRisk',
@@ -58,7 +64,8 @@ export default {
       listGreen: [],
       tradeDate: '',
       noUpdate: false,
-      noUpdateText: '今日信号未更新，请耐心等待'
+      noUpdateText: '今日信号未更新，请耐心等待',
+      nameMap
     }
   },
   computed: {

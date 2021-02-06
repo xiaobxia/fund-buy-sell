@@ -27,7 +27,7 @@ import indexList from '@/common/indexList'
 
 const nameMap = {}
 indexList.forEach((v) => {
-  nameMap[v.code] = v.name
+  nameMap[v.code] = v.realName || v.name
 })
 
 export default {

@@ -41,8 +41,8 @@ const nameKeyMap = {}
 const codeKeyMap = {}
 indexList.forEach((v) => {
   codeKeyMap[v.key] = v.code
-  nameMap[v.code] = v.name
-  nameKeyMap[v.key] = v.name
+  nameMap[v.code] = v.realName || v.name
+  nameKeyMap[v.key] = v.realName || v.name
 })
 
 export default {
