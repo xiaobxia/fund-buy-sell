@@ -15,13 +15,13 @@
         s.parentNode.insertBefore(hm, s);
       })();
       window.trackPageview = function (pageName) {
-        if (window._hmt) {
+        if (window._hmt && location.hostname !== 'localhost') {
           window._hmt.push(['_trackPageview', '/'+pageName])
         }
       }
       window.trackEvent = function (type, action, other) {
         // if (window._hmt && location.hostname !== 'localhost') {
-        if (window._hmt) {
+        if (window._hmt && location.hostname !== 'localhost') {
           window._hmt.push(['_trackEvent', type || '', action || '', other || '']);
         }
       }

@@ -15,7 +15,7 @@ let basePath = '/'
 
 // 默认连接地址，只在调试时有用
 if (process.env.NODE_ENV === 'development') {
-  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'online'}${basePath}`
+  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'local'}${basePath}`
 }
 
 axiosHttp.interceptors.request.use(function (config) {
@@ -47,6 +47,8 @@ function makeUrl (url) {
   if (url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://')) {
     return url
   } else {
+    // 统计接口
+    window.trackEvent('接口', url)
     return `${basePath}${url}`
   }
 }
