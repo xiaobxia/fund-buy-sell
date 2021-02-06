@@ -7,25 +7,14 @@
         <div class="h-t">信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div v-if="open">
-          <div v-if="list.length > 0">
+          <div
+            v-if="list.length > 0"
+            class="title-info-block round shadow"
+          >
             <div
               v-for="(item, index) in list"
-              :key="index"
-              class="title-info-block round shadow lock-tag-block-bottom"
-              :class="{'t-10': index !== 0, 'b-10': index !== list.length -1}"
-            >
-              <div class="title-wrap">
-                <span class="title-icon"></span>
-                <span class="t-t">{{nameKeyMap[item.key]}}</span>
-                <span style="float: right" :class="$stockNumberClass(item.rate)">{{item.rate}}%</span>
-              </div>
-              <div>
-                <b-s-card :info="item"/>
-              </div>
-              <template v-if="index !== list.length -1">
-                <lock-tag/>
-                <lock-tag/>
-              </template>
+              :key="index">
+              <b-s-card :info="item"/>
             </div>
           </div>
           <div v-else>
@@ -139,6 +128,7 @@ export default {
           if (v.flag !== undefined) {
             v.rate = map[this.codeKeyMap[v.key]]
             this.setColor(v)
+            v.name = this.nameKeyMap[v.key]
             newList.push(v)
           }
         })
