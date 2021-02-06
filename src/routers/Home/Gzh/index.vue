@@ -24,7 +24,7 @@
             >
               <div>
                 <div class="rt-i-i i-w">
-                  <img :src="item.news_item[0].thumb_url" alt="">
+                  <img src="../../../assets/gzh/cl.jpg" alt="">
                 </div>
                 <div class="rt-i-t">
                   <h4>{{item.news_item[0].title}}</h4>
