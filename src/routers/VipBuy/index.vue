@@ -96,6 +96,7 @@ export default {
       this.$router.replace('/')
     },
     selectCard (day) {
+      window.trackEvent('按钮', 'vip天数', day)
       this.$store.commit('SET_buyActive', day)
     },
     buyHandler () {

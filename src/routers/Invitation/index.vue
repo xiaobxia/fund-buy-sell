@@ -108,6 +108,7 @@ export default {
       this.$router.replace('/')
     },
     copySuccess () {
+      window.trackEvent('按钮', '邀请链接', this.userInfo.email)
       Toast.success('复制成功！')
     },
     downloadQr () {

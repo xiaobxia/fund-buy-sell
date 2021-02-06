@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     copySuccess () {
+      window.trackEvent('按钮', '支付码', this.code)
       Toast.success('复制成功！')
     },
     backHandler () {
