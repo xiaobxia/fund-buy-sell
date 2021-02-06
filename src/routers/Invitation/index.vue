@@ -12,19 +12,19 @@
         </div>
       </div>
       <div class="c-w-g">
-        <div class="title-info-block">
+        <div class="title-info-block" style="padding-bottom: 0">
           <div class="title-wrap">
             <span class="title-icon"></span>
             <span class="t-t">我的专属二维码</span>
-          </div>
-          <div style="text-align: center">
-            <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
-            <div class="b-w">
             <span
               v-clipboard:copy="invitationUrl"
               v-clipboard:success="copySuccess"
               class="c-b theme-text"
             >复制邀请链接</span>
+          </div>
+          <div style="text-align: center">
+            <img v-if="qrUrl" :src="qrUrl" alt="" class="qr-img">
+            <div class="b-w">
               <!--<span class="c-b theme-text" @click="downloadQr">保存邀请码</span>-->
             </div>
           </div>
@@ -47,7 +47,7 @@
               >您邀请的好友“<span class="theme-text">{{item.register_email}}</span>”已注册并验证邮箱，您获得5个交易日的奖励！</div>
               <div
                 v-else
-              >您邀请的好友“<span class="theme-text">{{item.register_email}}</span>”已注册但还未验证邮箱，快提醒他验证！</div>
+              >您邀请的好友“<span class="theme-text">{{item.register_email}}</span>”已注册但还未验证邮箱，快提醒他（她）验证，获得奖励！</div>
             </div>
           </div>
           <div v-else class="d-w-s">暂无数据</div>
@@ -140,15 +140,9 @@ export default {
   }
   .b-w {
     font-size: 14px;
-    .c-b {
-      padding-right: 10px;
-      border-right: 1px solid #E9E9E9;
-      &:last-child {
-        padding-left: 10px;
-        padding-right: 0;
-        border-right: none;
-      }
-    }
+  }
+  .c-b {
+    float: right;
   }
   .d-w-s {
     line-height: 40px;
