@@ -14,15 +14,15 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
+      var isam = location.search.indexOf('adc=true') !== -1
       window.trackPageview = function (pageName) {
-        if (window._hmt && location.hostname !== 'localhost' && !window.userRoles) {
+        if (window._hmt && location.hostname !== 'localhost' && !window.userRoles && !isam) {
           window._hmt.push(['_trackPageview', '/'+pageName])
         }
       }
       window.trackEvent = function (type, action, other) {
-        console.log(window.userRoles)
         // if (window._hmt && location.hostname !== 'localhost') {
-        if (window._hmt && location.hostname !== 'localhost' && !window.userRoles) {
+        if (window._hmt && location.hostname !== 'localhost' && !window.userRoles && !isam) {
           window._hmt.push(['_trackEvent', type || '', action || '', other || '']);
         }
       }
