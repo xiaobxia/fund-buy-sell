@@ -36,6 +36,7 @@
         <van-cell title="VIP管理" is-link to="/vipAdmin" />
         <van-cell title="定时任务手动" is-link to="/schedule" />
         <van-cell title="用户管理" is-link to="/userAdmin" />
+        <van-cell title="统计" is-link to="/analysisAdmin" />
       </template>
     </div>
     <div class="p-b">

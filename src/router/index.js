@@ -160,6 +160,22 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/analysisAdmin',
+    component: AppLayout,
+    name: 'AnalysisAdmin',
+    redirect: '/analysisAdmin/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('AnalysisAdmin'),
+        name: 'AnalysisAdminIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
+  },
+  {
     path: '/home',
     component: AppLayout,
     name: 'Home',
