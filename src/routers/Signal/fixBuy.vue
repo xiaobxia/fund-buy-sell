@@ -1,6 +1,7 @@
 <template>
   <div class="index-rate grey-page-full">
-    <van-nav-bar class="p-h op-nav-bar" title="定投信号" left-arrow @click-left="backHandler" />
+    <van-nav-bar class="p-h op-nav-bar" title="定投信号" left-arrow @click-left="backHandler">
+    </van-nav-bar>
     <div v-if="userInfo.email_active">
       <img src="../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
       <div class="con-w b-10">
@@ -67,7 +68,8 @@ export default {
       nameMap,
       nameKeyMap,
       codeKeyMap,
-      open: false
+      open: false,
+      showPopover: false
     }
   },
   computed: {
@@ -240,5 +242,8 @@ export default {
   }
   .d-d-w {
     margin-top: 20px;
+  }
+  .p-w {
+    padding: 20px;
   }
 </style>
