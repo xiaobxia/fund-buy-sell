@@ -33,8 +33,9 @@
       </van-cell>
       <van-cell title="关于我们" is-link to="/about" />
       <template v-if="isAdmin">
-        <van-cell title="定时任务手动" is-link to="/schedule" />
         <van-cell title="VIP管理" is-link to="/vipAdmin" />
+        <van-cell title="定时任务手动" is-link to="/schedule" />
+        <van-cell title="用户管理" is-link to="/userAdmin" />
       </template>
     </div>
     <div class="p-b">
