@@ -31,6 +31,9 @@
         <div v-else class="title-info-block round shadow lock-tag-block-bottom n-w" style="margin-bottom: 0">
           <signal-count-down ref="signalCountDown" @finish="openReQuery"/>
         </div>
+        <div class="d-d-w">
+          <disclaimer/>
+        </div>
       </div>
     </div>
   </div>
@@ -44,6 +47,7 @@ import indexList from '@/common/indexList'
 import openCountDown from '@/util/openCountDown'
 import BSCard from './components/BSCard'
 import themeUtil from '@/util/themeUtil.js'
+import Disclaimer from '@/components/Disclaimer'
 
 const indexSort = [
   'chuangye', 'chuangWL', 'wulin', 'sanbai', 'wubai', 'yiqian',
@@ -70,7 +74,8 @@ export default {
   components: {
     LockTag,
     SignalCountDown,
-    BSCard
+    BSCard,
+    Disclaimer
   },
   data () {
     return {
@@ -278,5 +283,8 @@ export default {
     width: 100%;
     height: 40px;
     text-align: center;
+  }
+  .d-d-w {
+    margin-top: 20px;
   }
 </style>

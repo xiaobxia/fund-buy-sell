@@ -32,6 +32,9 @@
             </div>
           </div>
         </div>
+        <div class="d-d-w">
+          <disclaimer/>
+        </div>
         <div class="b-10"></div>
       </div>
     </div>
@@ -46,6 +49,8 @@ import moment from 'moment-timezone'
 import { Notify } from 'vant'
 import dateUtil from '@/util/dateUtil'
 import indexList from '@/common/indexList'
+import Disclaimer from '@/components/Disclaimer'
+
 moment.tz.setDefault('Asia/Shanghai')
 
 const nameMap = {}
@@ -56,7 +61,8 @@ indexList.forEach((v) => {
 export default {
   name: 'IndexRisk',
   components: {
-    LockTag
+    LockTag,
+    Disclaimer
   },
   data () {
     return {
@@ -253,5 +259,8 @@ export default {
   }
   .ri-t {
     float: right;
+  }
+  .d-d-w {
+    margin-top: 20px;
   }
 </style>

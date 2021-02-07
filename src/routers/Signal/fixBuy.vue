@@ -24,6 +24,9 @@
           </div>
           <signal-count-down ref="signalCountDown" @finish="openReQuery"/>
         </div>
+        <div class="d-d-w">
+          <disclaimer/>
+        </div>
       </div>
     </div>
   </div>
@@ -35,6 +38,7 @@ import LockTag from '@/components/LockTag'
 import SignalCountDown from '@/components/SignalCountDown'
 import indexList from '@/common/indexList'
 import openCountDown from '@/util/openCountDown'
+import Disclaimer from '@/components/Disclaimer'
 
 const nameMap = {}
 const nameKeyMap = {}
@@ -49,7 +53,8 @@ export default {
   name: 'IndexFixBuy',
   components: {
     LockTag,
-    SignalCountDown
+    SignalCountDown,
+    Disclaimer
   },
   data () {
     return {
@@ -232,5 +237,8 @@ export default {
     img {
       width: 100px;
     }
+  }
+  .d-d-w {
+    margin-top: 20px;
   }
 </style>
