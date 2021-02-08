@@ -9,9 +9,9 @@
     >
       <van-cell v-for="item in list" :key="item.email">
         <div>
-          <span>{{item.email}}</span>
           <van-tag type="success" v-if="item.email_active">激活</van-tag>
           <van-tag v-else type="danger">未激活</van-tag>
+          <span>{{item.email}}</span>
           <span style="float: right">{{ $formatToDateTime(item.create_at) }}</span>
         </div>
       </van-cell>

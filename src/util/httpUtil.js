@@ -15,7 +15,7 @@ let basePath = '/'
 
 // 默认连接地址，只在调试时有用
 if (process.env.NODE_ENV === 'development') {
-  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'local'}${basePath}`
+  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'online'}${basePath}`
 }
 
 axiosHttp.interceptors.request.use(function (config) {
