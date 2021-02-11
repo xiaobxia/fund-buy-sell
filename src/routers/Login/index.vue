@@ -1,7 +1,7 @@
 <template>
   <div class="l-p-p">
     <div class="b-b">
-      <van-button plain type="primary" size="small" @click="toPath('/register')">注册</van-button>
+      <!--<van-button plain type="primary" size="small" @click="toPath('/register')">注册</van-button>-->
     </div>
     <div class="l-n theme-text">
       <span>养基定投波段</span>
@@ -31,6 +31,14 @@
           class="liner-bg"
           @click="loginHandler"
         >登录</van-button>
+        <van-button
+          round
+          block
+          plain
+          type="info"
+          class="info-bt"
+          @click="toPath('/register')"
+        >去注册</van-button>
       </div>
     </div>
     <div class="r-b">
@@ -114,6 +122,7 @@ export default {
   .b-b {
     text-align: right;
     margin: 20px 0;
+    height: 40px;
   }
   .ic-w {
     position: relative;
@@ -134,5 +143,8 @@ export default {
     font-size: 40px;
     font-weight: bold;
     line-height: 60px;
+  }
+  .info-bt {
+    margin-top: 10px;
   }
 </style>

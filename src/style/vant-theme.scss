@@ -25,3 +25,8 @@ $original-light-9: mix($original--color-white, $original-theme, 90%) !default;
 .van-dialog__confirm, .van-dialog__confirm:active {
   color: $original-theme;
 }
+
+.van-button--plain.van-button--info {
+  border-color: $original-theme;
+  color: $original-theme;
+}

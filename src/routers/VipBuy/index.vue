@@ -55,6 +55,8 @@ import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
 import BuyCountDownDialog from '@/components/BuyCountDownDialog/index.vue'
 import openCountDown from '@/util/openCountDown'
 
+// 未来一定是要提价的，目前先不
+
 export default {
   name: 'VipBuy',
   components: {
