@@ -6,7 +6,7 @@
       <div class="con-w b-10">
         <div class="h-t">
           <span>信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></span>
-          <span style="float: right">仓位：<span v-if="list.length > 0">{{position}}</span></span>
+          <span style="float: right">仓位标准：<span v-if="list.length > 0">{{position}}</span></span>
         </div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div v-if="open">
