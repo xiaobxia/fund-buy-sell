@@ -28,6 +28,7 @@
           <div class="index-list-wrap">
             <div v-for="(item, index) in listGreen" :key="index" :style="getBg(item.color)" class="index-item">
               <span>{{nameMap[item.name]}}</span>
+              <span v-if="isAdmin">{{item.stockIndexPSF}}</span>
               <span class="ri-t">风险系数:{{formatXS(item.netChangeRatio)}}</span>
             </div>
           </div>
@@ -78,7 +79,11 @@ export default {
     ...mapGetters([
       'userInfo',
       'isVipUser'
-    ])
+    ]),
+    isAdmin () {
+      const roles = this.userInfo.roles
+      return roles && (roles.indexOf('admin') !== -1)
+    }
   },
   created () {
     if (this.isVipUser === true) {
