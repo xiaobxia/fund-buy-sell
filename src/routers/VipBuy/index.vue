@@ -64,11 +64,12 @@ export default {
     BuyCountDownDialog
   },
   data () {
+    // 不要纠结定价，买得人多了再慢慢涨
     return {
       message: '',
       loading: false,
       cardList: [
-        {day: 1, money: 2},
+        {day: 1, money: 4},
         {day: 20, money: 15},
         {day: 60, money: 40},
         {day: 120, money: 70},
