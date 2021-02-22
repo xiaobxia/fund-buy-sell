@@ -2,7 +2,9 @@
   <div>
     <div v-if="showLayout" class="app-layout">
       <div class="router-wrap" :class="{showTabbar: showTabbar}">
-        <router-view :key="key"/>
+        <keep-alive>
+          <router-view :key="key"/>
+        </keep-alive>
       </div>
       <van-tabbar v-if="showTabbar" v-model="active" active-color="#E2684D" :fixed="true">
         <van-tabbar-item name="/home/main" replace to="/home/main">
@@ -10,6 +12,13 @@
           <template #icon="props">
             <van-icon v-if="props.active" name="wap-home"/>
             <van-icon v-else name="wap-home-o" />
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item name="/home/chat" replace to="/home/chat">
+          <span>消息</span>
+          <template #icon="props">
+            <van-icon v-if="props.active" name="comment"/>
+            <van-icon v-else name="comment-o" />
           </template>
         </van-tabbar-item>
         <van-tabbar-item name="/home/gzh" replace to="/home/gzh">

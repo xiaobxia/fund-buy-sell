@@ -7,6 +7,7 @@ const getters = {
   isVipUser: state => state.user.isVipUser,
   buyActive: state => state.user.buyActive,
   // app部分
-  wxList: state => state.app.wxList
+  wxList: state => state.app.wxList,
+  infoList: state => state.app.infoList
 }
 export default getters

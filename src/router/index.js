@@ -191,6 +191,15 @@ export const asyncRouterMap = [
         }
       },
       {
+        path: 'chat',
+        component: lazyLoading('Home/Chat'),
+        name: 'HomeChat',
+        meta: {
+          auth: true,
+          pageName: '信息流'
+        }
+      },
+      {
         path: 'gzh',
         component: lazyLoading('Home/Gzh'),
         name: 'HomeGzh',

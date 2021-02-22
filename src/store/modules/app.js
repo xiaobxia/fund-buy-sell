@@ -1,11 +1,14 @@
 const app = {
   state: {
-    wxList: []
+    wxList: [],
+    infoList: []
   },
   mutations: {
     SET_wxList: (state, info) => {
-      console.log(info)
       state.wxList = info
+    },
+    SET_infoList: (state, info) => {
+      state.infoList = info
     }
   },
   actions: {
