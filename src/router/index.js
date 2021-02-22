@@ -176,6 +176,22 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/chat',
+    component: AppLayout,
+    name: 'Chat',
+    redirect: '/chat/index',
+    children: [
+      {
+        path: 'index',
+        component: lazyLoading('Chat'),
+        name: 'ChatIndex',
+        meta: {
+          auth: true
+        }
+      }
+    ]
+  },
+  {
     path: '/home',
     component: AppLayout,
     name: 'Home',

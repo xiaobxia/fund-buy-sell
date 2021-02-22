@@ -19,7 +19,7 @@
                 class="rt-i"
               >
                 <div>
-                  <div>111</div>
+                  <div>{{item.content}}</div>
                   <div>111</div>
                   <div>111</div>
                   <div>删除</div>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import { Toast, Dialog } from 'vant'
+import { Toast, Dialog } from 'vant'
 import { mapGetters } from 'vuex'
 export default {
   name: 'HomeChat',
@@ -58,18 +58,18 @@ export default {
     onLoad () {
       if (this.refreshing) {
         this.$store.commit('SET_infoList', [])
-        this.refreshing = false;
+        this.refreshing = false
       }
       this.queryInfoList()
     },
-    onRefresh() {
+    onRefresh () {
       // 清空列表数据
-      this.finished = false;
+      this.finished = false
       this.current = 0
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
-      this.loading = true;
-      this.onLoad();
+      this.loading = true
+      this.onLoad()
     },
     queryInfoList () {
       this.loading = true
@@ -96,10 +96,10 @@ export default {
     toOther (url) {
       window.location = url
     },
-    deleteRow(row) {
+    deleteRow (row) {
       Dialog.confirm({
         title: '提示',
-        message: '确认删除？',
+        message: '确认删除？'
       })
         .then(() => {
           this.$http.post('fbsServer/infoFlow/deleteRecord', {
@@ -113,7 +113,7 @@ export default {
         })
         .catch(() => {
           // on cancel
-        });
+        })
     }
   }
 }
