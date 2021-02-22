@@ -5,25 +5,28 @@
     <div class="con-w">
       <div class="title-info-block round shadow">
         <div class="c-l-w">
-          <van-list
-            v-model="loading"
-            :finished="finished"
-            finished-text=""
-            @load="onLoad"
-            class="a-l-l"
-          >
-            <div
-              v-for="(item, index) in infoList"
-              :key="index"
-              class="rt-i"
+          <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+            <van-list
+              v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad"
+              class="a-l-l"
             >
-              <div>
-                <div>111</div>
-                <div>111</div>
-                <div>111</div>
+              <div
+                v-for="(item, index) in infoList"
+                :key="index"
+                class="rt-i"
+              >
+                <div>
+                  <div>111</div>
+                  <div>111</div>
+                  <div>111</div>
+                  <div>删除</div>
+                </div>
               </div>
-            </div>
-          </van-list>
+            </van-list>
+          </van-pull-refresh>
         </div>
       </div>
     </div>
@@ -31,6 +34,7 @@
 </template>
 
 <script>
+  import { Toast, Dialog } from 'vant'
 import { mapGetters } from 'vuex'
 export default {
   name: 'HomeChat',
@@ -39,7 +43,8 @@ export default {
       accessToken: '',
       current: 0,
       loading: false,
-      finished: false
+      finished: false,
+      refreshing: false
     }
   },
   computed: {
@@ -51,7 +56,20 @@ export default {
   },
   methods: {
     onLoad () {
+      if (this.refreshing) {
+        this.$store.commit('SET_infoList', [])
+        this.refreshing = false;
+      }
       this.queryInfoList()
+    },
+    onRefresh() {
+      // 清空列表数据
+      this.finished = false;
+      this.current = 0
+      // 重新加载数据
+      // 将 loading 设置为 true，表示处于加载状态
+      this.loading = true;
+      this.onLoad();
     },
     queryInfoList () {
       this.loading = true
@@ -77,6 +95,25 @@ export default {
     },
     toOther (url) {
       window.location = url
+    },
+    deleteRow(row) {
+      Dialog.confirm({
+        title: '提示',
+        message: '确认删除？',
+      })
+        .then(() => {
+          this.$http.post('fbsServer/infoFlow/deleteRecord', {
+            info_id: row.id
+          }).then(({ message }) => {
+            Toast.success({
+              message: '删除成功！',
+              duration: 1000 * 3
+            })
+          })
+        })
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 }
