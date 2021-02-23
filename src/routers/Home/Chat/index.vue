@@ -24,6 +24,7 @@
                       <img src="../../../assets/头像.png" alt="">
                     </div>
                     <div class="t-t">
+                      <div>基哥</div>
                       <div>{{formatTime(item.create_at)}}</div>
                     </div>
                     <div v-if="isAdmin" class="d-button">
@@ -185,9 +186,12 @@ export default {
       display: inline-block;
       vertical-align: top;
     }
+    .rt-c-w {
+      margin-top: 10px;
+    }
     .d-button {
       position: absolute;
-      right: 20px;
+      right: 0;
       top: 10px;
       color: #000;
       z-index: 100;
