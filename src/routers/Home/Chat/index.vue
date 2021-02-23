@@ -1,44 +1,41 @@
 <template>
   <div class="home-main grey-page">
     <div class="p-t">消息</div>
-    <img src="../../../assets/img-h-bg.png" alt="" style="position: absolute;width: 100%;top: 0;left: 0">
-    <div class="con-w">
-      <div class="title-info-block round shadow">
-        <div class="c-l-w">
-          <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-            <van-list
-              v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              @load="onLoad"
-              class="a-l-l"
+    <div>
+      <div class="c-l-w">
+        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="onLoad"
+            class="a-l-l"
+          >
+            <div
+              v-for="(item, index) in infoList"
+              :key="index"
+              class="rt-i"
             >
-              <div
-                v-for="(item, index) in infoList"
-                :key="index"
-                class="rt-i"
-              >
-                <div>
-                  <div class="rt-t-w">
-                    <div class="t-x">
-                      <img src="../../../assets/头像.png" alt="">
-                    </div>
-                    <div class="t-t">
-                      <div>基哥</div>
-                      <div>{{formatTime(item.create_at)}}</div>
-                    </div>
-                    <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
-                      <van-icon name="delete" />
-                    </div>
+              <div>
+                <div class="rt-t-w">
+                  <div class="t-x">
+                    <img src="../../../assets/头像.png" alt="">
                   </div>
-                  <div class="rt-c-w">
-                    <div>{{item.content}}</div>
+                  <div class="t-t">
+                    <div>基哥</div>
+                    <div>{{formatTime(item.create_at)}}</div>
+                  </div>
+                  <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
+                    <van-icon name="delete" />
                   </div>
                 </div>
+                <div class="rt-c-w">
+                  <div>{{item.content}}</div>
+                </div>
               </div>
-            </van-list>
-          </van-pull-refresh>
-        </div>
+            </div>
+          </van-list>
+        </van-pull-refresh>
       </div>
     </div>
   </div>
@@ -166,15 +163,16 @@ export default {
   .rt-i {
     position: relative;
     background-color: #fff;
-    padding: 10px 0;
-    border-bottom: 1px solid #E9E9E9;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
     &:last-child {
       border-bottom: 0;
     }
     .t-x {
       img {
-        height: 40px;
-        width: 40px;
+        height: 36px;
+        width: 36px;
       }
       display: inline-block;
       vertical-align: top;
@@ -183,20 +181,25 @@ export default {
       margin-left: 10px;
       display: inline-block;
       vertical-align: top;
+      font-size: 14px;
     }
     .rt-c-w {
-      margin-top: 10px;
+      margin: 10px 0 5px 0;
+      font-size: 20px;
+      word-wrap: break-word;
+      word-break: normal;
     }
     .d-button {
       position: absolute;
-      right: 0;
+      right: 20px;
       top: 10px;
       color: #000;
       z-index: 100;
       /deep/ {
         .van-icon {
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
+          font-size: 24px;
         }
       }
     }
