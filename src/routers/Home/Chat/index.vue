@@ -19,9 +19,19 @@
                 class="rt-i"
               >
                 <div>
-                  <div>{{item.content}}</div>
-                  <div v-if="isAdmin" class="d-button">
-                    <van-icon name="delete" />
+                  <div class="rt-t-w">
+                    <div class="t-x">
+                      <img src="../../../assets/头像.png" alt="">
+                    </div>
+                    <div class="t-t">
+                      <div>{{formatTime(item.create_at)}}</div>
+                    </div>
+                    <div v-if="isAdmin" class="d-button">
+                      <van-icon name="delete" />
+                    </div>
+                  </div>
+                  <div class="rt-c-w">
+                    <div>{{item.content}}</div>
                   </div>
                 </div>
               </div>
@@ -36,6 +46,8 @@
 <script>
 import { Toast, Dialog } from 'vant'
 import { mapGetters } from 'vuex'
+import moment from 'moment-timezone'
+moment.tz.setDefault('Asia/Shanghai')
 export default {
   name: 'HomeChat',
   data () {
@@ -60,6 +72,10 @@ export default {
   created () {
   },
   methods: {
+    formatTime (time) {
+      // const diffM = moment().diff(moment(time),'minutes')
+      return moment(time).format('M-D HH:mm')
+    },
     onLoad () {
       if (this.refreshing) {
         this.$store.commit('SET_infoList', [])
@@ -155,6 +171,19 @@ export default {
     border-bottom: 1px solid #E9E9E9;
     &:last-child {
       border-bottom: 0;
+    }
+    .t-x {
+      img {
+        height: 40px;
+        width: 40px;
+      }
+      display: inline-block;
+      vertical-align: top;
+    }
+    .t-t {
+      margin-left: 10px;
+      display: inline-block;
+      vertical-align: top;
     }
     .d-button {
       position: absolute;
