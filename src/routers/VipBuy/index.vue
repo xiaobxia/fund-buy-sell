@@ -71,8 +71,8 @@ export default {
       cardList: [
         {day: 1, money: 4},
         {day: 20, money: 15},
-        {day: 60, money: 40},
-        {day: 120, money: 70},
+        {day: 60, money: 42},
+        {day: 120, money: 75},
         {day: 240, money: 120}
       ],
       buyBLoading: false
