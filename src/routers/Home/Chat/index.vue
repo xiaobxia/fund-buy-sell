@@ -20,9 +20,9 @@
               >
                 <div>
                   <div>{{item.content}}</div>
-                  <div>111</div>
-                  <div>111</div>
-                  <div>删除</div>
+                  <div v-if="isAdmin" class="d-button">
+                    <van-icon name="delete" />
+                  </div>
                 </div>
               </div>
             </van-list>
@@ -49,8 +49,13 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'userInfo',
       'infoList'
-    ])
+    ]),
+    isAdmin () {
+      const roles = this.userInfo.roles
+      return roles && (roles.indexOf('admin') !== -1)
+    }
   },
   created () {
   },
@@ -144,51 +149,24 @@ export default {
     min-height: calc(100vh - 150px);
   }
   .rt-i {
+    position: relative;
     background-color: #fff;
     padding: 10px 0;
     border-bottom: 1px solid #E9E9E9;
     &:last-child {
       border-bottom: 0;
     }
-    .rt-i-i {
-      vertical-align: top;
-      width: 100px;
-      height: 68px;
-      display: inline-block;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .i-w {
-      overflow: hidden;
-      border-radius: 4px;
-    }
-    .rt-i-t {
-      vertical-align: top;
-      display: inline-block;
-      width: 210px;
-      margin-left: 10px;
-      h4 {
-        margin-top: 0;
-        margin-bottom: 0;
-        color: #303133;
-      }
-      .d-p {
-        color: #909399;
-        overflow:hidden;
-        display: -webkit-box;
-        -webkit-line-clamp:2;
-        -webkit-box-orient: vertical;
-        word-break: break-all;
-        word-wrap: break-word;
-        font-size: 12px;
-      }
-      .d-time {
-        margin-top: 2px;
-        font-size: 12px;
-        text-align: right;
-        color: #909399;
+    .d-button {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      color: #000;
+      z-index: 100;
+      /deep/ {
+        .van-icon {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }
