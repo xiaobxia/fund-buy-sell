@@ -35,7 +35,9 @@
                     <div v-if="userInfo.vip_days">
                       <div v-html="item.content"></div>
                     </div>
-                    <div v-else class="v-w">1111</div>
+                    <div v-else class="v-w">
+                      <div @click="toBuyPage">会员专属内容</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,6 +146,9 @@ export default {
       }).catch(() => {
         // on cancel
       })
+    },
+    toBuyPage () {
+      this.$router.push('/vipBuy/index')
     }
   }
 }
@@ -224,5 +229,8 @@ export default {
     height: 60px;
     background-color: rgb(245, 245, 245);
     border-radius: 4px;
+    text-align: center;
+    color: rgb(220, 220, 220);
+    line-height: 60px;
   }
 </style>
