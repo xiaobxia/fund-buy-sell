@@ -11,26 +11,28 @@
             @load="onLoad"
             class="a-l-l"
           >
-            <div
-              v-for="(item, index) in infoList"
-              :key="index"
-              class="rt-i"
-            >
-              <div>
-                <div class="rt-t-w">
-                  <div class="t-x">
-                    <img src="../../../assets/头像.png" alt="">
+            <div>
+              <div
+                v-for="(item, index) in infoList"
+                :key="index"
+                class="rt-i"
+              >
+                <div>
+                  <div class="rt-t-w">
+                    <div class="t-x">
+                      <img src="../../../assets/头像.png" alt="">
+                    </div>
+                    <div class="t-t">
+                      <div class="i-n">基哥</div>
+                      <div>{{formatTime(item.create_at)}}</div>
+                    </div>
+                    <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
+                      <van-icon name="delete" />
+                    </div>
                   </div>
-                  <div class="t-t">
-                    <div class="i-n">基哥</div>
-                    <div>{{formatTime(item.create_at)}}</div>
+                  <div class="rt-c-w">
+                    <div v-html="item.content"></div>
                   </div>
-                  <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
-                    <van-icon name="delete" />
-                  </div>
-                </div>
-                <div class="rt-c-w">
-                  <div v-html="item.content"></div>
                 </div>
               </div>
             </div>
@@ -170,7 +172,7 @@ export default {
     margin: 10px 0;
     box-sizing: border-box;
     &:last-child {
-      border-bottom: 0;
+      margin-bottom: 0;
     }
     .t-x {
       img {
