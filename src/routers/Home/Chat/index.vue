@@ -27,7 +27,7 @@
                       <div>基哥</div>
                       <div>{{formatTime(item.create_at)}}</div>
                     </div>
-                    <div v-if="isAdmin" class="d-button">
+                    <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
                       <van-icon name="delete" />
                     </div>
                   </div>
@@ -122,20 +122,18 @@ export default {
       Dialog.confirm({
         title: '提示',
         message: '确认删除？'
-      })
-        .then(() => {
-          this.$http.post('fbsServer/infoFlow/deleteRecord', {
-            info_id: row.id
-          }).then(({ message }) => {
-            Toast.success({
-              message: '删除成功！',
-              duration: 1000 * 3
-            })
+      }).then(() => {
+        this.$http.post('fbsServer/infoFlow/deleteRecord', {
+          info_id: row.id
+        }).then(({ message }) => {
+          Toast.success({
+            message: '删除成功！',
+            duration: 1000 * 3
           })
         })
-        .catch(() => {
-          // on cancel
-        })
+      }).catch(() => {
+        // on cancel
+      })
     }
   }
 }
