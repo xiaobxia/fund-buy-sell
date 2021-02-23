@@ -1,6 +1,6 @@
 <template>
   <div class="home-main grey-page">
-    <div class="p-t">消息</div>
+    <van-nav-bar class="p-h" title="消息"/>
     <div>
       <div class="c-l-w">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -22,7 +22,7 @@
                     <img src="../../../assets/头像.png" alt="">
                   </div>
                   <div class="t-t">
-                    <div>基哥</div>
+                    <div class="i-n">基哥</div>
                     <div>{{formatTime(item.create_at)}}</div>
                   </div>
                   <div v-if="isAdmin" class="d-button" @click="deleteRow(item)">
@@ -30,7 +30,7 @@
                   </div>
                 </div>
                 <div class="rt-c-w">
-                  <div>{{item.content}}</div>
+                  <div v-html="item.content"></div>
                 </div>
               </div>
             </div>
@@ -102,6 +102,9 @@ export default {
           ...this.infoList,
           ...data.list
         ]
+        infoList.forEach((v) => {
+          v.content = v.content.replace(/(\r\n|\n|\r)/gm, '<br />')
+        })
         this.$store.commit('SET_infoList', infoList)
         this.loading = false
         if (infoList.length >= data.count) {
@@ -163,8 +166,8 @@ export default {
   .rt-i {
     position: relative;
     background-color: #fff;
-    padding: 10px 20px;
-    margin-bottom: 10px;
+    padding: 8px 12px;
+    margin: 10px 0;
     box-sizing: border-box;
     &:last-child {
       border-bottom: 0;
@@ -181,11 +184,14 @@ export default {
       margin-left: 10px;
       display: inline-block;
       vertical-align: top;
-      font-size: 14px;
+      font-size: 12px;
+    }
+    .i-n {
+      margin-bottom: 5px;
     }
     .rt-c-w {
-      margin: 10px 0 5px 0;
-      font-size: 20px;
+      margin: 6px 0 2px 0;
+      font-size: 16px;
       word-wrap: break-word;
       word-break: normal;
     }
@@ -197,9 +203,9 @@ export default {
       z-index: 100;
       /deep/ {
         .van-icon {
-          width: 24px;
-          height: 24px;
-          font-size: 24px;
+          width: 18px;
+          height: 18px;
+          font-size: 18px;
         }
       }
     }
