@@ -85,6 +85,9 @@ export default {
       })
       Toast.success('退出成功！')
       this.$router.replace('/login')
+      setTimeout(() => {
+        window.location.reload()
+      }, 200)
     },
     sendActiveEmail () {
       this.$http.post('fbsServer/auth/sendActiveEmail', {

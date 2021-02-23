@@ -80,7 +80,7 @@ export default {
     ])
   },
   created () {
-    if (this.isVipUser === true) {
+    if (this.userInfo.email_active === true) {
       const invitationUrl = this.$webUrl + `/register?inv=${encodeURIComponent(this.userInfo.email)}`
       this.invitationUrl = invitationUrl
       QRCode.toDataURL(invitationUrl).then(url => {
@@ -97,8 +97,6 @@ export default {
     jump () {
       if (!this.userInfo.email_active) {
         this.$router.replace('/emailWarn/index')
-      } else if (!this.userInfo.vip_days) {
-        this.$router.replace('/vipBuy/index')
       }
     },
     backHandler () {

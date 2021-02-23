@@ -14,13 +14,13 @@
             <van-icon v-else name="wap-home-o" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item name="/home/chat" replace to="/home/chat">
-          <span>消息</span>
-          <template #icon="props">
-            <van-icon v-if="props.active" name="comment"/>
-            <van-icon v-else name="comment-o" />
-          </template>
-        </van-tabbar-item>
+        <!--<van-tabbar-item name="/home/chat" replace to="/home/chat">-->
+          <!--<span>消息</span>-->
+          <!--<template #icon="props">-->
+            <!--<van-icon v-if="props.active" name="comment"/>-->
+            <!--<van-icon v-else name="comment-o" />-->
+          <!--</template>-->
+        <!--</van-tabbar-item>-->
         <van-tabbar-item name="/home/gzh" replace to="/home/gzh">
           <span>公众号</span>
           <template #icon="props">

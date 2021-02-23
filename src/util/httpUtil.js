@@ -32,6 +32,9 @@ axiosHttp.interceptors.response.use(function (response) {
         isLogin: false
       })
       router.replace('/login')
+      setTimeout(() => {
+        window.location.reload()
+      }, 200)
     }
     if (!response.config.noWarn) {
       Toast.fail(response.data.message || '')

@@ -1,8 +1,9 @@
 <template>
-  <div class="home-main grey-page">
+  <div class="home-main" :class="{'grey-page': userInfo.email_active}">
     <van-nav-bar class="p-h" title="消息"/>
     <div>
-      <div class="c-l-w">
+      <should-active-email v-if="!userInfo.email_active"/>
+      <div v-else class="c-l-w">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
           <van-list
             v-model="loading"
@@ -31,7 +32,10 @@
                     </div>
                   </div>
                   <div class="rt-c-w">
-                    <div v-html="item.content"></div>
+                    <div v-if="userInfo.vip_days">
+                      <div v-html="item.content"></div>
+                    </div>
+                    <div v-else class="v-w">1111</div>
                   </div>
                 </div>
               </div>
@@ -46,10 +50,14 @@
 <script>
 import { Toast, Dialog } from 'vant'
 import { mapGetters } from 'vuex'
+import ShouldActiveEmail from '@/components/ShouldActiveEmail/index.vue'
 import moment from 'moment-timezone'
 moment.tz.setDefault('Asia/Shanghai')
 export default {
   name: 'HomeChat',
+  components: {
+    ShouldActiveEmail
+  },
   data () {
     return {
       accessToken: '',
@@ -211,5 +219,10 @@ export default {
         }
       }
     }
+  }
+  .v-w {
+    height: 60px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 4px;
   }
 </style>
