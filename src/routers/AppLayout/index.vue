@@ -2,9 +2,7 @@
   <div>
     <div v-if="showLayout" class="app-layout">
       <div class="router-wrap" :class="{showTabbar: showTabbar}">
-        <keep-alive>
-          <router-view :key="key"/>
-        </keep-alive>
+        <router-view :key="key"/>
       </div>
       <van-tabbar v-if="showTabbar" v-model="active" active-color="#E2684D" :fixed="true">
         <van-tabbar-item name="/home/main" replace to="/home/main">
