@@ -1,5 +1,8 @@
 <template>
   <div class="home-main">
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o">
+      遇到界面卡住，请刷新一下
+    </van-notice-bar>
     <van-notice-bar
       v-if="buyWarn"
       left-icon="volume-o"
