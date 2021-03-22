@@ -19,13 +19,13 @@
             <!--<van-icon v-else name="comment-o" />-->
           <!--</template>-->
         <!--</van-tabbar-item>-->
-        <van-tabbar-item name="/home/gzh" replace to="/home/gzh">
-          <span>公众号</span>
-          <template #icon="props">
-            <van-icon v-if="props.active" name="photo"/>
-            <van-icon v-else name="photo-o" />
-          </template>
-        </van-tabbar-item>
+        <!--<van-tabbar-item name="/home/gzh" replace to="/home/gzh">-->
+          <!--<span>公众号</span>-->
+          <!--<template #icon="props">-->
+            <!--<van-icon v-if="props.active" name="photo"/>-->
+            <!--<van-icon v-else name="photo-o" />-->
+          <!--</template>-->
+        <!--</van-tabbar-item>-->
         <van-tabbar-item name="/home/mine" replace to="/home/mine">
           <span>我的</span>
           <template #icon="props">
