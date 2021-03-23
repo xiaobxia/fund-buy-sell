@@ -6,7 +6,21 @@
       <div class="con-w b-10">
         <div class="h-t">
           <span>信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></span>
-          <span style="float: right">仓位标准：<span v-if="list.length > 0">{{position}}</span></span>
+          <span style="float: right">仓位标准：
+            <span v-if="list.length > 0">{{position}}%</span>
+            <van-popover v-model="showPopover" trigger="click" placement="bottom-end" theme="light" class="p-w-t">
+              <div>
+                <div class="p-w-t-v">
+                <p>仓位标准的指导意义在于：</p>
+                <p>如果标准是40%仓位的阶段，而你的仓位是80%，那么你在操作上应该更注重风险，卖的时候多卖点，买的时候少买点。</p>
+                <p>同理，如果标准是80%仓位的阶段，而你的仓位是40%，那么你在操作上应该更积极，买的时候多买点，卖的时候少卖点。</p>
+                </div>
+              </div>
+              <template #reference>
+                <van-icon name="question-o" class="question-icon"/>
+              </template>
+            </van-popover>
+          </span>
         </div>
         <div class="h-d">信号将在每个交易日的14:30更新并持续输出，越接近收盘时间，输出的信号也越准确。</div>
         <div v-if="open">
@@ -88,7 +102,8 @@ export default {
       nameKeyMap,
       codeKeyMap,
       open: false,
-      position: 0
+      position: 0,
+      showPopover: false
     }
   },
   computed: {
@@ -286,5 +301,14 @@ export default {
   }
   .d-d-w {
     margin-top: 20px;
+  }
+  .question-icon {
+    position: relative;
+    top: 3px;
+  }
+  .p-w-t-v {
+    width: 300px;
+    padding: 0 20px;
+    background-color: #fff;
   }
 </style>

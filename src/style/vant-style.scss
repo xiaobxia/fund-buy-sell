@@ -83,3 +83,27 @@
     font-size: 20px;
   }
 }
+
+.van-popover--light {
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 24px rgba(50, 50, 51, 0.12);
+  .van-popover__content {
+  }
+  .van-popover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+    color: #fff;
+    top: 0;
+    border-top-width: 0;
+    border-bottom-color: #fff;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    right: 16px;
+  }
+}
