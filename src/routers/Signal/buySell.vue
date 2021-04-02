@@ -6,14 +6,14 @@
       <div class="con-w b-10">
         <div class="h-t">
           <span>信号日期：<span v-if="list.length > 0">{{tradeDate}}</span></span>
-          <span style="float: right">仓位标准：
-            <span v-if="list.length > 0">{{position}}%</span>
+          <span style="float: right">市场评分：
+            <span v-if="list.length > 0">{{position}}</span>
             <van-popover v-model="showPopover" trigger="click" placement="bottom-end" theme="light" class="p-w-t">
               <div>
                 <div class="p-w-t-v">
-                <p>仓位标准的指导意义在于：</p>
-                <p>如果标准是30%仓位的阶段，而你的仓位是70%，那么你在操作上应该更注重风险，卖的时候多卖点，买的时候少买点。</p>
-                <p>同理，如果标准是70%仓位的阶段，而你的仓位是30%，那么你在操作上应该更积极，买的时候多买点，卖的时候少卖点。</p>
+                <p>市场评分的指导意义在于：</p>
+                <p>如果市场评分是30的阶段，而你的仓位是70%，那么你在操作上应该更注重风险，卖的时候多卖点，买的时候少买点。</p>
+                <p>同理，如果市场评分是70的阶段，而你的仓位是30%，那么你在操作上应该更积极，买的时候多买点，卖的时候少卖点。</p>
                 </div>
               </div>
               <template #reference>
