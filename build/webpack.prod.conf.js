@@ -36,8 +36,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /^\.\/(zh-cn)$/i),
     new UglifyJsPlugin({
       uglifyOptions: {
+        output:{
+          comments:false
+        },
         compress: {
           warnings: false
         }

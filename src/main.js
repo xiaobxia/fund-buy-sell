@@ -25,13 +25,6 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
 
-Vue.prototype.$formatToDay = function (day) {
-  if (!day) {
-    return ''
-  }
-  return moment(day).format('YYYY-MM-DD')
-}
-
 Vue.prototype.$formatToDateTime = function (day) {
   if (!day) {
     return ''
